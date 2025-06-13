@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -35,10 +34,10 @@ fun ListItem(
     isHighlighted: Boolean = false,
     comment: String? = null,
     lead: String? = null,
-    trailingDescription: String? = null,
+    trailingText: String? = null,
     trailingIcon: ImageVector? = null,
     trailingContent: (@Composable () -> Unit)? = null,
-    onItemClick: () -> Unit,
+    onItemClick: () -> Unit = {},
 ) {
     val backgroundColor = if (isHighlighted) {
         MaterialTheme.colorScheme.secondary
@@ -46,20 +45,21 @@ fun ListItem(
         MaterialTheme.colorScheme.surface
     }
 
-    val clickableModifier = if (trailingContent == null) {
+    val clickableModifier = if (trailingContent == null && !isHighlighted) {
         Modifier
             .fillMaxWidth()
             .clickable { onItemClick() }
-    } else {
+    } else if(trailingContent != null) {
         Modifier.fillMaxWidth()
+    } else {
+        Modifier
     }
 
     Row(
         modifier = modifier
             .then(clickableModifier)
             .background(color = backgroundColor)
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-            .height(70.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         lead?.let {
@@ -70,7 +70,7 @@ fun ListItem(
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = content,
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -85,10 +85,10 @@ fun ListItem(
         }
         Spacer(modifier = Modifier.width(16.dp))
 
-        trailingDescription?.let {
+        trailingText?.let {
             Text(
                 text = it,
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface),
             )
         }
 
@@ -97,11 +97,13 @@ fun ListItem(
                 Spacer(modifier = Modifier.width(16.dp))
                 trailingContent()
             }
+
             trailingIcon != null -> {
                 Spacer(modifier = Modifier.width(16.dp))
                 Icon(
                     imageVector = trailingIcon,
                     contentDescription = null,
+                    tint = MaterialTheme.colorScheme.tertiary
                 )
             }
         }
@@ -133,6 +135,7 @@ fun EmojiBox(
 }
 
 @PreviewFontScale
+@Preview(showBackground = true)
 @Composable
 private fun ListItemPreview() {
     ListItem(
@@ -140,7 +143,7 @@ private fun ListItemPreview() {
         modifier = Modifier.fillMaxWidth(),
         lead = "\uD83C\uDFCB",
         comment = "Энни",
-        trailingDescription = "100 000 ₽"
+        trailingText = "100 000 ₽"
     ) {}
 }
 
@@ -153,7 +156,7 @@ private fun ListItemPreview_Icon() {
         modifier = Modifier.fillMaxWidth(),
         lead = "РК",
         comment = "Энни",
-        trailingDescription = "100 000 ₽",
+        trailingText = "100 000 ₽",
         trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight
     ) {}
 }

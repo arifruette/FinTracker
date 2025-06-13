@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlinx.serialization.plugin)
-    alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    namespace = "ru.ari.feature.expenses.ui"
+    namespace = "ru.ari.core.domain"
     compileSdk = 35
 
     defaultConfig {
@@ -35,16 +33,5 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.tooling)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(platform(libs.androidx.compose.bom))
-
-    implementation(projects.core.ui)
-    implementation(projects.feature.expenses.domain)
-
-    androidTestImplementation(platform(libs.androidx.compose.bom))
+    implementation(libs.kotlinx.datetime)
 }

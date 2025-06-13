@@ -5,19 +5,19 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -46,7 +46,6 @@ class MainActivity : ComponentActivity() {
             FinTrackerTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    containerColor = MaterialTheme.colorScheme.surface,
                     topBar = {
                         val titleId: Int? = currentRoute.getRouteTitleId()
                         val iconId: Int? = currentRoute.getRouteTrailingIconId()
@@ -71,8 +70,9 @@ class MainActivity : ComponentActivity() {
                                     .clip(CircleShape)
                             ) {
                                 Icon(
-                                    imageVector = Icons.Filled.Add,
-                                    contentDescription = null
+                                    imageVector = ImageVector.vectorResource(R.drawable.plus_icon),
+                                    contentDescription = null,
+                                    tint = Color.White
                                 )
                             }
                         }
@@ -83,7 +83,9 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     AppNavGraph(
                         navController = navController,
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier
+                            .padding(innerPadding)
+                            .background(MaterialTheme.colorScheme.surface)
                     )
                 }
             }
