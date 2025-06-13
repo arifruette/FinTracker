@@ -1,13 +1,10 @@
-import org.gradle.kotlin.dsl.implementation
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    namespace = "ru.ari.ui"
+    namespace = "ru.ari.common"
     compileSdk = 35
 
     defaultConfig {
@@ -36,16 +33,5 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
 
-
-    implementation(projects.core.common)
-
-    androidTestImplementation(platform(libs.androidx.compose.bom))
 }

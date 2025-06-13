@@ -10,6 +10,7 @@ private val LightColorScheme = lightColorScheme(
     tertiary = Magnolia,
     surface = Magnolia,
     onSurface = RaisinBlack,
+    onPrimary = RaisinBlack,
     onSurfaceVariant = DarkGray,
     primaryContainer = DarkMagnolia,
     secondaryContainer = LightGreen,

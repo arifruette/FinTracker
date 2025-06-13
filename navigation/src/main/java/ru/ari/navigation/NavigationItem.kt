@@ -14,13 +14,15 @@ sealed class NavigationItem(
     val title: Int,
     val selectedIcon: Int,
     val unselectedIcon: Int,
+    val topBarIcon: Int? = null,
 ) {
     data object ExpensesScreen : NavigationItem(
         route = Expenses,
         label = R.string.expenses_label,
         title = R.string.expenses_title,
         selectedIcon = R.drawable.expenses_selected_icon,
-        unselectedIcon = R.drawable.expenses_unselected_icon
+        unselectedIcon = R.drawable.expenses_unselected_icon,
+        topBarIcon = R.drawable.history_icon
     )
 
     data object IncomeScreen : NavigationItem(
@@ -28,7 +30,8 @@ sealed class NavigationItem(
         label = R.string.income_label,
         title = R.string.income_title,
         selectedIcon = R.drawable.income_selected_icon,
-        unselectedIcon = R.drawable.income_unselected_icon
+        unselectedIcon = R.drawable.income_unselected_icon,
+        topBarIcon = R.drawable.history_icon
     )
 
     data object BalanceScreen : NavigationItem(
@@ -36,7 +39,8 @@ sealed class NavigationItem(
         label = R.string.balance_label,
         title = R.string.balance_title,
         selectedIcon = R.drawable.balance_selected_icon,
-        unselectedIcon = R.drawable.balance_unselected_icon
+        unselectedIcon = R.drawable.balance_unselected_icon,
+        topBarIcon = R.drawable.edit_icon
     )
 
     data object CategoriesScreen : NavigationItem(
@@ -59,6 +63,12 @@ sealed class NavigationItem(
         fun getNavigationItems() = listOf(
             ExpensesScreen, IncomeScreen, BalanceScreen,
             CategoriesScreen, SettingsScreen
+        )
+
+        fun getRoutesWithFloatingButton() = listOf(
+            ExpensesScreen.route.getRouteName(),
+            IncomeScreen.route.getRouteName(),
+            BalanceScreen.route.getRouteName()
         )
     }
 }
