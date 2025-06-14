@@ -1,11 +1,11 @@
 package ru.ari.navigation
 
+import ru.ari.feature.settings.ui.navigation.Settings
 import ru.ari.ui.navigation.Balance
 import ru.ari.ui.navigation.Categories
 import ru.ari.ui.navigation.Expenses
 import ru.ari.ui.navigation.Income
 import ru.ari.ui.navigation.Screen
-import ru.ari.ui.navigation.Settings
 
 
 sealed class NavigationItem(

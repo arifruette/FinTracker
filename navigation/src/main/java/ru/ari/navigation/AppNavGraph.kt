@@ -4,12 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import ru.ari.feature.settings.ui.navigation.settingsScreen
 import ru.ari.ui.navigation.Expenses
 import ru.ari.ui.navigation.balanceScreen
 import ru.ari.ui.navigation.categoriesScreen
 import ru.ari.ui.navigation.expensesScreen
 import ru.ari.ui.navigation.incomeScreen
-import ru.ari.ui.navigation.settingsScreen
 
 @Composable
 fun AppNavGraph(
