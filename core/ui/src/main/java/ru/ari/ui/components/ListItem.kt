@@ -19,8 +19,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewFontScale
@@ -31,6 +33,7 @@ import androidx.compose.ui.unit.dp
 fun ListItem(
     modifier: Modifier = Modifier,
     content: String,
+    emojiBackgroundColor: Color = MaterialTheme.colorScheme.secondary,
     isHighlighted: Boolean = false,
     comment: String? = null,
     lead: String? = null,
@@ -45,14 +48,12 @@ fun ListItem(
         MaterialTheme.colorScheme.surface
     }
 
-    val clickableModifier = if (trailingContent == null && !isHighlighted) {
+    val clickableModifier = if (trailingContent == null && trailingIcon != null) {
         Modifier
             .fillMaxWidth()
             .clickable { onItemClick() }
-    } else if(trailingContent != null) {
-        Modifier.fillMaxWidth()
     } else {
-        Modifier
+        Modifier.fillMaxWidth()
     }
 
     Row(
@@ -63,14 +64,20 @@ fun ListItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         lead?.let {
-            EmojiBox(lead)
+            EmojiBox(
+                emoji = lead,
+                backgroundColor = emojiBackgroundColor
+            )
             Spacer(modifier = Modifier.width(16.dp))
         }
 
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = content,
-                style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface),
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontWeight = FontWeight(400)
+                ),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -79,7 +86,10 @@ fun ListItem(
                     text = it,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        fontWeight = FontWeight(400)
+                    )
                 )
             }
         }
@@ -88,7 +98,10 @@ fun ListItem(
         trailingText?.let {
             Text(
                 text = it,
-                style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface),
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontWeight = FontWeight(400)
+                ),
             )
         }
 
@@ -115,12 +128,13 @@ fun ListItem(
 fun EmojiBox(
     emoji: String,
     size: Dp = 24.dp,
+    backgroundColor: Color,
     modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier
             .size(size)
-            .background(MaterialTheme.colorScheme.secondary, CircleShape),
+            .background(backgroundColor, CircleShape),
         contentAlignment = Alignment.Center
     ) {
         BasicText(
@@ -187,7 +201,8 @@ private fun SwitchPreview() {
 @Composable
 private fun EmojiBoxPreview() {
     EmojiBox(
-        emoji = "\uD83D\uDC36"
+        emoji = "\uD83D\uDC36",
+        backgroundColor = MaterialTheme.colorScheme.secondary
     )
 }
 
@@ -195,6 +210,7 @@ private fun EmojiBoxPreview() {
 @Composable
 private fun EmojiBoxPreview2() {
     EmojiBox(
-        emoji = "\uD83C\uDFCB"
+        emoji = "\uD83C\uDFCB",
+        backgroundColor = MaterialTheme.colorScheme.secondary
     )
 }
