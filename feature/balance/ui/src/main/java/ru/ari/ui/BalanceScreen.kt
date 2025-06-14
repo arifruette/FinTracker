@@ -44,7 +44,7 @@ fun BalanceScreen(
                     trailingText = (uiState.value as BalanceState.Success).balance.totalBalance,
                     trailingIcon = ImageVector.vectorResource(R.drawable.forward_arrow_icon),
                     emojiBackgroundColor = Color.White,
-                    lead = (uiState.value as BalanceState.Success).balance.icon,
+                    leadEmoji = "\uD83D\uDCB0",
                     isHighlighted = true,
                     modifier = Modifier.height(56.dp)
                 )

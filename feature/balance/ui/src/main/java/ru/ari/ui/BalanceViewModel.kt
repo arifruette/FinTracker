@@ -26,7 +26,6 @@ class BalanceViewModel : ViewModel() {
 
                 _state.value = BalanceState.Success(
                     Balance(
-                        icon = "\uD83D\uDCB0",
                         totalBalance = "-670 000 ₽",
                         currency = "₽"
                     )

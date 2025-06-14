@@ -36,7 +36,7 @@ fun ListItem(
     emojiBackgroundColor: Color = MaterialTheme.colorScheme.secondary,
     isHighlighted: Boolean = false,
     comment: String? = null,
-    lead: String? = null,
+    leadEmoji: String? = null,
     trailingText: String? = null,
     trailingIcon: ImageVector? = null,
     trailingContent: (@Composable () -> Unit)? = null,
@@ -63,9 +63,9 @@ fun ListItem(
             .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        lead?.let {
+        leadEmoji?.let {
             EmojiBox(
-                emoji = lead,
+                emoji = leadEmoji,
                 backgroundColor = emojiBackgroundColor
             )
             Spacer(modifier = Modifier.width(16.dp))
@@ -155,7 +155,7 @@ private fun ListItemPreview() {
     ListItem(
         content = "О программе",
         modifier = Modifier.fillMaxWidth(),
-        lead = "\uD83C\uDFCB",
+        leadEmoji = "\uD83C\uDFCB",
         comment = "Энни",
         trailingText = "100 000 ₽"
     ) {}
@@ -168,7 +168,7 @@ private fun ListItemPreview_Icon() {
     ListItem(
         content = "О программе",
         modifier = Modifier.fillMaxWidth(),
-        lead = "РК",
+        leadEmoji = "РК",
         comment = "Энни",
         trailingText = "100 000 ₽",
         trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight
