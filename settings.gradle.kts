@@ -20,5 +20,27 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "FinTracker"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 include(":app")
- 
+include(":navigation")
+include(":core")
+include(":core:ui")
+include(":feature")
+include(":feature:expenses")
+include(":feature:expenses:ui")
+include(":feature:income")
+include(":feature:income:ui")
+include(":feature:balance")
+include(":feature:categories")
+include(":feature:balance:ui")
+include(":feature:categories:ui")
+include(":feature:settings")
+include(":core:common")
+include(":feature:expenses:domain")
+include(":core:domain")
+include(":feature:income:domain")
+include(":feature:balance:domain")
+include(":feature:categories:domain")
+include(":feature:settings:domain")
+include(":feature:settings:ui")
