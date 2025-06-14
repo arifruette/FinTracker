@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.ari.feature.expenses.domain"
+    namespace = "ru.ari.feature.balance.domain"
     compileSdk = 35
 
     defaultConfig {
@@ -33,4 +33,5 @@ android {
 }
 
 dependencies {
+
 }

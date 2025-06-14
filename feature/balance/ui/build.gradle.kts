@@ -43,6 +43,7 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
 
     implementation(projects.core.ui)
+    implementation(projects.feature.balance.domain)
 
     androidTestImplementation(platform(libs.androidx.compose.bom))
 }
