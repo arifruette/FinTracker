@@ -1,17 +1,88 @@
 package ru.ari.ui
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ru.ari.feature.categories.ui.R
+import ru.ari.ui.component.CategoriesList
+import ru.ari.ui.components.ErrorText
+import ru.ari.ui.components.Loading
 
 @Composable
-fun CategoriesScreen(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier,
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = "Categories screen")
+fun CategoriesScreen(
+    viewModel: CategoriesViewModel,
+    modifier: Modifier = Modifier,
+) {
+    val uiState = viewModel.state.collectAsStateWithLifecycle()
+    var textFieldState by rememberSaveable { mutableStateOf("") }
+    when (uiState.value) {
+        CategoriesState.Loading -> Loading(modifier = modifier.fillMaxSize())
+        is CategoriesState.Success -> {
+            LaunchedEffect(Unit) {
+                textFieldState = (uiState.value as CategoriesState.Success).searchTextState
+            }
+            Column(modifier = modifier) {
+                TextField(
+                    value = textFieldState,
+                    onValueChange = { textFieldState = it },
+                    modifier = Modifier.fillMaxWidth(),
+                    placeholder = {
+                        Text(
+                            text = "Найти статью",
+                            style = MaterialTheme.typography.bodyLarge
+                                .copy(color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        )
+                    },
+                    trailingIcon = {
+                        IconButton(onClick = { }) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(R.drawable.search_icon),
+                                contentDescription = null
+                            )
+                        }
+                    },
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                        unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        cursorColor = MaterialTheme.colorScheme.outlineVariant
+                        )
+                )
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.outlineVariant
+                )
+                CategoriesList(
+                    categories = (uiState.value as CategoriesState.Success).categories
+                )
+            }
+        }
+
+        is CategoriesState.Error -> {
+            ErrorText(
+                errorMessage = (uiState.value as CategoriesState.Error).message,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
     }
 }

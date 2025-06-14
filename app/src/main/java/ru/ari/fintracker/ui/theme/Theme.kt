@@ -15,7 +15,8 @@ private val LightColorScheme = lightColorScheme(
     primaryContainer = DarkMagnolia,
     secondaryContainer = LightGreen,
     onSecondaryContainer = SpringGreen,
-    outlineVariant = LavenderGray
+    outlineVariant = LavenderGray,
+    surfaceContainerHigh = DarkLilac
 )
 
 @Composable
