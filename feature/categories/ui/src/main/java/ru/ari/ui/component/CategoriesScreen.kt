@@ -1,4 +1,4 @@
-package ru.ari.ui
+package ru.ari.ui.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,24 +21,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ru.ari.feature.categories.ui.R
-import ru.ari.ui.component.CategoriesList
+import ru.ari.ui.CategoriesState
 import ru.ari.ui.components.ErrorText
 import ru.ari.ui.components.Loading
 
 @Composable
 fun CategoriesScreen(
-    viewModel: CategoriesViewModel,
+    uiState: CategoriesState,
     modifier: Modifier = Modifier,
 ) {
-    val uiState = viewModel.state.collectAsStateWithLifecycle()
     var textFieldState by rememberSaveable { mutableStateOf("") }
-    when (uiState.value) {
+    when (uiState) {
         CategoriesState.Loading -> Loading(modifier = modifier.fillMaxSize())
         is CategoriesState.Success -> {
             LaunchedEffect(Unit) {
-                textFieldState = (uiState.value as CategoriesState.Success).searchTextState
+                textFieldState = uiState.searchTextState
             }
             Column(modifier = modifier) {
                 TextField(
@@ -66,21 +64,21 @@ fun CategoriesScreen(
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
                         cursorColor = MaterialTheme.colorScheme.outlineVariant
-                        )
+                    )
                 )
                 HorizontalDivider(
                     thickness = 1.dp,
                     color = MaterialTheme.colorScheme.outlineVariant
                 )
                 CategoriesList(
-                    categories = (uiState.value as CategoriesState.Success).categories
+                    categories = uiState.categories
                 )
             }
         }
 
         is CategoriesState.Error -> {
             ErrorText(
-                errorMessage = (uiState.value as CategoriesState.Error).message,
+                errorMessage = uiState.message,
                 modifier = Modifier.fillMaxSize()
             )
         }

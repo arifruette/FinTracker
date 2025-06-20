@@ -1,4 +1,4 @@
-package ru.ari.ui
+package ru.ari.ui.component
 
 import ListItem
 import androidx.compose.foundation.layout.Column
@@ -7,39 +7,37 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import ru.ari.ui.component.ExpensesList
+import ru.ari.ui.ExpensesState
 import ru.ari.ui.components.ErrorText
 import ru.ari.ui.components.Loading
 
 @Composable
 fun ExpensesScreen(
-    viewModel: ExpensesViewModel,
+    uiState: ExpensesState,
     modifier: Modifier = Modifier,
 ) {
-    val uiState = viewModel.state.collectAsStateWithLifecycle()
-    when (uiState.value) {
+    when (uiState) {
         ExpensesState.Loading -> Loading(modifier = modifier.fillMaxSize())
         is ExpensesState.Success -> {
-            Column(modifier = modifier) {
+            Column(modifier = modifier.fillMaxSize()) {
                 ListItem(
                     content = "Всего",
-                    trailingText = (uiState.value as ExpensesState.Success)
+                    trailingText = uiState
                         .totalAmount,
                     isHighlighted = true,
                     modifier = Modifier
                         .height(56.dp)
                 )
                 ExpensesList(
-                    expenses = (uiState.value as ExpensesState.Success).expenses
+                    expenses = uiState.expenses
                 )
             }
         }
 
         is ExpensesState.Error -> {
             ErrorText(
-                errorMessage = (uiState.value as ExpensesState.Error).message,
-                modifier = Modifier.fillMaxSize()
+                errorMessage = uiState.message,
+                modifier = modifier.fillMaxSize()
             )
         }
     }

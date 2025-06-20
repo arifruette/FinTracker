@@ -1,4 +1,4 @@
-package ru.ari.ui
+package ru.ari.ui.component
 
 import ListItem
 import androidx.compose.foundation.layout.Column
@@ -7,36 +7,36 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import ru.ari.ui.component.IncomeList
+import ru.ari.ui.IncomeState
 import ru.ari.ui.components.ErrorText
 import ru.ari.ui.components.Loading
 
 @Composable
 fun IncomeScreen(
-    viewModel: IncomesViewModel,
+    uiState: IncomeState,
     modifier: Modifier = Modifier,
 ) {
-    val uiState = viewModel.state.collectAsStateWithLifecycle()
-    when (uiState.value) {
-        IncomeState.Loading -> Loading(modifier = modifier.fillMaxSize())
+    when (uiState) {
+        IncomeState.Loading -> {
+            Loading(modifier = modifier.fillMaxSize())
+        }
         is IncomeState.Success -> {
             Column(modifier = modifier) {
                 ListItem(
                     content = "Всего",
-                    trailingText = (uiState.value as IncomeState.Success)
+                    trailingText = uiState
                         .totalAmount,
                     isHighlighted = true,
                     modifier = Modifier
                         .height(56.dp)
                 )
-                IncomeList(incomes = (uiState.value as IncomeState.Success).incomes)
+                IncomeList(incomes = uiState.incomes)
             }
         }
 
         is IncomeState.Error -> {
             ErrorText(
-                errorMessage = (uiState.value as IncomeState.Error).message,
+                errorMessage = uiState.message,
                 modifier = Modifier.fillMaxSize()
             )
         }

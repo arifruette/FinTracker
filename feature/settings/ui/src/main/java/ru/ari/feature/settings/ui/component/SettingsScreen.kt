@@ -1,4 +1,4 @@
-package ru.ari.feature.settings.ui
+package ru.ari.feature.settings.ui.component
 
 import ListItem
 import androidx.compose.foundation.layout.Column
@@ -11,14 +11,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ru.ari.feature.settings.ui.R
+import ru.ari.feature.settings.ui.SettingsState
 
 @Composable
 fun SettingsScreen(
-    viewModel: SettingsViewModel,
+    uiState: SettingsState,
     modifier: Modifier = Modifier,
 ) {
-    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     Column(
         modifier = modifier
     ) {
@@ -26,8 +26,8 @@ fun SettingsScreen(
             content = "Тёмная тема",
             trailingContent = {
                 Switch(
-                    checked = uiState.value.isDarkTheme,
-                    onCheckedChange = { viewModel.toggleDarkTheme() }
+                    checked = uiState.isDarkTheme,
+                    onCheckedChange = { }
                 )
             },
             modifier = Modifier.height(56.dp)

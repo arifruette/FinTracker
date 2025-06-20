@@ -29,7 +29,7 @@ fun ExpensesList(
             ListItem(
                 content = expense.content,
                 leadEmoji = expense.icon,
-                trailingText = expense.amount.toString(),
+                trailingText = expense.amount,
                 trailingIcon = ImageVector.vectorResource(R.drawable.arrow_forward_icon),
                 comment = expense.comment,
                 modifier = Modifier.height(70.dp)

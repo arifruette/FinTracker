@@ -1,4 +1,4 @@
-package ru.ari.ui
+package ru.ari.ui.component
 
 import ListItem
 import androidx.compose.foundation.layout.Column
@@ -12,21 +12,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ru.ari.feature.balance.ui.R
+import ru.ari.ui.BalanceState
 import ru.ari.ui.components.ErrorText
 import ru.ari.ui.components.Loading
 
 @Composable
 fun BalanceScreen(
-    viewModel: BalanceViewModel,
+    uiState: BalanceState,
     modifier: Modifier = Modifier,
 ) {
-    val uiState = viewModel.state.collectAsStateWithLifecycle()
-    when (uiState.value) {
+    when (uiState) {
         is BalanceState.Error -> {
             ErrorText(
-                errorMessage = (uiState.value as BalanceState.Error).message,
+                errorMessage = uiState.message,
                 modifier = modifier.fillMaxSize()
             )
         }
@@ -41,7 +40,7 @@ fun BalanceScreen(
             ) {
                 ListItem(
                     content = "Баланс",
-                    trailingText = (uiState.value as BalanceState.Success).balance.totalBalance,
+                    trailingText = uiState.balance.totalBalance,
                     trailingIcon = ImageVector.vectorResource(R.drawable.forward_arrow_icon),
                     emojiBackgroundColor = Color.White,
                     leadEmoji = "\uD83D\uDCB0",
@@ -54,7 +53,7 @@ fun BalanceScreen(
                 )
                 ListItem(
                     content = "Валюта",
-                    trailingText = (uiState.value as BalanceState.Success).balance.currency,
+                    trailingText = uiState.balance.currency,
                     trailingIcon = ImageVector.vectorResource(R.drawable.forward_arrow_icon),
                     isHighlighted = true,
                     modifier = Modifier.height(56.dp)

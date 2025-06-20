@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.ari.feature.income.domain.model.Income
 
-class IncomesViewModel : ViewModel() {
+class IncomeViewModel : ViewModel() {
     private val _state = MutableStateFlow<IncomeState>(IncomeState.Loading)
     val state = _state.asStateFlow()
 
