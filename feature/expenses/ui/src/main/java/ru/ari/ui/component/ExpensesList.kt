@@ -32,6 +32,7 @@ fun ExpensesList(
                 trailingText = expense.amount,
                 trailingIcon = ImageVector.vectorResource(R.drawable.arrow_forward_icon),
                 comment = expense.comment,
+                onItemClick = {},
                 modifier = Modifier.height(70.dp)
             )
             HorizontalDivider(

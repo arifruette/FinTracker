@@ -19,7 +19,7 @@ fun CategoriesScreenWrapper(
     val uiState by viewModel.state.collectAsStateWithLifecycle()
     Scaffold(
         topBar = {
-            FinTrackerTopBar(route = route, onIconClick = {})
+            FinTrackerTopBar(route = route, onTrailingIconClick = {})
         }
     ) { innerPadding ->
         CategoriesScreen(

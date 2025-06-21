@@ -31,6 +31,7 @@ fun IncomeList(
                 trailingText = income.amount,
                 trailingIcon = ImageVector.vectorResource(R.drawable.arrow_forward_icon),
                 comment = income.comment,
+                onItemClick = {},
                 modifier = Modifier.height(70.dp)
             )
             HorizontalDivider(

@@ -22,7 +22,7 @@ fun ExpensesScreenWrapper(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            FinTrackerTopBar(route = route, onIconClick = onTopBarIconClick)
+            FinTrackerTopBar(route = route, onTrailingIconClick = onTopBarIconClick)
         },
         floatingActionButton = {
             route.FloatingButton(onFloatingButtonClick)

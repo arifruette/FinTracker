@@ -30,8 +30,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.ui.tooling.preview)
@@ -39,6 +37,7 @@ dependencies {
 
     implementation(projects.core.ui)
     implementation(projects.feature.income.domain)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     androidTestImplementation(platform(libs.androidx.compose.bom))
 }

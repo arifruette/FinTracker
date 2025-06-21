@@ -18,8 +18,9 @@ import ru.ari.ui.navigation.Screen
 @Composable
 fun FinTrackerTopBar(
     route: Screen,
-    onIconClick: () -> Unit,
-    modifier: Modifier = Modifier
+    onTrailingIconClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    onLeadingIconClick: () -> Unit = {}
 ) {
     Column(
         modifier = modifier
@@ -31,12 +32,19 @@ fun FinTrackerTopBar(
                 .fillMaxWidth()
                 .padding(top = 18.dp, bottom = 18.dp, start = 4.dp, end = 4.dp)
         ) {
+            route.TopBarLeadingIcon(
+                onClick = onLeadingIconClick,
+                modifier = Modifier.align(Alignment.CenterStart)
+            )
             Text(
                 text = route.title,
                 modifier = Modifier.align(Alignment.Center),
                 style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onPrimary)
             )
-            route.TopBarIcon(onClick = onIconClick, modifier = Modifier.align(Alignment.CenterEnd))
+            route.TopBarTrailingIcon(
+                onClick = onTrailingIconClick,
+                modifier = Modifier.align(Alignment.CenterEnd)
+            )
         }
     }
 }

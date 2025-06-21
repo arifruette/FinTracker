@@ -6,7 +6,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 interface Screen {
     @Composable
-    fun TopBarIcon(onClick: () -> Unit, modifier: Modifier)
+    fun TopBarTrailingIcon(onClick: () -> Unit, modifier: Modifier)
+
+    @Composable
+    fun TopBarLeadingIcon(onClick: () -> Unit, modifier: Modifier)
 
     @get:Composable
     val title: String

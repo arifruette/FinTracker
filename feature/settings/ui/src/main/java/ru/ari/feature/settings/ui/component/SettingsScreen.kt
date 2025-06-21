@@ -36,42 +36,49 @@ fun SettingsScreen(
         ListItem(
             content = "Основной цвет",
             trailingIcon = ImageVector.vectorResource(R.drawable.arrow_right),
+            onItemClick = {},
             modifier = Modifier.height(56.dp)
         )
         HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
         ListItem(
             content = "Звуки",
             trailingIcon = ImageVector.vectorResource(R.drawable.arrow_right),
+            onItemClick = {},
             modifier = Modifier.height(56.dp)
         )
         HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
         ListItem(
             content = "Хаптики",
             trailingIcon = ImageVector.vectorResource(R.drawable.arrow_right),
+            onItemClick = {},
             modifier = Modifier.height(56.dp)
         )
         HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
         ListItem(
             content = "Код пароль",
             trailingIcon = ImageVector.vectorResource(R.drawable.arrow_right),
+            onItemClick = {},
             modifier = Modifier.height(56.dp)
         )
         HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
         ListItem(
             content = "Синхронизация",
             trailingIcon = ImageVector.vectorResource(R.drawable.arrow_right),
+            onItemClick = {},
             modifier = Modifier.height(56.dp)
         )
         HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
         ListItem(
             content = "Язык",
             trailingIcon = ImageVector.vectorResource(R.drawable.arrow_right),
+            onItemClick = {},
             modifier = Modifier.height(56.dp)
         )
         HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
         ListItem(
             content = "О программе",
             trailingIcon = ImageVector.vectorResource(R.drawable.arrow_right),
+            onItemClick = {},
             modifier = Modifier.height(56.dp)
         )
         HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)

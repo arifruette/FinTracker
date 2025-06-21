@@ -45,6 +45,7 @@ fun BalanceScreen(
                     emojiBackgroundColor = Color.White,
                     leadEmoji = "\uD83D\uDCB0",
                     isHighlighted = true,
+                    onItemClick = {},
                     modifier = Modifier.height(56.dp)
                 )
                 HorizontalDivider(
@@ -56,6 +57,7 @@ fun BalanceScreen(
                     trailingText = uiState.balance.currency,
                     trailingIcon = ImageVector.vectorResource(R.drawable.forward_arrow_icon),
                     isHighlighted = true,
+                    onItemClick = {},
                     modifier = Modifier.height(56.dp)
                 )
             }
