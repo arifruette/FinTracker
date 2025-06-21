@@ -2,8 +2,8 @@ package com.example.feature.history.domain.usecase
 
 import com.example.core.common.utils.Result
 import com.example.core.common.utils.map
+import com.example.core.common.utils.toCurrencySymbol
 import com.example.feature.history.domain.model.HistoryData
-import com.example.feature.history.domain.utils.toCurrencySymbol
 import ru.ari.core.domain.model.Transaction
 import ru.ari.core.domain.model.TransactionType
 import ru.ari.core.domain.repository.TransactionRepository

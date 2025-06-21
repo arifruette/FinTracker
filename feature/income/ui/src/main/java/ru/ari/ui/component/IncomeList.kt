@@ -1,6 +1,7 @@
 package ru.ari.ui.component
 
 import ListItem
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,33 +12,39 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import ru.ari.feature.income.domain.model.Income
-import ru.ari.feature.income.ui.R
+import com.example.core.common.utils.formatMoney
+import ru.ari.core.domain.model.Transaction
+import ru.ari.ui.components.EmptyState
 
 @Composable
 fun IncomeList(
-    incomes: List<Income>,
+    income: List<Transaction>,
     modifier: Modifier = Modifier,
 ) {
-    LazyColumn(
-        modifier = modifier
-    ) {
-        items(
-            incomes,
-            key = { it.id }
-        ) { income ->
-            ListItem(
-                content = income.content,
-                trailingText = income.amount,
-                trailingIcon = ImageVector.vectorResource(R.drawable.arrow_forward_icon),
-                comment = income.comment,
-                onItemClick = {},
-                modifier = Modifier.height(70.dp)
-            )
-            HorizontalDivider(
-                thickness = 1.dp,
-                color = MaterialTheme.colorScheme.outlineVariant
-            )
+    if (income.isEmpty()) {
+        EmptyState(modifier = modifier.fillMaxSize())
+    } else {
+        LazyColumn(
+            modifier = modifier
+        ) {
+            items(
+                income,
+                key = { it.id }
+            ) { income ->
+                ListItem(
+                    content = income.category.name,
+                    leadEmoji = income.category.emoji,
+                    trailingText = formatMoney(income.amount, income.account.currency),
+                    trailingIcon = ImageVector.vectorResource(ru.ari.feature.income.ui.R.drawable.arrow_forward_icon),
+                    comment = if (income.comment.isNullOrBlank()) null else income.comment,
+                    onItemClick = {},
+                    modifier = Modifier.height(70.dp)
+                )
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.outlineVariant
+                )
+            }
         }
     }
 }

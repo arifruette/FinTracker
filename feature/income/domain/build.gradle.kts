@@ -28,4 +28,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.javax.inject)
+    implementation(projects.core.domain)
+    implementation(projects.core.common)
 }

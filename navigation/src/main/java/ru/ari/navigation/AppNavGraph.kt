@@ -17,5 +17,6 @@ fun AppNavGraph(
     ) {
         mainNavigationFlow(navController)
         expensesHistoryNavigationFlow(navController)
+        incomeHistoryNavigationFlow(navController)
     }
 }

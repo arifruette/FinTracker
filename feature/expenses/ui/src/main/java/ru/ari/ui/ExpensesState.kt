@@ -1,9 +1,11 @@
 package ru.ari.ui
 
-import ru.ari.feature.expenses.domain.Expense
+import ru.ari.core.domain.model.Transaction
 
-sealed interface ExpensesState {
-    data object Loading : ExpensesState
-    data class Success(val totalAmount: String, val expenses: List<Expense>) : ExpensesState
-    data class Error(val message: String): ExpensesState
-}
+data class ExpensesState(
+    val expenses: List<Transaction> = emptyList(),
+    val amount: Double = 0.0,
+    val currency: String = "₽",
+    val isLoading: Boolean = false,
+    val errorMessage: String? = null,
+)

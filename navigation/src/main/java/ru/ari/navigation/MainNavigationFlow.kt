@@ -44,7 +44,12 @@ fun NavGraphBuilder.mainNavigationFlow(navController: NavHostController) {
             },
             onFloatingButtonClick = {}
         )
-        incomeScreen({}, {})
+        incomeScreen(
+            onTopBarIconClick = {
+                navController.navigate(IncomeHistoryFLow)
+            },
+            onFloatingButtonClick = {}
+        )
         balanceScreen({}, {})
         categoriesScreen()
         settingsScreen()

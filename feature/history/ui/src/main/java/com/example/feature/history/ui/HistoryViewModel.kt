@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.ari.core.domain.model.TransactionType
+import java.net.UnknownHostException
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -24,7 +25,7 @@ class HistoryViewModel @Inject constructor(
     private val getHistoryUseCase: GetHistoryUseCase
 ) : ViewModel() {
 
-    private var transactionType: TransactionType = TransactionType.EXPENSE
+    var transactionType: TransactionType = TransactionType.EXPENSE
 
     private val _state: MutableStateFlow<HistoryState> = MutableStateFlow(HistoryState())
     val state: StateFlow<HistoryState> = _state.asStateFlow()
@@ -76,10 +77,14 @@ class HistoryViewModel @Inject constructor(
                 }
             }
             .onException { error ->
+                var message = "Ошибка: Непредвиденная ошибка :("
+                if (error is UnknownHostException) {
+                    message = "Ошибка подключения к сети"
+                }
                 _state.update {
                     it.copy(
                         isLoading = false,
-                        errorMessage = "Исключение: ${error.localizedMessage}"
+                        errorMessage = message
                     )
                 }
             }

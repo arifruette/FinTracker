@@ -9,6 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ru.ari.core.domain.model.TransactionType
 import ru.ari.ui.components.FinTrackerTopBar
 import ru.ari.ui.navigation.Screen
 
@@ -17,9 +18,13 @@ fun HistoryScreenWrapper(
     route: Screen,
     onLeadingIconClick: () -> Unit,
     onTrailingIconClick: () -> Unit,
+    isIncomeScreen: Boolean = false,
     viewModel: HistoryViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.state.collectAsStateWithLifecycle()
+    if (isIncomeScreen) {
+        viewModel.transactionType = TransactionType.INCOME
+    }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {

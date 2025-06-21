@@ -2,61 +2,81 @@ package ru.ari.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.core.common.utils.Result
+import com.example.core.common.utils.onError
+import com.example.core.common.utils.onException
+import com.example.core.common.utils.onSuccess
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import ru.ari.feature.expenses.domain.Expense
+import ru.ari.feature.expenses.domain.ExpenseData
+import ru.ari.feature.expenses.domain.usecase.GetExpensesUseCase
+import java.net.UnknownHostException
+import javax.inject.Inject
 
-class ExpensesViewModel : ViewModel() {
-    private val _state = MutableStateFlow<ExpensesState>(ExpensesState.Loading)
+@HiltViewModel
+class ExpensesViewModel @Inject constructor(
+    private val getExpensesUseCase: GetExpensesUseCase
+) : ViewModel() {
+    private val _state = MutableStateFlow<ExpensesState>(ExpensesState())
     val state = _state.asStateFlow()
 
     init {
-        mockExpenses()
+        getExpenses()
     }
 
-    private fun mockExpenses() {
+    private fun getExpenses() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                _state.value = ExpensesState.Loading
-                delay(MOCK_DELAY_MILLIS)
-                _state.value = ExpensesState.Success(
-                    totalAmount = "436 558 ₽",
-                    expenses = listOf(
-                        mockExpense(1, "\uD83C\uDFE0", "Аренда квартиры", "100 000 ₽", null),
-                        mockExpense(2, "\uD83D\uDC57", "Одежда", "100 000 ₽", null),
-                        mockExpense(3, "\uD83D\uDC36", "На собачку", "100 000 ₽", "Джек"),
-                        mockExpense(4, "\uD83D\uDC36", "На собачку", "100 000 ₽", "Энни"),
-                        mockExpense(5, "РК", "Ремонт квартиры", "100 000 ₽", null),
-                        mockExpense(6, "\uD83C\uDF6D", "Продукты", "100 000 ₽", null),
-                        mockExpense(7, "\uD83C\uDFCB\uFE0F", "Спортзал", "100 000 ₽", null),
-                        mockExpense(8, "\uD83D\uDC8A", "Медицина", "100 000 ₽", null)
-                    )
-                )
+                _state.update { it.copy(isLoading = true, errorMessage = null) }
+
+                viewModelScope.launch {
+                    withContext(Dispatchers.IO) {
+                        val result = getExpensesUseCase(
+                            accountId = 1
+                        )
+                        handleResult(result)
+                    }
+                }
             }
         }
     }
 
-    private fun mockExpense(
-        id: Int,
-        icon: String,
-        title: String,
-        amount: String,
-        comment: String?
-    ): Expense {
-        return Expense(
-            id = id,
-            icon = icon,
-            content = title,
-            amount = amount,
-            comment = comment
-        )
-    }
-
-    private companion object {
-        const val MOCK_DELAY_MILLIS = 1000L
+    private fun handleResult(result: Result<ExpenseData>) {
+        result
+            .onSuccess { expenseData ->
+                _state.update {
+                    it.copy(
+                        expenses = expenseData.expenses,
+                        amount = expenseData.amount,
+                        currency = expenseData.currency,
+                        isLoading = false
+                    )
+                }
+            }
+            .onError { code, message ->
+                _state.update {
+                    it.copy(
+                        isLoading = false,
+                        errorMessage = "Ошибка: $message"
+                    )
+                }
+            }
+            .onException { error ->
+                var message = "Ошибка: Непредвиденная ошибка :("
+                if (error is UnknownHostException) {
+                    message = "Ошибка подключения к сети"
+                }
+                _state.update {
+                    it.copy(
+                        isLoading = false,
+                        errorMessage = message
+                    )
+                }
+            }
     }
 }

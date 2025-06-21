@@ -1,4 +1,4 @@
-package com.example.feature.history.domain.utils
+package com.example.core.common.utils
 
 fun String.toCurrencySymbol() = when (this) {
     "RUB" -> "\u20BD"
