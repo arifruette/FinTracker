@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlinx.serialization.plugin)
 }
 
 android {
@@ -41,6 +42,7 @@ dependencies {
     implementation(projects.feature.income.ui)
     implementation(projects.feature.categories.ui)
     implementation(projects.feature.settings.ui)
+    implementation(projects.feature.history.ui)
 
     androidTestImplementation(platform(libs.androidx.compose.bom))
 }

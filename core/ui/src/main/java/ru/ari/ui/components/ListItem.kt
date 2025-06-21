@@ -38,9 +38,10 @@ fun ListItem(
     comment: String? = null,
     leadEmoji: String? = null,
     trailingText: String? = null,
+    trailingSecondaryText: String? = null,
     trailingIcon: ImageVector? = null,
     trailingContent: (@Composable () -> Unit)? = null,
-    onItemClick: () -> Unit = {},
+    onItemClick: (() -> Unit)? = null,
 ) {
     val backgroundColor = if (isHighlighted) {
         MaterialTheme.colorScheme.secondary
@@ -48,7 +49,7 @@ fun ListItem(
         MaterialTheme.colorScheme.surface
     }
 
-    val clickableModifier = if (trailingContent == null && trailingIcon != null) {
+    val clickableModifier = if (onItemClick != null) {
         Modifier
             .fillMaxWidth()
             .clickable { onItemClick() }
@@ -96,13 +97,32 @@ fun ListItem(
         Spacer(modifier = Modifier.width(16.dp))
 
         trailingText?.let {
-            Text(
-                text = it,
-                style = MaterialTheme.typography.bodyLarge.copy(
-                    color = MaterialTheme.colorScheme.onSurface,
-                    fontWeight = FontWeight(400)
-                ),
-            )
+            if (trailingSecondaryText != null) {
+                Column(horizontalAlignment = Alignment.End) {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontWeight = FontWeight(400)
+                        ),
+                    )
+                    Text(
+                        text = trailingSecondaryText,
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontWeight = FontWeight(400)
+                        ),
+                    )
+                }
+            } else {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        color = MaterialTheme.colorScheme.onSurface,
+                        fontWeight = FontWeight(400)
+                    ),
+                )
+            }
         }
 
         when {

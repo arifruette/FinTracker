@@ -1,9 +1,12 @@
 package ru.ari.ui
 
-import ru.ari.feature.income.domain.model.Income
+import ru.ari.core.domain.model.Transaction
 
-sealed interface IncomeState {
-    data object Loading : IncomeState
-    data class Success(val totalAmount: String, val incomes: List<Income>) : IncomeState
-    data class Error(val message: String): IncomeState
-}
+
+data class IncomeState(
+    val incomes: List<Transaction> = emptyList(),
+    val amount: Double = 0.0,
+    val currency: String = "₽",
+    val isLoading: Boolean = false,
+    val errorMessage: String? = null,
+)

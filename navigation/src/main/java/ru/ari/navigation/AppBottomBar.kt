@@ -8,12 +8,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 
@@ -23,34 +22,34 @@ fun AppBottomBar(
     modifier: Modifier = Modifier,
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
-
-    val tabs = NavigationItem.getNavigationItems()
+    val currentDestination = navBackStackEntry?.destination
+    val routes = MainFlow.routes
+    val currentRoute = routes.firstOrNull { route ->
+        currentDestination?.hierarchy?.any { it.hasRoute(route::class) } == true
+    }
     NavigationBar(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.primaryContainer
     ) {
-        tabs.forEach { destination ->
-            val isSelected = currentRoute == destination.route.getRouteName()
+        routes.forEach { route ->
+            val isSelected = route == currentRoute
             NavigationBarItem(
                 selected = isSelected,
                 onClick = {
-                    navController.navigate(destination.route) {
+                    navController.navigate(route) {
                         launchSingleTop = true
                         restoreState = true
                     }
                 },
                 icon = {
                     Icon(
-                        imageVector = ImageVector.vectorResource(
-                            if (isSelected) destination.selectedIcon else destination.unselectedIcon
-                        ),
-                        contentDescription = stringResource(destination.label)
+                        imageVector = route.icon,
+                        contentDescription = route.label
                     )
                 },
                 label = {
                     Text(
-                        text = stringResource(destination.label),
+                        text = route.label,
                         style = MaterialTheme.typography.labelSmall.copy(
                             fontWeight = FontWeight(if (isSelected) 600 else 500)
                         )

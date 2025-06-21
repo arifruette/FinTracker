@@ -6,13 +6,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class SettingsViewModel: ViewModel() {
-    private val _uiState = MutableStateFlow(SettingsState())
+    private val _state = MutableStateFlow(SettingsState())
 
-    val uiState: StateFlow<SettingsState> = _uiState.asStateFlow()
+    val state: StateFlow<SettingsState> = _state.asStateFlow()
 
     fun toggleDarkTheme() {
-        _uiState.value = _uiState.value.copy(
-            isDarkTheme = !_uiState.value.isDarkTheme
+        _state.value = _state.value.copy(
+            isDarkTheme = !_state.value.isDarkTheme
         )
     }
 }
