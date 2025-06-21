@@ -31,17 +31,13 @@ class IncomeViewModel @Inject constructor(
 
     private fun getIncome() {
         viewModelScope.launch {
+            _state.update { it.copy(isLoading = true, errorMessage = null) }
             withContext(Dispatchers.IO) {
-                _state.update { it.copy(isLoading = true, errorMessage = null) }
+                val result = getIncomeUseCase(
+                    accountId = 1
+                )
+                handleResult(result)
 
-                viewModelScope.launch {
-                    withContext(Dispatchers.IO) {
-                        val result = getIncomeUseCase(
-                            accountId = 1
-                        )
-                        handleResult(result)
-                    }
-                }
             }
         }
     }
