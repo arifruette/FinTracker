@@ -31,17 +31,12 @@ class ExpensesViewModel @Inject constructor(
 
     private fun getExpenses() {
         viewModelScope.launch {
+            _state.update { it.copy(isLoading = true, errorMessage = null) }
             withContext(Dispatchers.IO) {
-                _state.update { it.copy(isLoading = true, errorMessage = null) }
-
-                viewModelScope.launch {
-                    withContext(Dispatchers.IO) {
-                        val result = getExpensesUseCase(
-                            accountId = 1
-                        )
-                        handleResult(result)
-                    }
-                }
+                val result = getExpensesUseCase(
+                    accountId = 1
+                )
+                handleResult(result)
             }
         }
     }
