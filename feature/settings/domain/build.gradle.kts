@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.ari.domain"
+    namespace = "ru.ari.fintracker.feature.settings.domain"
     compileSdk = 35
 
     defaultConfig {
@@ -28,5 +28,4 @@ android {
 }
 
 dependencies {
-
 }

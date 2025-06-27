@@ -1,7 +1,7 @@
 [versions]
 agp = "8.9.1"
 hiltNavigationComposeVersion = "1.2.0"
-kotlin = "2.0.21"
+kotlin = "2.1.21"
 javaxInject = "1"
 coreKtx = "1.16.0"
 espressoCore = "3.6.1"
