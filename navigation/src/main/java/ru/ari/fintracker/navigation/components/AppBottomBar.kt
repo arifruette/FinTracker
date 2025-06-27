@@ -19,6 +19,12 @@ import ru.ari.fintracker.navigation.flows.MainFlow
 import ru.ari.fintracker.navigation.utils.Constants.SELECTED_NAV_BAR_ITEM_FONT_WEIGHT
 import ru.ari.fintracker.navigation.utils.Constants.UNSELECTED_NAV_BAR_ITEM_FONT_WEIGHT
 
+/**
+ * Компонент нижней навигационной панели приложения
+ *
+ * @param navController контроллер навигации для управления переходами
+ * @param modifier модификатор для кастома
+ */
 @Composable
 fun AppBottomBar(
     navController: NavController,

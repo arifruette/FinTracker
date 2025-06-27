@@ -14,9 +14,18 @@ import ru.ari.fintracker.feature.history.ui.presentation.HistoryScreenWrapper
 import ru.ari.fintracker.navigation.flows.ExpensesHistory.expensesHistoryScreen
 import ru.ari.navigation.R
 
+
+/**
+ * Объект для навигационного потока истории расходов.
+ */
 @Serializable
 data object ExpensesHistoryFLow
 
+/**
+ * Навигационный граф для экрана истории расходов
+ *
+ * @param navController контроллер навигации для управления переходами
+ */
 fun NavGraphBuilder.expensesHistoryNavigationFlow(navController: NavHostController) {
     navigation<ExpensesHistoryFLow>(ExpensesHistory) {
         expensesHistoryScreen({
@@ -29,6 +38,9 @@ fun NavGraphBuilder.expensesHistoryNavigationFlow(navController: NavHostControll
     }
 }
 
+/**
+ * Объект экрана истории расходов, реализующий интерфейс Screen.
+ */
 @Serializable
 data object ExpensesHistory : Screen {
     @Composable
@@ -53,6 +65,12 @@ data object ExpensesHistory : Screen {
         @Composable
         get() = stringResource(R.string.history_screen_title)
 
+    /**
+     * Регистрация composable экрана истории расходов в графе навигации
+     *
+     * @param onLeadingIconClick обработчик клика по иконке "назад"
+     * @param onTrailingIconClick обработчик клика по дополнительной иконке
+     */
     fun NavGraphBuilder.expensesHistoryScreen(
         onLeadingIconClick: () -> Unit,
         onTrailingIconClick: () -> Unit

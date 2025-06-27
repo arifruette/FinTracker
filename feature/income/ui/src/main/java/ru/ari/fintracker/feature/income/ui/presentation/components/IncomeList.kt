@@ -17,6 +17,12 @@ import ru.ari.fintracker.core.domain.models.Transaction
 import ru.ari.fintracker.core.ui.components.EmptyState
 import ru.ari.fintracker.core.ui.components.ListItem
 
+
+/**
+ * Компонент для отображения списка доходов
+ * @param income Список доходов
+ * @param modifier Модификатор для кастомизации
+ */
 @Composable
 fun IncomeList(
     income: List<Transaction>,

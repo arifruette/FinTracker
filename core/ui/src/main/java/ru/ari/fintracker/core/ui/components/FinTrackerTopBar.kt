@@ -15,6 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.ari.fintracker.core.ui.navigation.Screen
 
+/**
+ * Кастомный верхний бар
+ * @param route Текущий экран (объект, реализующий интерфейс Screen)
+ * @param onTrailingIconClick Обработчик клика по трейлинг иконке
+ * @param modifier Модификатор для кастомизации
+ * @param onLeadingIconClick Обработчик клика по ведущей иконке
+ */
 @Composable
 fun FinTrackerTopBar(
     route: Screen,

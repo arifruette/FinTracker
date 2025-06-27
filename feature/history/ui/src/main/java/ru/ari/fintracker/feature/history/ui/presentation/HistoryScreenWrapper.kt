@@ -13,15 +13,23 @@ import ru.ari.fintracker.core.ui.components.FinTrackerTopBar
 import ru.ari.fintracker.core.ui.navigation.Screen
 import ru.ari.fintracker.feature.history.ui.presentation.components.HistoryScreen
 import ru.ari.fintracker.feature.history.ui.viewmodel.HistoryViewModel
-
+/**
+ * Обертка для экрана истории транзакций (доходов/расходов)
+ * @param route Текущий экран для настройки TopBar
+ * @param onLeadingIconClick Обработчик клика по левой иконке в TopBar
+ * @param onTrailingIconClick Обработчик клика по правой иконке в TopBar
+ * @param isIncomeScreen Флаг, определяющий тип операций:
+ *   - `true`: экран истории доходов
+ *   - `false`: экран истории расходов (по умолчанию)
+ */
 @Composable
 fun HistoryScreenWrapper(
     route: Screen,
     onLeadingIconClick: () -> Unit,
     onTrailingIconClick: () -> Unit,
-    isIncomeScreen: Boolean = false,
-    viewModel: HistoryViewModel = hiltViewModel()
+    isIncomeScreen: Boolean = false
 ) {
+    val viewModel: HistoryViewModel = hiltViewModel()
     val uiState by viewModel.state.collectAsStateWithLifecycle()
     if (isIncomeScreen) {
         viewModel.transactionType = TransactionType.INCOME

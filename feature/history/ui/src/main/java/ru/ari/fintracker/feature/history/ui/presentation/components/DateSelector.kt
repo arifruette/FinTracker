@@ -21,6 +21,14 @@ import ru.ari.fintracker.feature.history.ui.presentation.utils.toLocalDate
 import java.time.LocalDate
 import java.time.ZoneOffset
 
+/**
+ * Компонент выбора даты с диалоговым окном календаря
+ *
+ * @param label Текст заголовка
+ * @param date Выбранная дата
+ * @param onDateSelected Обработчик выбора новой даты
+ * @param modifier Модификатор для кастома
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DateSelector(

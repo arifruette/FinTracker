@@ -23,19 +23,14 @@ fun BalanceScreen(
     uiState: BalanceState,
     modifier: Modifier = Modifier,
 ) {
-    when (uiState) {
-        is BalanceState.Error -> {
-            ErrorText(
-                errorMessage = uiState.message,
-                modifier = modifier.fillMaxSize()
-            )
-        }
+    when {
+        uiState.isLoading -> Loading(modifier = Modifier.fillMaxSize())
+        !uiState.error.isNullOrBlank() -> ErrorText(
+            errorMessage = uiState.error,
+            modifier = modifier.fillMaxSize()
+        )
 
-        BalanceState.Loading -> {
-            Loading(modifier = modifier.fillMaxSize())
-        }
-
-        is BalanceState.Success -> {
+        else -> {
             Column(
                 modifier = modifier
             ) {

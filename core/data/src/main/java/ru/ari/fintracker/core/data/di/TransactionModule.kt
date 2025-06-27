@@ -9,7 +9,12 @@ import ru.ari.fintracker.core.data.api.TransactionApi
 import ru.ari.fintracker.core.data.repository.TransactionRepositoryImpl
 import ru.ari.fintracker.core.domain.repository.TransactionRepository
 
-
+/**
+ * Hilt-модуль для предоставления зависимостей, связанных с транзакциями.
+ * ### Предоставляемые зависимости:
+ * 1. [TransactionApi] - Retrofit-интерфейс для сетевых запросов
+ * 2. [TransactionRepository] - репозиторий для бизнес-логики работы с транзакциями
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 class TransactionModule {

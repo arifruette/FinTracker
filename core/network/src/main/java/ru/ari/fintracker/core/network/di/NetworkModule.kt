@@ -1,4 +1,4 @@
-package ru.ari.fintracker.core.network
+package ru.ari.fintracker.core.network.di
 
 import com.example.core.feature.network.BuildConfig
 import dagger.Module
@@ -8,8 +8,12 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import ru.ari.fintracker.core.network.AuthInterceptor
 import javax.inject.Singleton
 
+/**
+ * Hilt-модуль для предоставления сетевых зависимостей ([Retrofit], [OkHttpClient] с [AuthInterceptor])
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {

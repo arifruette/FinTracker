@@ -10,6 +10,11 @@ import ru.ari.fintracker.feature.income.domain.models.IncomeData
 import java.time.LocalDate
 import javax.inject.Inject
 
+/**
+ * UseCase получения данных о доходах по счёту за текущий день.
+ *
+ * @param transactionRepository репозиторий для доступа к транзакциям
+ */
 class GetIncomeUseCase @Inject constructor(
     private val transactionRepository: TransactionRepository
 ){

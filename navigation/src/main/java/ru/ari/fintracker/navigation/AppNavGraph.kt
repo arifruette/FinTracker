@@ -9,6 +9,12 @@ import ru.ari.fintracker.navigation.flows.expensesHistoryNavigationFlow
 import ru.ari.fintracker.navigation.flows.incomeHistoryNavigationFlow
 import ru.ari.fintracker.navigation.flows.mainNavigationFlow
 
+/**
+ * Главный навигационный граф приложения
+ *
+ * @param modifier модификатор для настройки внешнего вида
+ * @param navController контроллер навигации для управления переходами
+ */
 @Composable
 fun AppNavGraph(
     modifier: Modifier = Modifier,

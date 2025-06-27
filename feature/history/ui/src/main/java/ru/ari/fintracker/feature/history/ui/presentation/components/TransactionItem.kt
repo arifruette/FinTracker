@@ -11,6 +11,9 @@ import ru.ari.fintracker.core.common.utils.toCurrencySymbol
 import ru.ari.fintracker.core.domain.models.Transaction
 import ru.ari.fintracker.core.ui.components.ListItem
 
+/**
+ * Компонент для отображения транзакции
+ */
 @Composable
 fun TransactionItem(
     transaction: Transaction,

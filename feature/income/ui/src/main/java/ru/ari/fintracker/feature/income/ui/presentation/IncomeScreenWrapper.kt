@@ -13,13 +13,21 @@ import ru.ari.fintracker.core.ui.components.FinTrackerTopBar
 import ru.ari.fintracker.core.ui.navigation.MainFlowScreen
 import ru.ari.fintracker.feature.income.ui.presentation.components.IncomeScreen
 import ru.ari.fintracker.feature.income.ui.viewmodel.IncomeViewModel
+
+/**
+ * Composable обертка для экрана доходов, реализующая базовую структуру экрана
+ *
+ * @param route текущий экран в потоке MainFlowScreen (для кастомизации элементов)
+ * @param onTopBarIconClick обработчик клика по иконке в топбаре
+ * @param onFloatingButtonClick обработчик клика по плавающей кнопке
+ */
 @Composable
 fun IncomeScreenWrapper(
     route: MainFlowScreen,
     onTopBarIconClick: () -> Unit,
-    onFloatingButtonClick: () -> Unit,
-    viewModel: IncomeViewModel = hiltViewModel()
+    onFloatingButtonClick: () -> Unit
 ) {
+    val viewModel: IncomeViewModel = hiltViewModel()
     val uiState by viewModel.state.collectAsStateWithLifecycle()
     Scaffold(
         topBar = {

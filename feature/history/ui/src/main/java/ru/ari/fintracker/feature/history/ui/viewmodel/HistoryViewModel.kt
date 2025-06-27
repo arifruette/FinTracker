@@ -23,7 +23,10 @@ import ru.ari.fintracker.feature.history.ui.viewmodel.contract.HistoryState
 import java.net.UnknownHostException
 import java.time.LocalDate
 import javax.inject.Inject
-
+/**
+ * ViewModel для экрана истории, управляющая ui состоянием
+ * @param getHistoryUseCase UseCase получения данных о истории доходов/расходов за опред. период
+ */
 @HiltViewModel
 class HistoryViewModel @Inject constructor(
     private val getHistoryUseCase: GetHistoryUseCase

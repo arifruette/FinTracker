@@ -37,7 +37,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     implementation(projects.core.ui)
-    implementation(projects.feature.categories.domain)
+    implementation(projects.feature.settings.domain)
 
     androidTestImplementation(platform(libs.androidx.compose.bom))
 }

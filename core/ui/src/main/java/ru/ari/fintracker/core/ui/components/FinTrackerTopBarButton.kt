@@ -10,6 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 
+/**
+ * Стандартная кнопка для верхнего бара приложения
+ *
+ * @param onClick Обработчик клика по кнопке
+ * @param iconId Идентификатор векторного ресурса для иконки
+ * @param modifier Модификатор для кастомизации
+ */
 @Composable
 fun FinTrackerTopBarButton(
     onClick: () -> Unit,

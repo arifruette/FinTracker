@@ -19,6 +19,10 @@ import ru.ari.fintracker.feature.expenses.ui.viewmodel.contract.ExpensesState
 import java.net.UnknownHostException
 import javax.inject.Inject
 
+/**
+ * ViewModel для экрана расходов, управляющая ui состоянием
+ * @param getExpensesUseCase UseCase получения данных о расходах
+ */
 @HiltViewModel
 class ExpensesViewModel @Inject constructor(
     private val getExpensesUseCase: GetExpensesUseCase

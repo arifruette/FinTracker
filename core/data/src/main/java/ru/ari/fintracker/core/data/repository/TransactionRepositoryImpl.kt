@@ -9,6 +9,10 @@ import ru.ari.fintracker.core.domain.repository.TransactionRepository
 import java.time.LocalDate
 import javax.inject.Inject
 
+/**
+ * Реализация репозитория для работы с транзакциями.
+ * @param api Сетевой клиент для работы с API транзакций
+ */
 class TransactionRepositoryImpl @Inject constructor(
     private val api: TransactionApi
 ) : TransactionRepository {

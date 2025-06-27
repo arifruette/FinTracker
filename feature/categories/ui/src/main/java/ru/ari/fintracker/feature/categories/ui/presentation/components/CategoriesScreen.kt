@@ -32,9 +32,13 @@ fun CategoriesScreen(
     modifier: Modifier = Modifier,
 ) {
     var textFieldState by rememberSaveable { mutableStateOf("") }
-    when (uiState) {
-        CategoriesState.Loading -> Loading(modifier = modifier.fillMaxSize())
-        is CategoriesState.Success -> {
+    when {
+        uiState.isLoading -> Loading(modifier = modifier.fillMaxSize())
+        !uiState.error.isNullOrBlank() -> ErrorText(
+            errorMessage = uiState.error,
+            modifier = Modifier.fillMaxSize()
+        )
+        else -> {
             LaunchedEffect(Unit) {
                 textFieldState = uiState.searchTextState
             }
@@ -74,13 +78,6 @@ fun CategoriesScreen(
                     categories = uiState.categories
                 )
             }
-        }
-
-        is CategoriesState.Error -> {
-            ErrorText(
-                errorMessage = uiState.message,
-                modifier = Modifier.fillMaxSize()
-            )
         }
     }
 }

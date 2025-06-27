@@ -17,6 +17,11 @@ import ru.ari.fintracker.core.domain.models.Transaction
 import ru.ari.fintracker.core.ui.components.EmptyState
 import ru.ari.fintracker.core.ui.components.ListItem
 
+/**
+ * Компонент для отображения списка расходов
+ * @param expenses Список расходов для отображения
+ * @param modifier Модификатор для доп. кастома
+ */
 @Composable
 fun ExpensesList(
     expenses: List<Transaction>,

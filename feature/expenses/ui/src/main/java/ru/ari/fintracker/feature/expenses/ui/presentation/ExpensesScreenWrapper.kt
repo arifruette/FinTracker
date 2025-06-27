@@ -14,13 +14,19 @@ import ru.ari.fintracker.core.ui.navigation.MainFlowScreen
 import ru.ari.fintracker.feature.expenses.ui.presentation.components.ExpensesScreen
 import ru.ari.fintracker.feature.expenses.ui.viewmodel.ExpensesViewModel
 
+/**
+ * Обертка для экрана расходов, интегрирующая UI с ViewModel и Scaffold
+ * @param route Текущий экран для конфигурации TopBar и FAB
+ * @param onTopBarIconClick Обработчик клика по иконке в верхней панели
+ * @param onFloatingButtonClick Обработчик клика по плавающей кнопке
+ */
 @Composable
 fun ExpensesScreenWrapper(
     route: MainFlowScreen,
     onTopBarIconClick: () -> Unit,
-    onFloatingButtonClick: () -> Unit,
-    viewModel: ExpensesViewModel = hiltViewModel()
+    onFloatingButtonClick: () -> Unit
 ) {
+    val viewModel: ExpensesViewModel = hiltViewModel()
     val uiState by viewModel.state.collectAsStateWithLifecycle()
     Scaffold(
         modifier = Modifier.fillMaxSize(),

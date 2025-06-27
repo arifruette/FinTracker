@@ -15,6 +15,11 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import ru.ari.ui.R
 
+/**
+ * Кастомная плавающая кнопка действия
+ * @param onClick Обработчик клика по кнопке
+ * @param modifier Модификатор для кастомизации
+ */
 @Composable
 fun FinTrackerFloatingButton(
     onClick: () -> Unit,

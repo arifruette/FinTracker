@@ -10,9 +10,21 @@ import ru.ari.fintracker.feature.history.domain.models.HistoryData
 import java.time.LocalDate
 import javax.inject.Inject
 
+/**
+ * Usecase получения истории транзакций с фильтрацией по типу операций
+ */
 class GetHistoryUseCase @Inject constructor(
     private val transactionRepository: TransactionRepository
 ) {
+    /**
+     * Параметры:
+     * @param startDate Начальная дата периода
+     * @param endDate Конечная дата периода
+     * @param accountId Идентификатор банковского счёта
+     * @param transactionType Тип операций для фильтрации:
+     *   - `TransactionType.INCOME`: только доходы
+     *   - `TransactionType.EXPENSE`: только расходы
+     */
     suspend operator fun invoke(
         startDate: LocalDate,
         endDate: LocalDate,

@@ -22,6 +22,13 @@ import ru.ari.fintracker.navigation.AppNavGraph
 import ru.ari.fintracker.navigation.components.AppBottomBar
 import ru.ari.fintracker.navigation.flows.MainFlow
 
+/**
+ * Главная активность приложения, служащая корневым контейнером для навигации и UI.
+ * 1. Инициализирует edge-to-edge оформление
+ * 2. Управляет навигацией через navController
+ * 3. Динамически показывает/скрывает нижнюю панель в зависимости от текущего маршрута
+ * 4. Содержит основной граф навигации
+ */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

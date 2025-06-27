@@ -12,6 +12,12 @@ import androidx.compose.ui.unit.dp
 import ru.ari.fintracker.core.ui.components.ListItem
 import ru.ari.fintracker.feature.categories.domain.models.Category
 
+/**
+ * Компонент для отображения списка категорий в виде прокручиваемой колонки
+ *
+ * @param categories Список категорий для отображения
+ * @param modifier Модификатор для кастомизации
+ */
 @Composable
 fun CategoriesList(
     categories: List<Category>,

@@ -8,6 +8,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
+/**
+ * Компонент для отображения текста ошибки в центре контейнера
+ * @param errorMessage Текст ошибки для отображения
+ * @param modifier Модификатор для кастомизации контейнера
+ *
+ */
 @Composable
 fun ErrorText(
     errorMessage: String,

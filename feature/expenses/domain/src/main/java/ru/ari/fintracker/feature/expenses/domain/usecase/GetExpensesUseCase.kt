@@ -9,9 +9,16 @@ import ru.ari.fintracker.feature.expenses.domain.models.ExpenseData
 import java.time.LocalDate
 import javax.inject.Inject
 
+/**
+ * Сценарий получения данных о расходах за текущий день.
+ *
+ */
 class GetExpensesUseCase @Inject constructor(
     private val transactionRepository: TransactionRepository
 ){
+    /**
+     *  * @param accountId Идентификатор счёта у которого получаем транзакции
+     */
     suspend operator fun invoke(
         accountId: Long
     ): Result<ExpenseData> {

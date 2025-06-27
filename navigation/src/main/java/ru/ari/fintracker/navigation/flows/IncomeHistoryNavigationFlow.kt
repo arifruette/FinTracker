@@ -14,9 +14,17 @@ import ru.ari.fintracker.feature.history.ui.presentation.HistoryScreenWrapper
 import ru.ari.fintracker.navigation.flows.IncomeHistory.incomeHistoryScreen
 import ru.ari.navigation.R
 
+/**
+ * Объект для навигационного потока истории доходов.
+ */
 @Serializable
 data object IncomeHistoryFLow
 
+/**
+ * Навигационный граф для экрана истории доходов.
+ *
+ * @param navController контроллер навигации для управления переходами
+ */
 fun NavGraphBuilder.incomeHistoryNavigationFlow(navController: NavHostController) {
     navigation<IncomeHistoryFLow>(IncomeHistory) {
         incomeHistoryScreen(onLeadingIconClick = {
@@ -29,6 +37,9 @@ fun NavGraphBuilder.incomeHistoryNavigationFlow(navController: NavHostController
     }
 }
 
+/**
+ * Объект экрана истории доходов, реализующий интерфейс Screen.
+ */
 @Serializable
 data object IncomeHistory : Screen {
     @Composable
@@ -53,6 +64,12 @@ data object IncomeHistory : Screen {
         @Composable
         get() = stringResource(R.string.history_screen_title)
 
+    /**
+     * Регистрация composable экрана истории доходов в графе навигации
+     *
+     * @param onLeadingIconClick обработчик клика по иконке "назад"
+     * @param onTrailingIconClick обработчик клика по дополнительной иконке
+     */
     fun NavGraphBuilder.incomeHistoryScreen(
         onLeadingIconClick: () -> Unit,
         onTrailingIconClick: () -> Unit

@@ -19,6 +19,11 @@ import ru.ari.fintracker.feature.income.ui.viewmodel.contract.IncomeState
 import java.net.UnknownHostException
 import javax.inject.Inject
 
+
+/**
+ * ViewModel для экрана доходов, управляющая ui состоянием
+ * @param getIncomeUseCase UseCase получения данных о доходах
+ */
 @HiltViewModel
 class IncomeViewModel @Inject constructor(
     private val getIncomeUseCase: GetIncomeUseCase

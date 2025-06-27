@@ -4,83 +4,39 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import ru.ari.feature.settings.ui.R
-import ru.ari.fintracker.core.ui.components.ListItem
-import ru.ari.fintracker.feature.settings.ui.viewmodel.contract.SettingsState
+import ru.ari.fintracker.feature.settings.domain.models.SettingItem
+import ru.ari.fintracker.feature.settings.domain.models.SettingType
 
 @Composable
 fun SettingsScreen(
-    uiState: SettingsState,
     modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = modifier
-    ) {
-        ListItem(
-            content = "Тёмная тема",
-            trailingContent = {
-                Switch(
-                    checked = uiState.isDarkTheme,
-                    onCheckedChange = { }
-                )
-            },
-            modifier = Modifier.height(56.dp)
+    Column(modifier = modifier) {
+        val settingsItems = listOf(
+            SettingItem("Тёмная тема", SettingType.SWITCH),
+            SettingItem("Основной цвет", SettingType.NAVIGATION),
+            SettingItem("Звуки", SettingType.NAVIGATION),
+            SettingItem("Хаптики", SettingType.NAVIGATION),
+            SettingItem("Код пароль", SettingType.NAVIGATION),
+            SettingItem("Синхронизация", SettingType.NAVIGATION),
+            SettingItem("Язык", SettingType.NAVIGATION),
+            SettingItem("О программе", SettingType.NAVIGATION),
         )
-        HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
-        ListItem(
-            content = "Основной цвет",
-            trailingIcon = ImageVector.vectorResource(R.drawable.arrow_right),
-            onItemClick = {},
-            modifier = Modifier.height(56.dp)
-        )
-        HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
-        ListItem(
-            content = "Звуки",
-            trailingIcon = ImageVector.vectorResource(R.drawable.arrow_right),
-            onItemClick = {},
-            modifier = Modifier.height(56.dp)
-        )
-        HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
-        ListItem(
-            content = "Хаптики",
-            trailingIcon = ImageVector.vectorResource(R.drawable.arrow_right),
-            onItemClick = {},
-            modifier = Modifier.height(56.dp)
-        )
-        HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
-        ListItem(
-            content = "Код пароль",
-            trailingIcon = ImageVector.vectorResource(R.drawable.arrow_right),
-            onItemClick = {},
-            modifier = Modifier.height(56.dp)
-        )
-        HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
-        ListItem(
-            content = "Синхронизация",
-            trailingIcon = ImageVector.vectorResource(R.drawable.arrow_right),
-            onItemClick = {},
-            modifier = Modifier.height(56.dp)
-        )
-        HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
-        ListItem(
-            content = "Язык",
-            trailingIcon = ImageVector.vectorResource(R.drawable.arrow_right),
-            onItemClick = {},
-            modifier = Modifier.height(56.dp)
-        )
-        HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
-        ListItem(
-            content = "О программе",
-            trailingIcon = ImageVector.vectorResource(R.drawable.arrow_right),
-            onItemClick = {},
-            modifier = Modifier.height(56.dp)
-        )
-        HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
+
+        settingsItems.forEach { item ->
+            SettingListItem(
+                title = item.title,
+                type = item.type,
+                onClick = {},
+                modifier = Modifier.height(56.dp)
+            )
+            HorizontalDivider(
+                thickness = 1.dp,
+                color = MaterialTheme.colorScheme.outlineVariant
+            )
+        }
     }
 }

@@ -32,6 +32,21 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import ru.ari.fintracker.core.ui.components.utils.Constants.BASE_TEXT_FONT_WEIGHT
 
+/**
+ * Универсальный элемент списка с гибкой структурой контента
+ * @param modifier Модификатор для кастомизации
+ * @param content Основной текст элемента
+ * @param emojiBackgroundColor Цвет фона для emoji-бокса
+ * @param isHighlighted Флаг выделенного состояния (меняет фон)
+ * @param comment Дополнительный текст с описанием
+ * @param leadEmoji Emoji-символ в начале элемента (unicode)
+ * @param trailingText Основной трейлинг текст
+ * @param trailingSecondaryText Дополнительный трейлинг текст
+ * @param trailingIcon Иконка в конце элемента
+ * @param trailingContent Произвольный composable в конце элемента (если нет трейлинг иконки)
+ * @param onItemClick Обработчик клика по элементу
+ */
+@Suppress("LongParameterList")
 @Composable
 fun ListItem(
     modifier: Modifier = Modifier,
@@ -146,7 +161,14 @@ fun ListItem(
     }
 }
 
-
+/**
+ * Компонент для отображения emoji в круглом цветном контейнере
+ *
+ * @param emoji Строка с emoji-символом для отображения (unicode)
+ * @param size Размер контейнера
+ * @param backgroundColor Цвет фона контейнера
+ * @param modifier Дополнительный модификатор для кастомизации
+ */
 @Composable
 fun EmojiBox(
     emoji: String,
