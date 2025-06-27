@@ -1,0 +1,19 @@
+package ru.ari.fintracker.feature.settings.ui.viewmodel
+
+import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import ru.ari.fintracker.feature.settings.ui.viewmodel.contract.SettingsState
+
+class SettingsViewModel: ViewModel() {
+    private val _state = MutableStateFlow(SettingsState())
+
+    val state: StateFlow<SettingsState> = _state.asStateFlow()
+
+    fun toggleDarkTheme() {
+        _state.value = _state.value.copy(
+            isDarkTheme = !_state.value.isDarkTheme
+        )
+    }
+}
