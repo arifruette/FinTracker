@@ -8,7 +8,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import ru.ari.core.domain.repository.TransactionRepository
-import javax.inject.Singleton
 
 
 @Module

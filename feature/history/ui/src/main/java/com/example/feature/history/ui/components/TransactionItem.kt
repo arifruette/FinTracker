@@ -1,4 +1,4 @@
-package com.example.feature.history.ui.component
+package com.example.feature.history.ui.components
 
 import ListItem
 import androidx.compose.runtime.Composable

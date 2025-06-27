@@ -18,9 +18,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.ari.fintracker.ui.theme.FinTrackerTheme
-import ru.ari.navigation.AppBottomBar
+import ru.ari.navigation.components.AppBottomBar
 import ru.ari.navigation.AppNavGraph
-import ru.ari.navigation.MainFlow
+import ru.ari.navigation.flows.MainFlow
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

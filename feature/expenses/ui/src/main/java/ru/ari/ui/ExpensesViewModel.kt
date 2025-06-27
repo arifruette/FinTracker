@@ -47,8 +47,7 @@ class ExpensesViewModel @Inject constructor(
     }
 
     private fun handleResult(result: Result<ExpenseData>) {
-        result
-            .onSuccess { expenseData ->
+        result.onSuccess { expenseData ->
                 _state.update {
                     it.copy(
                         expenses = expenseData.expenses,
@@ -57,16 +56,14 @@ class ExpensesViewModel @Inject constructor(
                         isLoading = false
                     )
                 }
-            }
-            .onError { code, message ->
+            }.onError { code, message ->
                 _state.update {
                     it.copy(
                         isLoading = false,
                         errorMessage = "Ошибка: $message"
                     )
                 }
-            }
-            .onException { error ->
+            }.onException { error ->
                 var message = "Ошибка: Непредвиденная ошибка :("
                 if (error is UnknownHostException) {
                     message = "Ошибка подключения к сети"

@@ -28,13 +28,9 @@ class GetHistoryUseCase @Inject constructor(
                 TransactionType.INCOME -> transactions.filter { it.category.isIncome }
                 TransactionType.EXPENSE -> transactions.filter { !it.category.isIncome }
             }
-
             val sorted: List<Transaction> = filtered.sortedByDescending { it.date }
-
             val amount = calculateAmount(filtered, transactionType)
-
             val currency = filtered.firstOrNull()?.account?.currency?.toCurrencySymbol() ?: ""
-
             HistoryData(
                 transactions = sorted,
                 amount = amount,

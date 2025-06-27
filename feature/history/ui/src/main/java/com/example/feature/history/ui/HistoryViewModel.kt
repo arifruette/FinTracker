@@ -7,6 +7,8 @@ import com.example.core.common.utils.onException
 import com.example.core.common.utils.onSuccess
 import com.example.feature.history.domain.model.HistoryData
 import com.example.feature.history.domain.usecase.GetHistoryUseCase
+import com.example.feature.history.ui.contract.HistoryAction
+import com.example.feature.history.ui.contract.HistoryState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -48,7 +50,7 @@ class HistoryViewModel @Inject constructor(
                 val result = getHistoryUseCase(
                     startDate = state.dateStart,
                     endDate = state.dateEnd,
-                    accountId = getAccountId(),
+                    accountId = MOCK_ACCOUNT_ID,
                     transactionType = transactionType
                 )
                 handleResult(result)
@@ -57,8 +59,7 @@ class HistoryViewModel @Inject constructor(
     }
 
     private fun handleResult(result: Result<HistoryData>) {
-        result
-            .onSuccess { historyData ->
+        result.onSuccess { historyData ->
                 _state.update {
                     it.copy(
                         transactions = historyData.transactions,
@@ -67,16 +68,14 @@ class HistoryViewModel @Inject constructor(
                         isLoading = false
                     )
                 }
-            }
-            .onError { code, message ->
+            }.onError { code, message ->
                 _state.update {
                     it.copy(
                         isLoading = false,
                         errorMessage = "Ошибка $code: $message"
                     )
                 }
-            }
-            .onException { error ->
+            }.onException { error ->
                 var message = "Ошибка: Непредвиденная ошибка :("
                 if (error is UnknownHostException) {
                     message = "Ошибка подключения к сети"
@@ -106,5 +105,7 @@ class HistoryViewModel @Inject constructor(
         loadTransactions()
     }
 
-    private fun getAccountId(): Long = 1L
+    private companion object {
+        private const val MOCK_ACCOUNT_ID = 1L
+    }
 }

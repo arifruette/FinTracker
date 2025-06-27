@@ -14,9 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.core.common.utils.formatMoney
-import com.example.feature.history.ui.HistoryAction
-import com.example.feature.history.ui.HistoryState
-import com.example.feature.history.ui.component.TransactionItem
+import com.example.feature.history.ui.contract.HistoryAction
+import com.example.feature.history.ui.contract.HistoryState
+import com.example.feature.history.ui.components.TransactionItem
 import ru.ari.ui.components.EmptyState
 import ru.ari.ui.components.ErrorText
 import ru.ari.ui.components.Loading

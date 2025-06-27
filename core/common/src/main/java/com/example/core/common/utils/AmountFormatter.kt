@@ -5,11 +5,12 @@ import java.text.DecimalFormatSymbols
 import java.util.Locale
 
 fun formatMoney(amount: Double, currencySymbol: String = ""): String {
-    val formatter = DecimalFormat("#,##0.00", DecimalFormatSymbols(Locale.getDefault())).apply {
-        decimalFormatSymbols = DecimalFormatSymbols(Locale.getDefault()).apply {
-            groupingSeparator = ' '
-            decimalSeparator = '.'
-        }
+    val symbols = DecimalFormatSymbols(Locale.getDefault()).apply {
+        groupingSeparator = ' '
+        decimalSeparator = '.'
+    }
+
+    val formatter = DecimalFormat("#,##0.00", symbols).apply {
         isGroupingUsed = true
     }
 

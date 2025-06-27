@@ -1,4 +1,4 @@
-package ru.ari.navigation
+package ru.ari.navigation.components
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -15,6 +15,8 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import ru.ari.navigation.flows.MainFlow
+import ru.ari.navigation.utils.Constants
 
 @Composable
 fun AppBottomBar(
@@ -51,7 +53,11 @@ fun AppBottomBar(
                     Text(
                         text = route.label,
                         style = MaterialTheme.typography.labelSmall.copy(
-                            fontWeight = FontWeight(if (isSelected) 600 else 500)
+                            fontWeight = FontWeight(
+                                if (isSelected) {
+                                    Constants.SELECTED_NAV_BAR_ITEM_FONT_WEIGHT
+                                } else Constants.UNSELECTED_NAV_BAR_ITEM_FONT_WEIGHT
+                            )
                         )
                     )
                 }

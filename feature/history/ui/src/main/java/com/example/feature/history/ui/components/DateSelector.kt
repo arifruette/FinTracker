@@ -77,12 +77,6 @@ fun DateSelector(
     }
 }
 
-fun LocalDate.toEpochMilli(): Long {
-    return atStartOfDay(java.time.ZoneId.systemDefault())
-        .toInstant()
-        .toEpochMilli()
-}
-
 fun Long.toLocalDate(): LocalDate {
     return java.time.Instant.ofEpochMilli(this)
         .atZone(java.time.ZoneId.systemDefault())

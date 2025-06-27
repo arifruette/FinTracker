@@ -1,4 +1,4 @@
-package ru.ari.navigation
+package ru.ari.navigation.flows
 
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
@@ -12,11 +12,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import kotlinx.serialization.Serializable
 import ru.ari.feature.settings.ui.SettingsScreenWrapper
-import ru.ari.navigation.Balance.balanceScreen
-import ru.ari.navigation.Categories.categoriesScreen
-import ru.ari.navigation.Expenses.expensesScreen
-import ru.ari.navigation.Income.incomeScreen
-import ru.ari.navigation.Settings.settingsScreen
+import ru.ari.navigation.R
+import ru.ari.navigation.flows.Balance.balanceScreen
+import ru.ari.navigation.flows.Categories.categoriesScreen
+import ru.ari.navigation.flows.Expenses.expensesScreen
+import ru.ari.navigation.flows.Income.incomeScreen
+import ru.ari.navigation.flows.Settings.settingsScreen
 import ru.ari.ui.BalanceScreenWrapper
 import ru.ari.ui.CategoriesScreenWrapper
 import ru.ari.ui.ExpensesScreenWrapper

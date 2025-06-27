@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewFontScale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import ru.ari.ui.components.utils.Constants.BASE_TEXT_FONT_WEIGHT
 
 @Composable
 fun ListItem(
@@ -77,7 +78,7 @@ fun ListItem(
                 text = content,
                 style = MaterialTheme.typography.bodyLarge.copy(
                     color = MaterialTheme.colorScheme.onSurface,
-                    fontWeight = FontWeight(400)
+                    fontWeight = FontWeight(BASE_TEXT_FONT_WEIGHT)
                 ),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
@@ -89,7 +90,7 @@ fun ListItem(
                     overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.bodyMedium.copy(
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        fontWeight = FontWeight(400)
+                        fontWeight = FontWeight(BASE_TEXT_FONT_WEIGHT)
                     )
                 )
             }
@@ -103,14 +104,14 @@ fun ListItem(
                         text = it,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             color = MaterialTheme.colorScheme.onSurface,
-                            fontWeight = FontWeight(400)
+                            fontWeight = FontWeight(BASE_TEXT_FONT_WEIGHT)
                         ),
                     )
                     Text(
                         text = trailingSecondaryText,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             color = MaterialTheme.colorScheme.onSurface,
-                            fontWeight = FontWeight(400)
+                            fontWeight = FontWeight(BASE_TEXT_FONT_WEIGHT)
                         ),
                     )
                 }
@@ -119,7 +120,7 @@ fun ListItem(
                     text = it,
                     style = MaterialTheme.typography.bodyLarge.copy(
                         color = MaterialTheme.colorScheme.onSurface,
-                        fontWeight = FontWeight(400)
+                        fontWeight = FontWeight(BASE_TEXT_FONT_WEIGHT)
                     ),
                 )
             }

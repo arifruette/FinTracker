@@ -1,4 +1,4 @@
-package com.example.feature.history.ui
+package com.example.feature.history.ui.contract
 
 import java.time.LocalDate
 

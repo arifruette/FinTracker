@@ -1,4 +1,4 @@
-package com.example.feature.history.ui
+package com.example.feature.history.ui.contract
 
 import ru.ari.core.domain.model.Transaction
 import java.time.LocalDate

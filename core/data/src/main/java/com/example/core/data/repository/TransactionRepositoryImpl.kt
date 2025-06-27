@@ -18,7 +18,7 @@ class TransactionRepositoryImpl @Inject constructor(
         endDate: LocalDate,
         accountId: Long
     ): Result<List<Transaction>> {
-        try {
+        return try {
             val startDateStr = startDate.toString()
             val endDateStr = endDate.toString()
             val response = api.getTransactionsByAccountAndPeriod(
@@ -26,11 +26,11 @@ class TransactionRepositoryImpl @Inject constructor(
                 startDate = startDateStr,
                 endDate = endDateStr
             )
-            return Result.Success(response.body()?.map { it.toDomain() } ?: emptyList())
+            Result.Success(response.body()?.map { it.toDomain() } ?: emptyList())
         } catch (e: HttpException) {
-            return Result.Error(e.code(), e.message())
-        } catch (e: Exception) {
-            return Result.Exception(e)
+            Result.Error(e.code(), e.message())
+        } catch (e: Throwable) {
+            Result.Exception(e)
         }
     }
 }
