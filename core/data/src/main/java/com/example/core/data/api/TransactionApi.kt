@@ -1,6 +1,6 @@
 package com.example.core.data.api
 
-import com.example.core.data.model.TransactionResponse
+import com.example.core.data.models.TransactionResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

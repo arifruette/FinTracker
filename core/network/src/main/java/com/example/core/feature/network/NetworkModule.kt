@@ -11,15 +11,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-class AuthInterceptor(private val token: String) : Interceptor {
-    override fun intercept(chain: Interceptor.Chain): Response {
-        val request = chain.request().newBuilder()
-            .addHeader("Authorization", "Bearer $token")
-            .build()
-        return chain.proceed(request)
-    }
-}
-
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {

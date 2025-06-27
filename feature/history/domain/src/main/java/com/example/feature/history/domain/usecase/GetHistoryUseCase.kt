@@ -3,9 +3,9 @@ package com.example.feature.history.domain.usecase
 import com.example.core.common.utils.Result
 import com.example.core.common.utils.map
 import com.example.core.common.utils.toCurrencySymbol
-import com.example.feature.history.domain.model.HistoryData
-import ru.ari.core.domain.model.Transaction
-import ru.ari.core.domain.model.TransactionType
+import com.example.feature.history.domain.models.HistoryData
+import ru.ari.core.domain.models.Transaction
+import ru.ari.core.domain.models.TransactionType
 import ru.ari.core.domain.repository.TransactionRepository
 import java.time.LocalDate
 import javax.inject.Inject

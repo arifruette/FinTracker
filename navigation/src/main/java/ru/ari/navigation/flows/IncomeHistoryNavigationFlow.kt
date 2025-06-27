@@ -7,7 +7,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.example.feature.history.ui.HistoryScreenWrapper
+import com.example.feature.history.ui.presentation.HistoryScreenWrapper
 import kotlinx.serialization.Serializable
 import ru.ari.navigation.R
 import ru.ari.navigation.flows.IncomeHistory.incomeHistoryScreen

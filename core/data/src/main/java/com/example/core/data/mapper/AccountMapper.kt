@@ -1,7 +1,7 @@
 package com.example.core.data.mapper
 
-import com.example.core.data.model.AccountBriefResponse
-import ru.ari.core.domain.model.AccountBrief
+import com.example.core.data.models.AccountBriefResponse
+import ru.ari.core.domain.models.AccountBrief
 
 
 fun AccountBriefResponse.toDomain(): AccountBrief {

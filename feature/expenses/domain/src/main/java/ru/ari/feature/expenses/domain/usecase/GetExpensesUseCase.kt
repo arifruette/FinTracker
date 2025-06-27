@@ -3,9 +3,9 @@ package ru.ari.feature.expenses.domain.usecase
 import com.example.core.common.utils.Result
 import com.example.core.common.utils.map
 import com.example.core.common.utils.toCurrencySymbol
-import ru.ari.core.domain.model.Transaction
+import ru.ari.core.domain.models.Transaction
 import ru.ari.core.domain.repository.TransactionRepository
-import ru.ari.feature.expenses.domain.ExpenseData
+import ru.ari.feature.expenses.domain.models.ExpenseData
 import java.time.LocalDate
 import javax.inject.Inject
 

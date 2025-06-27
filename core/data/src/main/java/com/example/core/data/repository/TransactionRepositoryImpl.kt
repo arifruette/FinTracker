@@ -4,7 +4,7 @@ import com.example.core.common.utils.Result
 import com.example.core.data.api.TransactionApi
 import com.example.core.data.mapper.toDomain
 import retrofit2.HttpException
-import ru.ari.core.domain.model.Transaction
+import ru.ari.core.domain.models.Transaction
 import ru.ari.core.domain.repository.TransactionRepository
 import java.time.LocalDate
 import javax.inject.Inject
