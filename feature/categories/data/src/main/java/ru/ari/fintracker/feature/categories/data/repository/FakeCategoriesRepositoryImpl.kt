@@ -9,7 +9,7 @@ import javax.inject.Inject
 /**
  * Mock репозиторий для получения категорий
  */
-class FakeRepositoryImpl @Inject constructor(
+class FakeCategoriesRepositoryImpl @Inject constructor(
 
 ): CategoriesRepository {
     override suspend fun getCategories(): Result<List<Category>> {
