@@ -1,5 +1,6 @@
 package ru.ari.fintracker.feature.edit_balance.data.repository
 
+import android.util.Log
 import retrofit2.HttpException
 import ru.ari.fintracker.core.common.utils.Result
 import ru.ari.fintracker.core.domain.models.AccountBrief
@@ -16,6 +17,7 @@ class AccountEditRepositoryImpl @Inject constructor(
         accountId: Long,
         info: AccountUpdateInfo
     ): Result<AccountBrief> {
+        Log.d("DEBUG", "$info")
         return try {
             Result.Success(
                 accountApi.updateAccountById(accountId, info).body()?.toDomain()

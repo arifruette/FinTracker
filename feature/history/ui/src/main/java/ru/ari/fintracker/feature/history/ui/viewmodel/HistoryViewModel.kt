@@ -59,11 +59,12 @@ class HistoryViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 var result: Result<HistoryData> = Result.Success(HistoryData())
-                getAccountInfoUseCase().onSuccess {
+                getAccountInfoUseCase().onSuccess { res ->
+                    _state.update { it.copy(currency = res.currency) }
                     result = getHistoryUseCase(
                         startDate = state.dateStart,
                         endDate = state.dateEnd,
-                        accountId = it.id,
+                        accountId = res.id,
                         transactionType = transactionType
                     )
                 }.onError { code, message ->
@@ -82,7 +83,6 @@ class HistoryViewModel @Inject constructor(
                     it.copy(
                         transactions = historyData.transactions,
                         amount = historyData.amount,
-                        currency = historyData.currency.symbol,
                         isLoading = false
                     )
                 }

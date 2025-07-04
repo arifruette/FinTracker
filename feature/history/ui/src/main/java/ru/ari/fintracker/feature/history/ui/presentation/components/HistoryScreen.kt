@@ -76,7 +76,7 @@ fun HistoryScreen(
                         .height(56.dp),
                     content = "Сумма",
                     isHighlighted = true,
-                    trailingText = formatMoney(uiState.amount, uiState.currency)
+                    trailingText = formatMoney(uiState.amount, uiState.currency.symbol)
                 )
 
                 HorizontalDivider(

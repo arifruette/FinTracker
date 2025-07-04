@@ -5,10 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
@@ -25,7 +23,6 @@ import javax.inject.Inject
 /**
  * ViewModel для экрана управления категориями (пока мок)
  */
-@OptIn(FlowPreview::class)
 @HiltViewModel
 class CategoriesViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase
@@ -37,7 +34,6 @@ class CategoriesViewModel @Inject constructor(
         viewModelScope.launch {
             getCategories()
             _uiState.map { it.searchQuery }
-                .debounce(SEARCH_QUERY_DEBOUNCE_MILLIS)
                 .map { it.trim().lowercase() }
                 .distinctUntilChanged()
                 .collect { query ->
@@ -75,9 +71,5 @@ class CategoriesViewModel @Inject constructor(
                 Log.d("DEBUG", "mockCategories: $it")
             }
         }
-    }
-
-    private companion object {
-        private const val SEARCH_QUERY_DEBOUNCE_MILLIS = 300L
     }
 }

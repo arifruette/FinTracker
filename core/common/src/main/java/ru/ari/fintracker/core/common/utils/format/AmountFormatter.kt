@@ -4,7 +4,7 @@ import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.Locale
 
-fun formatMoney(amount: Double, currencySymbol: String = ""): String {
+fun formatMoney(amount: Double, currencySymbol: String = "", withSpaces: Boolean = true): String {
     val symbols = DecimalFormatSymbols(Locale.getDefault()).apply {
         groupingSeparator = ' '
         decimalSeparator = '.'
@@ -15,5 +15,9 @@ fun formatMoney(amount: Double, currencySymbol: String = ""): String {
     }
 
     val formatted = formatter.format(amount)
-    return "$formatted $currencySymbol".trim()
+    return if (withSpaces) {
+        "$formatted $currencySymbol".trim()
+    } else {
+        "${formatted.replace(" ", "")} $currencySymbol".trim()
+    }
 }

@@ -1,8 +1,6 @@
 package ru.ari.fintracker.navigation.flows
 
-import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -11,8 +9,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import kotlinx.serialization.Serializable
-import ru.ari.fintracker.core.ui.components.FinTrackerFloatingButton
-import ru.ari.fintracker.core.ui.components.FinTrackerTopBarButton
 import ru.ari.fintracker.core.ui.navigation.MainFlowScreen
 import ru.ari.fintracker.feature.balance.ui.presentation.BalanceScreenWrapper
 import ru.ari.fintracker.feature.categories.ui.presentation.CategoriesScreenWrapper
@@ -84,34 +80,12 @@ data object Expenses : MainFlowScreen {
         @Composable
         get() = stringResource(R.string.expenses_label)
 
-    @Composable
-    override fun FloatingButton(onClick: () -> Unit) {
-        FinTrackerFloatingButton(onClick)
-    }
-
-    @Composable
-    override fun TopBarTrailingIcon(onClick: () -> Unit, modifier: Modifier) {
-        FinTrackerTopBarButton(
-            onClick = onClick,
-            iconId = R.drawable.history_icon,
-            modifier = modifier
-        )
-    }
-
-    @Composable
-    override fun TopBarLeadingIcon(onClick: () -> Unit, modifier: Modifier) = Unit
-
-    override val title: String
-        @Composable
-        get() = stringResource(R.string.expenses_title)
-
     fun NavGraphBuilder.expensesScreen(
         onTopBarIconClick: () -> Unit,
         onFloatingButtonClick: () -> Unit
     ) {
         composable<Expenses> {
             ExpensesScreenWrapper(
-                route = Expenses,
                 onTopBarIconClick = onTopBarIconClick,
                 onFloatingButtonClick = onFloatingButtonClick
             )
@@ -131,34 +105,12 @@ data object Income : MainFlowScreen {
         @Composable
         get() = stringResource(R.string.income_label)
 
-    @Composable
-    override fun FloatingButton(onClick: () -> Unit) {
-        FinTrackerFloatingButton(onClick)
-    }
-
-    @Composable
-    override fun TopBarTrailingIcon(onClick: () -> Unit, modifier: Modifier) {
-        FinTrackerTopBarButton(
-            onClick = onClick,
-            iconId = R.drawable.history_icon,
-            modifier = modifier
-        )
-    }
-
-    @Composable
-    override fun TopBarLeadingIcon(onClick: () -> Unit, modifier: Modifier) = Unit
-
-    override val title: String
-        @Composable
-        get() = stringResource(R.string.income_title)
-
     fun NavGraphBuilder.incomeScreen(
         onTopBarIconClick: () -> Unit,
         onFloatingButtonClick: () -> Unit
     ) {
         composable<Income> {
             IncomeScreenWrapper(
-                route = Income,
                 onTopBarIconClick = onTopBarIconClick,
                 onFloatingButtonClick = onFloatingButtonClick
             )
@@ -178,23 +130,9 @@ data object Categories : MainFlowScreen {
         @Composable
         get() = stringResource(R.string.categories_label)
 
-    @Composable
-    override fun FloatingButton(onClick: () -> Unit) = Unit
-
-    @Composable
-    override fun TopBarTrailingIcon(onClick: () -> Unit, modifier: Modifier) {
-        IconButton(onClick = {}) {}
-    }
-
-    @Composable
-    override fun TopBarLeadingIcon(onClick: () -> Unit, modifier: Modifier) = Unit
-    override val title: String
-        @Composable
-        get() = stringResource(R.string.categories_title)
-
     fun NavGraphBuilder.categoriesScreen() {
         composable<Categories> {
-            CategoriesScreenWrapper(route = Categories)
+            CategoriesScreenWrapper()
         }
     }
 }
@@ -211,34 +149,12 @@ data object Balance : MainFlowScreen {
         @Composable
         get() = stringResource(R.string.balance_label)
 
-    @Composable
-    override fun FloatingButton(onClick: () -> Unit) {
-        FinTrackerFloatingButton(onClick)
-    }
-
-    @Composable
-    override fun TopBarTrailingIcon(onClick: () -> Unit, modifier: Modifier) {
-        FinTrackerTopBarButton(
-            onClick = onClick,
-            iconId = R.drawable.edit_icon,
-            modifier = modifier
-        )
-    }
-
-    @Composable
-    override fun TopBarLeadingIcon(onClick: () -> Unit, modifier: Modifier) = Unit
-
-    override val title: String
-        @Composable
-        get() = stringResource(R.string.balance_title)
-
     fun NavGraphBuilder.balanceScreen(
         onTopBarIconClick: () -> Unit,
         onFloatingButtonClick: () -> Unit
     ) {
         composable<Balance> {
             BalanceScreenWrapper(
-                route = Balance,
                 onTopBarIconClick = onTopBarIconClick,
                 onFloatingButtonClick = onFloatingButtonClick
             )
@@ -258,24 +174,9 @@ data object Settings : MainFlowScreen {
         @Composable
         get() = stringResource(R.string.settings_label)
 
-    @Composable
-    override fun FloatingButton(onClick: () -> Unit) = Unit
-
-    @Composable
-    override fun TopBarTrailingIcon(onClick: () -> Unit, modifier: Modifier) {
-        IconButton({}) { }
-    }
-
-    @Composable
-    override fun TopBarLeadingIcon(onClick: () -> Unit, modifier: Modifier) = Unit
-
-    override val title: String
-        @Composable
-        get() = stringResource(R.string.settings_title)
-
     fun NavGraphBuilder.settingsScreen() {
         composable<Settings> {
-            SettingsScreenWrapper(route = Settings)
+            SettingsScreenWrapper()
         }
     }
 }

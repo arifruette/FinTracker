@@ -49,7 +49,7 @@ fun FinTrackerBottomSheet(
                     emojiBackgroundColor = Color.Transparent,
                     modifier = Modifier.fillMaxWidth().height(72.dp)
                 )
-                HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
             }
         }
     }

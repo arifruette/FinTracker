@@ -35,7 +35,7 @@ fun ExpensesScreen(
                 Column(modifier = Modifier.fillMaxSize()) {
                     ListItem(
                         content = "Всего",
-                        trailingText = formatMoney(uiState.amount, uiState.currency),
+                        trailingText = formatMoney(uiState.amount, uiState.currency.symbol),
                         isHighlighted = true,
                         modifier = Modifier
                             .height(56.dp)

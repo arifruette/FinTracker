@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import ru.ari.fintracker.core.common.utils.format.formatMoney
 import ru.ari.fintracker.core.common.utils.onError
 import ru.ari.fintracker.core.common.utils.onException
 import ru.ari.fintracker.core.common.utils.onSuccess
@@ -40,7 +41,8 @@ class BalanceViewModel @Inject constructor(
                     _state.update {
                         it.copy(
                             isLoading = false,
-                            amount = res.balance.toString(),
+                            amount = formatMoney(res.balance),
+                            accountName = res.name,
                             currency = res.currency
                         )
                     }

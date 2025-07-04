@@ -27,7 +27,7 @@ fun FinTrackerTextField(
             .fillMaxWidth()
             .height(56.dp)
             .background(color = MaterialTheme.colorScheme.secondary)
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(start = 16.dp, top = 8.dp, end = 30.dp, bottom = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(title)

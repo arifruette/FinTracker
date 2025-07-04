@@ -41,8 +41,9 @@ class ExpensesViewModel @Inject constructor(
             withContext(Dispatchers.IO) {
                 _state.update { it.copy(isLoading = true, errorMessage = null) }
                 var result: Result<ExpenseData> = Result.Success<ExpenseData>(ExpenseData())
-                getAccountInfoUseCase().onSuccess {
-                    result = getExpensesUseCase(it.id)
+                getAccountInfoUseCase().onSuccess { res ->
+                    _state.update { it.copy(currency = res.currency) }
+                    result = getExpensesUseCase(res.id)
                 }.onError { code, message ->
                     result = Result.Error(code, message)
                 }.onException {
@@ -59,7 +60,6 @@ class ExpensesViewModel @Inject constructor(
                 it.copy(
                     expenses = expenseData.expenses,
                     amount = expenseData.amount,
-                    currency = expenseData.currency.symbol,
                     isLoading = false
                 )
             }

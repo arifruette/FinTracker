@@ -6,16 +6,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import ru.ari.fintracker.core.ui.components.FinTrackerTopBar
-import ru.ari.fintracker.core.ui.navigation.MainFlowScreen
 import ru.ari.fintracker.feature.settings.ui.presentation.components.SettingsScreen
 
 @Composable
-fun SettingsScreenWrapper(
-    route: MainFlowScreen
-) {
+fun SettingsScreenWrapper() {
     Scaffold(
         topBar = {
-            FinTrackerTopBar(route = route, onTrailingIconClick = {})
+            FinTrackerTopBar(title = "Настройки")
         }
     ) { innerPadding ->
         SettingsScreen(

@@ -9,5 +9,6 @@ data class BalanceState(
     val isLoading: Boolean = false,
     val amount: String = "0.00",
     val currency: Currency = Currency.RUB,
+    val accountName: String = "",
     val error: String? = null
 )

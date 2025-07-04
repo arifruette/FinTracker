@@ -6,17 +6,18 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ru.ari.fintracker.core.ui.components.FinTrackerTopBar
-import ru.ari.fintracker.core.ui.navigation.Screen
+import ru.ari.fintracker.feature.edit_balance.ui.R
 import ru.ari.fintracker.feature.edit_balance.ui.presentation.components.EditBalanceScreen
 import ru.ari.fintracker.feature.edit_balance.ui.viewmodel.EditBalanceViewModel
 import ru.ari.fintracker.feature.edit_balance.ui.viewmodel.contract.EditScreenAction.UpdateAccountInfo
 
 @Composable
 fun EditBalanceScreenWrapper(
-    route: Screen,
     onCancelButtonClick: () -> Unit,
 ) {
     val viewModel: EditBalanceViewModel = hiltViewModel()
@@ -25,10 +26,12 @@ fun EditBalanceScreenWrapper(
     Scaffold(
         topBar = {
             FinTrackerTopBar(
-                route = route,
+                title = uiState.accountName.ifBlank { "Мой счет" },
                 onTrailingIconClick = {
                     (viewModel::onAction)(UpdateAccountInfo(onSuccess = { onCancelButtonClick() }))
                 },
+                trailingIcon = ImageVector.vectorResource(R.drawable.accept_icon),
+                leadingIcon = ImageVector.vectorResource(R.drawable.close_icon),
                 onLeadingIconClick = onCancelButtonClick
             )
         }

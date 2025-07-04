@@ -6,13 +6,16 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.feature.history.ui.R
 import ru.ari.fintracker.core.domain.models.TransactionType
 import ru.ari.fintracker.core.ui.components.FinTrackerTopBar
-import ru.ari.fintracker.core.ui.navigation.Screen
 import ru.ari.fintracker.feature.history.ui.presentation.components.HistoryScreen
 import ru.ari.fintracker.feature.history.ui.viewmodel.HistoryViewModel
+
 /**
  * Обертка для экрана истории транзакций (доходов/расходов)
  * @param route Текущий экран для настройки TopBar
@@ -24,7 +27,6 @@ import ru.ari.fintracker.feature.history.ui.viewmodel.HistoryViewModel
  */
 @Composable
 fun HistoryScreenWrapper(
-    route: Screen,
     onLeadingIconClick: () -> Unit,
     onTrailingIconClick: () -> Unit,
     isIncomeScreen: Boolean = false
@@ -38,7 +40,9 @@ fun HistoryScreenWrapper(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             FinTrackerTopBar(
-                route = route,
+                title = "Моя история",
+                trailingIcon = ImageVector.vectorResource(R.drawable.analysis_icon),
+                leadingIcon = ImageVector.vectorResource(R.drawable.back_arrow_icon),
                 onTrailingIconClick = onTrailingIconClick,
                 onLeadingIconClick = onLeadingIconClick
             )

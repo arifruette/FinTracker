@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -55,11 +57,12 @@ fun EditBalanceScreen(
                     title = "Название счета",
                     value = uiState.accountName,
                     onValueChange = {
-                        if (it.length < 20) {
+                        if (it.length < 25) {
                             onAction(ChangeAccountName(it))
                         }
                     }
                 )
+                HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
                 FinTrackerTextField(
                     title = "Баланс",
                     value = uiState.amountInput,
@@ -68,11 +71,10 @@ fun EditBalanceScreen(
                         imeAction = ImeAction.Done
                     ),
                     onValueChange = {
-                        if (it.length < 20) {
-                            onAction(ChangeAccountAmount(it))
-                        }
+                        onAction(ChangeAccountAmount(it))
                     }
                 )
+                HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
                 ListItem(
                     content = "Валюта",
                     trailingText = uiState.currency.symbol,
@@ -83,6 +85,7 @@ fun EditBalanceScreen(
                         .fillMaxWidth()
                         .height(56.dp)
                 )
+                HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
             }
             if (uiState.isBottomSheetShown) {
                 FinTrackerBottomSheet(onDismiss = {
