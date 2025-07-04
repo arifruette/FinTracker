@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import ru.ari.feature.expenses.ui.R
-import ru.ari.fintracker.core.common.utils.formatMoney
+import ru.ari.fintracker.core.common.utils.format.formatMoney
 import ru.ari.fintracker.core.domain.models.Transaction
 import ru.ari.fintracker.core.ui.components.EmptyState
 import ru.ari.fintracker.core.ui.components.ListItem
@@ -40,7 +40,7 @@ fun ExpensesList(
                 ListItem(
                     content = expense.category.name,
                     leadEmoji = expense.category.emoji,
-                    trailingText = formatMoney(expense.amount, expense.account.currency),
+                    trailingText = formatMoney(expense.amount, expense.account.currency.symbol),
                     trailingIcon = ImageVector.vectorResource(R.drawable.arrow_forward_icon),
                     comment = if (expense.comment.isNullOrBlank()) null else expense.comment,
                     onItemClick = {},

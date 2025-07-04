@@ -1,6 +1,6 @@
-package ru.ari.fintracker.core.data.mapper
+package ru.ari.fintracker.core.data.mapper.transaction
 
-import ru.ari.fintracker.core.data.models.TransactionResponse
+import ru.ari.fintracker.core.data.models.transaction.TransactionResponse
 import ru.ari.fintracker.core.domain.models.Transaction
 import java.time.LocalDateTime
 import java.time.ZoneId

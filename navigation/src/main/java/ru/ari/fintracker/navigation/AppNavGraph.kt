@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import ru.ari.fintracker.navigation.flows.MainFlow
+import ru.ari.fintracker.navigation.flows.balanceNavigationFlow
 import ru.ari.fintracker.navigation.flows.expensesHistoryNavigationFlow
 import ru.ari.fintracker.navigation.flows.incomeHistoryNavigationFlow
 import ru.ari.fintracker.navigation.flows.mainNavigationFlow
@@ -28,5 +29,6 @@ fun AppNavGraph(
         mainNavigationFlow(navController)
         expensesHistoryNavigationFlow(navController)
         incomeHistoryNavigationFlow(navController)
+        balanceNavigationFlow(navController)
     }
 }

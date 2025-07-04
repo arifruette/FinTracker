@@ -20,3 +20,4 @@ data class Transaction(
     val date: LocalDateTime,
     val comment: String?
 )
+

@@ -1,4 +1,4 @@
-package ru.ari.fintracker.core.data.models
+package ru.ari.fintracker.core.data.models.transaction
 
 /**
  * Полная информация о транзакции с сервера.

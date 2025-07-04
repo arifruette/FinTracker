@@ -29,5 +29,5 @@ android {
 
 dependencies {
     implementation(projects.core.common)
-    implementation(libs.kotlinx.datetime)
+    implementation(libs.javax.inject)
 }

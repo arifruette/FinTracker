@@ -56,11 +56,22 @@ fun NavGraphBuilder.mainNavigationFlow(navController: NavHostController) {
             },
             onFloatingButtonClick = {}
         )
-        balanceScreen({}, {})
+        balanceScreen(
+            onTopBarIconClick = {
+                navController.navigate(BalanceNavigationFlow) {
+                    launchSingleTop = true
+                }
+            },
+            onFloatingButtonClick =
+                {
+
+                }
+        )
         categoriesScreen()
         settingsScreen()
     }
 }
+
 /**
  * Экран расходов
  */

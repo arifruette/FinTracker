@@ -1,4 +1,4 @@
-package ru.ari.fintracker.core.common.utils
+package ru.ari.fintracker.core.common.utils.format
 
 import java.time.LocalDateTime
 

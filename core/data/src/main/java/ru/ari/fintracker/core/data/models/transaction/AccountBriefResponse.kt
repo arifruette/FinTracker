@@ -1,4 +1,4 @@
-package ru.ari.fintracker.core.data.models
+package ru.ari.fintracker.core.data.models.transaction
 
 /**
  * Информация о банковском счёте
@@ -11,6 +11,6 @@ package ru.ari.fintracker.core.data.models
 data class AccountBriefResponse(
     val id: Long,
     val name: String,
-    val balance: String,
+    val balance: Double,
     val currency: String
 )

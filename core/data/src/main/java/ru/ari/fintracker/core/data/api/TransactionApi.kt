@@ -4,7 +4,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import ru.ari.fintracker.core.data.models.TransactionResponse
+import ru.ari.fintracker.core.data.models.transaction.TransactionResponse
 
 /**
  * API для работы с банковскими транзакциями

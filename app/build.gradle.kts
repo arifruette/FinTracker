@@ -58,7 +58,7 @@ dependencies {
     implementation(projects.core.data)
     implementation(projects.core.ui)
     implementation(projects.feature.categories.data)
-    implementation(projects.feature.balance.data)
+    implementation(projects.feature.editBalance.data)
 
     ksp(libs.hilt.android.compiler)
 

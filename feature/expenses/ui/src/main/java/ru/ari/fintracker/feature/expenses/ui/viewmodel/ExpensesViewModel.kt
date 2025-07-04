@@ -13,6 +13,7 @@ import ru.ari.fintracker.core.common.utils.Result
 import ru.ari.fintracker.core.common.utils.onError
 import ru.ari.fintracker.core.common.utils.onException
 import ru.ari.fintracker.core.common.utils.onSuccess
+import ru.ari.fintracker.core.domain.usecase.GetAccountInfoUseCase
 import ru.ari.fintracker.feature.expenses.domain.models.ExpenseData
 import ru.ari.fintracker.feature.expenses.domain.usecase.GetExpensesUseCase
 import ru.ari.fintracker.feature.expenses.ui.viewmodel.contract.ExpensesState
@@ -25,7 +26,8 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class ExpensesViewModel @Inject constructor(
-    private val getExpensesUseCase: GetExpensesUseCase
+    private val getExpensesUseCase: GetExpensesUseCase,
+    private val getAccountInfoUseCase: GetAccountInfoUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow<ExpensesState>(ExpensesState())
     val state = _state.asStateFlow()
@@ -38,9 +40,14 @@ class ExpensesViewModel @Inject constructor(
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, errorMessage = null) }
             withContext(Dispatchers.IO) {
-                val result = getExpensesUseCase(
-                    accountId = 1
-                )
+                var result: Result<ExpenseData> = Result.Success<ExpenseData>(ExpenseData())
+                getAccountInfoUseCase().onSuccess {
+                    result = getExpensesUseCase(it.id)
+                }.onError { code, message ->
+                    result = Result.Error(code, message)
+                }.onException {
+                    result = Result.Exception(it)
+                }
                 handleResult(result)
             }
         }
@@ -48,32 +55,32 @@ class ExpensesViewModel @Inject constructor(
 
     private fun handleResult(result: Result<ExpenseData>) {
         result.onSuccess { expenseData ->
-                _state.update {
-                    it.copy(
-                        expenses = expenseData.expenses,
-                        amount = expenseData.amount,
-                        currency = expenseData.currency,
-                        isLoading = false
-                    )
-                }
-            }.onError { code, message ->
-                _state.update {
-                    it.copy(
-                        isLoading = false,
-                        errorMessage = "Ошибка: $message"
-                    )
-                }
-            }.onException { error ->
-                var message = "Ошибка: Непредвиденная ошибка :("
-                if (error is UnknownHostException) {
-                    message = "Ошибка подключения к сети"
-                }
-                _state.update {
-                    it.copy(
-                        isLoading = false,
-                        errorMessage = message
-                    )
-                }
+            _state.update {
+                it.copy(
+                    expenses = expenseData.expenses,
+                    amount = expenseData.amount,
+                    currency = expenseData.currency.symbol,
+                    isLoading = false
+                )
             }
+        }.onError { code, message ->
+            _state.update {
+                it.copy(
+                    isLoading = false,
+                    errorMessage = "Ошибка: $message"
+                )
+            }
+        }.onException { error ->
+            var message = "Ошибка: Непредвиденная ошибка :("
+            if (error is UnknownHostException) {
+                message = "Ошибка подключения к сети"
+            }
+            _state.update {
+                it.copy(
+                    isLoading = false,
+                    errorMessage = message
+                )
+            }
+        }
     }
 }
