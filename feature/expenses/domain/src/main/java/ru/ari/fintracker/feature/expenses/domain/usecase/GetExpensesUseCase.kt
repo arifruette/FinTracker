@@ -2,7 +2,7 @@ package ru.ari.fintracker.feature.expenses.domain.usecase
 
 import ru.ari.fintracker.core.common.utils.Result
 import ru.ari.fintracker.core.common.utils.map
-import ru.ari.fintracker.core.common.utils.toCurrencySymbol
+import ru.ari.fintracker.core.domain.models.Currency
 import ru.ari.fintracker.core.domain.models.Transaction
 import ru.ari.fintracker.core.domain.repository.TransactionRepository
 import ru.ari.fintracker.feature.expenses.domain.models.ExpenseData
@@ -33,7 +33,7 @@ class GetExpensesUseCase @Inject constructor(
 
             val amount = calculateAmount(filtered)
 
-            val currency = filtered.firstOrNull()?.account?.currency?.toCurrencySymbol() ?: ""
+            val currency = filtered.firstOrNull()?.account?.currency ?: Currency.RUB
 
             ExpenseData(
                 expenses = sorted,

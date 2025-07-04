@@ -11,11 +11,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.ari.fintracker.core.common.utils.formatMoney
+import ru.ari.fintracker.core.common.utils.format.formatMoney
 import ru.ari.fintracker.core.ui.components.EmptyState
 import ru.ari.fintracker.core.ui.components.ErrorText
 import ru.ari.fintracker.core.ui.components.ListItem
@@ -29,9 +28,6 @@ fun HistoryScreen(
     onAction: (HistoryAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    LaunchedEffect(Unit) {
-        onAction(HistoryAction.LoadTransactions)
-    }
     when {
         uiState.isLoading -> Loading(modifier = modifier)
         uiState.errorMessage != null -> {
@@ -80,7 +76,7 @@ fun HistoryScreen(
                         .height(56.dp),
                     content = "Сумма",
                     isHighlighted = true,
-                    trailingText = formatMoney(uiState.amount, uiState.currency)
+                    trailingText = formatMoney(uiState.amount, uiState.currency.symbol)
                 )
 
                 HorizontalDivider(

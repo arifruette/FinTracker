@@ -6,10 +6,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ru.ari.feature.balance.ui.R
+import ru.ari.fintracker.core.ui.components.FinTrackerFloatingButton
 import ru.ari.fintracker.core.ui.components.FinTrackerTopBar
-import ru.ari.fintracker.core.ui.navigation.MainFlowScreen
 import ru.ari.fintracker.feature.balance.ui.presentation.components.BalanceScreen
 import ru.ari.fintracker.feature.balance.ui.viewmodel.BalanceViewModel
 
@@ -22,7 +25,6 @@ import ru.ari.fintracker.feature.balance.ui.viewmodel.BalanceViewModel
  */
 @Composable
 fun BalanceScreenWrapper(
-    route: MainFlowScreen,
     onTopBarIconClick: () -> Unit,
     onFloatingButtonClick: () -> Unit
 ) {
@@ -31,10 +33,14 @@ fun BalanceScreenWrapper(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            FinTrackerTopBar(route = route, onTrailingIconClick = onTopBarIconClick)
+            FinTrackerTopBar(
+                onTrailingIconClick = onTopBarIconClick,
+                title = uiState.accountName.ifBlank { "Мой счет" },
+                trailingIcon = ImageVector.vectorResource(R.drawable.edit_icon)
+            )
         },
         floatingActionButton = {
-            route.FloatingButton(onFloatingButtonClick)
+            FinTrackerFloatingButton(onFloatingButtonClick)
         }
     ) { innerPadding ->
         BalanceScreen(

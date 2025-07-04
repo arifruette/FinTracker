@@ -1,12 +1,14 @@
 package ru.ari.fintracker.feature.balance.ui.viewmodel.contract
 
-import ru.ari.fintracker.feature.balance.domain.models.Balance
+import ru.ari.fintracker.core.domain.models.Currency
 
 /**
  * Состояния для экрана отображения баланса.
  */
 data class BalanceState(
     val isLoading: Boolean = false,
-    val balance: Balance = Balance(totalBalance = "0.0", currency = "₽"),
+    val amount: String = "0.00",
+    val currency: Currency = Currency.RUB,
+    val accountName: String = "",
     val error: String? = null
 )

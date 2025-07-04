@@ -31,7 +31,7 @@ android {
 
 dependencies {
     implementation(libs.retrofit)
-    implementation(libs.kotlinx.datetime)
+    implementation(libs.converter.gson)
     implementation(libs.hilt.android)
 
     implementation(projects.core.domain)

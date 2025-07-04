@@ -7,10 +7,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ru.ari.feature.expenses.ui.R
+import ru.ari.fintracker.core.ui.components.FinTrackerFloatingButton
 import ru.ari.fintracker.core.ui.components.FinTrackerTopBar
-import ru.ari.fintracker.core.ui.navigation.MainFlowScreen
 import ru.ari.fintracker.feature.expenses.ui.presentation.components.ExpensesScreen
 import ru.ari.fintracker.feature.expenses.ui.viewmodel.ExpensesViewModel
 
@@ -22,7 +25,6 @@ import ru.ari.fintracker.feature.expenses.ui.viewmodel.ExpensesViewModel
  */
 @Composable
 fun ExpensesScreenWrapper(
-    route: MainFlowScreen,
     onTopBarIconClick: () -> Unit,
     onFloatingButtonClick: () -> Unit
 ) {
@@ -31,10 +33,14 @@ fun ExpensesScreenWrapper(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            FinTrackerTopBar(route = route, onTrailingIconClick = onTopBarIconClick)
+            FinTrackerTopBar(
+                title = "Расходы сегодня",
+                trailingIcon = ImageVector.vectorResource(R.drawable.history_icon),
+                onTrailingIconClick = onTopBarIconClick
+            )
         },
         floatingActionButton = {
-            route.FloatingButton(onFloatingButtonClick)
+            FinTrackerFloatingButton(onFloatingButtonClick)
         }
     ) { innerPadding ->
         ExpensesScreen(

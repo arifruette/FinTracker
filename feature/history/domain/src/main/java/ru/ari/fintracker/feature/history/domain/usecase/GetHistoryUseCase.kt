@@ -2,7 +2,7 @@ package ru.ari.fintracker.feature.history.domain.usecase
 
 import ru.ari.fintracker.core.common.utils.Result
 import ru.ari.fintracker.core.common.utils.map
-import ru.ari.fintracker.core.common.utils.toCurrencySymbol
+import ru.ari.fintracker.core.domain.models.Currency
 import ru.ari.fintracker.core.domain.models.Transaction
 import ru.ari.fintracker.core.domain.models.TransactionType
 import ru.ari.fintracker.core.domain.repository.TransactionRepository
@@ -42,7 +42,7 @@ class GetHistoryUseCase @Inject constructor(
             }
             val sorted: List<Transaction> = filtered.sortedByDescending { it.date }
             val amount = calculateAmount(filtered, transactionType)
-            val currency = filtered.firstOrNull()?.account?.currency?.toCurrencySymbol() ?: ""
+            val currency = filtered.firstOrNull()?.account?.currency ?: Currency.RUB
             HistoryData(
                 transactions = sorted,
                 amount = amount,

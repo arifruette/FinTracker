@@ -3,7 +3,7 @@ package ru.ari.fintracker.core.data.repository
 import retrofit2.HttpException
 import ru.ari.fintracker.core.common.utils.Result
 import ru.ari.fintracker.core.data.api.TransactionApi
-import ru.ari.fintracker.core.data.mapper.toDomain
+import ru.ari.fintracker.core.data.mapper.transaction.toDomain
 import ru.ari.fintracker.core.domain.models.Transaction
 import ru.ari.fintracker.core.domain.repository.TransactionRepository
 import java.time.LocalDate

@@ -18,11 +18,4 @@ interface MainFlowScreen : Screen {
      */
     @get:Composable
     val label: String
-
-    /**
-     * Компонент, который создает плавающую кнопку действия для экрана
-     * @param onClick Обработчик клика по кнопке
-     */
-    @Composable
-    fun FloatingButton(onClick: () -> Unit)
 }

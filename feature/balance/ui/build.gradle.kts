@@ -39,6 +39,7 @@ dependencies {
 
     implementation(projects.core.ui)
     implementation(projects.core.common)
+    implementation(projects.core.domain)
     implementation(projects.feature.balance.domain)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.hilt.navigation.compose)

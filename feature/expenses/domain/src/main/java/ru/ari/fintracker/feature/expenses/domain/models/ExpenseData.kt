@@ -1,5 +1,6 @@
 package ru.ari.fintracker.feature.expenses.domain.models
 
+import ru.ari.fintracker.core.domain.models.Currency
 import ru.ari.fintracker.core.domain.models.Transaction
 
 /**
@@ -10,7 +11,7 @@ import ru.ari.fintracker.core.domain.models.Transaction
  * @property currency Символ валюты для форматированного вывода
  */
 data class ExpenseData(
-    val expenses: List<Transaction>,
-    val amount: Double,
-    val currency: String
+    val expenses: List<Transaction> = emptyList<Transaction>(),
+    val amount: Double = 0.0,
+    val currency: Currency = Currency.RUB
 )

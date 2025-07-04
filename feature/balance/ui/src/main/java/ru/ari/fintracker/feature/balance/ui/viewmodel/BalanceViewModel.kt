@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import ru.ari.fintracker.core.common.utils.format.formatMoney
 import ru.ari.fintracker.core.common.utils.onError
 import ru.ari.fintracker.core.common.utils.onException
 import ru.ari.fintracker.core.common.utils.onSuccess
@@ -21,9 +22,9 @@ import javax.inject.Inject
  * ViewModel для экрана баланса, управляющая состоянием данных
  */
 @HiltViewModel
-class BalanceViewModel @Inject constructor (
+class BalanceViewModel @Inject constructor(
     private val getBalanceUseCase: GetBalanceUseCase
-): ViewModel() {
+) : ViewModel() {
     private var _state = MutableStateFlow<BalanceState>(BalanceState())
     val state = _state.asStateFlow()
 
@@ -36,8 +37,15 @@ class BalanceViewModel @Inject constructor (
             _state.update { it.copy(isLoading = true) }
             withContext(Dispatchers.IO) {
                 val result = getBalanceUseCase()
-                result.onSuccess{ res ->
-                    _state.update { it.copy(isLoading = false, balance = res) }
+                result.onSuccess { res ->
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            amount = formatMoney(res.balance),
+                            accountName = res.name,
+                            currency = res.currency
+                        )
+                    }
                 }.onError { code, message ->
                     _state.update { it.copy(isLoading = false, error = message) }
                 }.onException {

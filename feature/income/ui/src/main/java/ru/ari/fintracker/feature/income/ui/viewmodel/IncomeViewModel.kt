@@ -13,6 +13,7 @@ import ru.ari.fintracker.core.common.utils.Result
 import ru.ari.fintracker.core.common.utils.onError
 import ru.ari.fintracker.core.common.utils.onException
 import ru.ari.fintracker.core.common.utils.onSuccess
+import ru.ari.fintracker.core.domain.usecase.GetAccountInfoUseCase
 import ru.ari.fintracker.feature.income.domain.models.IncomeData
 import ru.ari.fintracker.feature.income.domain.usecase.GetIncomeUseCase
 import ru.ari.fintracker.feature.income.ui.viewmodel.contract.IncomeState
@@ -26,7 +27,8 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class IncomeViewModel @Inject constructor(
-    private val getIncomeUseCase: GetIncomeUseCase
+    private val getIncomeUseCase: GetIncomeUseCase,
+    private val getAccountInfoUseCase: GetAccountInfoUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow<IncomeState>(IncomeState())
     val state = _state.asStateFlow()
@@ -39,9 +41,15 @@ class IncomeViewModel @Inject constructor(
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, errorMessage = null) }
             withContext(Dispatchers.IO) {
-                val result = getIncomeUseCase(
-                    accountId = 1
-                )
+                var result: Result<IncomeData> = Result.Success<IncomeData>(IncomeData())
+                getAccountInfoUseCase().onSuccess { res ->
+                    _state.update { it.copy(currency = res.currency) }
+                    result = getIncomeUseCase(res.id)
+                }.onError { code, message ->
+                    result = Result.Error(code, message)
+                }.onException {
+                    result = Result.Exception(it)
+                }
                 handleResult(result)
 
             }
@@ -54,7 +62,6 @@ class IncomeViewModel @Inject constructor(
                     it.copy(
                         incomes = expenseData.income,
                         amount = expenseData.amount,
-                        currency = expenseData.currency,
                         isLoading = false
                     )
                 }

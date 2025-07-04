@@ -7,10 +7,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ru.ari.feature.income.ui.R
+import ru.ari.fintracker.core.ui.components.FinTrackerFloatingButton
 import ru.ari.fintracker.core.ui.components.FinTrackerTopBar
-import ru.ari.fintracker.core.ui.navigation.MainFlowScreen
 import ru.ari.fintracker.feature.income.ui.presentation.components.IncomeScreen
 import ru.ari.fintracker.feature.income.ui.viewmodel.IncomeViewModel
 
@@ -23,7 +26,6 @@ import ru.ari.fintracker.feature.income.ui.viewmodel.IncomeViewModel
  */
 @Composable
 fun IncomeScreenWrapper(
-    route: MainFlowScreen,
     onTopBarIconClick: () -> Unit,
     onFloatingButtonClick: () -> Unit
 ) {
@@ -31,10 +33,14 @@ fun IncomeScreenWrapper(
     val uiState by viewModel.state.collectAsStateWithLifecycle()
     Scaffold(
         topBar = {
-            FinTrackerTopBar(route, onTopBarIconClick)
+            FinTrackerTopBar(
+                title = "Доходы сегодня",
+                trailingIcon = ImageVector.vectorResource(R.drawable.history_icon),
+                onTrailingIconClick = onTopBarIconClick
+            )
         },
         floatingActionButton = {
-            route.FloatingButton(onFloatingButtonClick)
+            FinTrackerFloatingButton(onFloatingButtonClick)
         }
     ) { innerPadding ->
         IncomeScreen(

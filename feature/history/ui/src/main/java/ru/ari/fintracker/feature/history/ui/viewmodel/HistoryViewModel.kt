@@ -16,6 +16,7 @@ import ru.ari.fintracker.core.common.utils.onError
 import ru.ari.fintracker.core.common.utils.onException
 import ru.ari.fintracker.core.common.utils.onSuccess
 import ru.ari.fintracker.core.domain.models.TransactionType
+import ru.ari.fintracker.core.domain.usecase.GetAccountInfoUseCase
 import ru.ari.fintracker.feature.history.domain.models.HistoryData
 import ru.ari.fintracker.feature.history.domain.usecase.GetHistoryUseCase
 import ru.ari.fintracker.feature.history.ui.viewmodel.contract.HistoryAction
@@ -29,13 +30,18 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class HistoryViewModel @Inject constructor(
-    private val getHistoryUseCase: GetHistoryUseCase
+    private val getHistoryUseCase: GetHistoryUseCase,
+    private val getAccountInfoUseCase: GetAccountInfoUseCase
 ) : ViewModel() {
 
     var transactionType: TransactionType = TransactionType.EXPENSE
 
     private val _state: MutableStateFlow<HistoryState> = MutableStateFlow(HistoryState())
     val state: StateFlow<HistoryState> = _state.asStateFlow()
+
+    init {
+        loadTransactions()
+    }
 
     fun onAction(action: HistoryAction) {
         when (action) {
@@ -52,12 +58,20 @@ class HistoryViewModel @Inject constructor(
 
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                val result = getHistoryUseCase(
-                    startDate = state.dateStart,
-                    endDate = state.dateEnd,
-                    accountId = MOCK_ACCOUNT_ID,
-                    transactionType = transactionType
-                )
+                var result: Result<HistoryData> = Result.Success(HistoryData())
+                getAccountInfoUseCase().onSuccess { res ->
+                    _state.update { it.copy(currency = res.currency) }
+                    result = getHistoryUseCase(
+                        startDate = state.dateStart,
+                        endDate = state.dateEnd,
+                        accountId = res.id,
+                        transactionType = transactionType
+                    )
+                }.onError { code, message ->
+                    result = Result.Error(code, message)
+                }.onException {
+                    result = Result.Exception(it)
+                }
                 handleResult(result)
             }
         }
@@ -69,7 +83,6 @@ class HistoryViewModel @Inject constructor(
                     it.copy(
                         transactions = historyData.transactions,
                         amount = historyData.amount,
-                        currency = historyData.currency,
                         isLoading = false
                     )
                 }
@@ -108,9 +121,5 @@ class HistoryViewModel @Inject constructor(
             state.copy(dateStart = newStart)
         }
         loadTransactions()
-    }
-
-    private companion object {
-        private const val MOCK_ACCOUNT_ID = 1L
     }
 }

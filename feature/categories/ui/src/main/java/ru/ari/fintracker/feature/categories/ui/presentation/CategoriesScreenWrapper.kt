@@ -9,7 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ru.ari.fintracker.core.ui.components.FinTrackerTopBar
-import ru.ari.fintracker.core.ui.navigation.MainFlowScreen
 import ru.ari.fintracker.feature.categories.ui.presentation.components.CategoriesScreen
 import ru.ari.fintracker.feature.categories.ui.viewmodel.CategoriesViewModel
 
@@ -18,18 +17,18 @@ import ru.ari.fintracker.feature.categories.ui.viewmodel.CategoriesViewModel
  * @param route Текущий экран для конфигурации верхней панели
  */
 @Composable
-fun CategoriesScreenWrapper(
-    route: MainFlowScreen
-) {
+fun CategoriesScreenWrapper() {
     val viewModel: CategoriesViewModel = hiltViewModel()
-    val uiState by viewModel.state.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     Scaffold(
         topBar = {
-            FinTrackerTopBar(route = route, onTrailingIconClick = {})
+            FinTrackerTopBar(title = "Мои статьи")
         }
     ) { innerPadding ->
         CategoriesScreen(
-            uiState = uiState, modifier = Modifier
+            uiState = uiState,
+            onAction = viewModel::onAction,
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         )

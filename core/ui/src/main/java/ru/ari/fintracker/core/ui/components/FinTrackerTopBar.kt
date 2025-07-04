@@ -7,27 +7,30 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import ru.ari.fintracker.core.ui.navigation.Screen
 
 /**
  * Кастомный верхний бар
- * @param route Текущий экран (объект, реализующий интерфейс Screen)
  * @param onTrailingIconClick Обработчик клика по трейлинг иконке
  * @param modifier Модификатор для кастомизации
  * @param onLeadingIconClick Обработчик клика по ведущей иконке
  */
 @Composable
+@Suppress("LongParameterList")
 fun FinTrackerTopBar(
-    route: Screen,
-    onTrailingIconClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onLeadingIconClick: () -> Unit = {}
+    title: String? = null,
+    leadingIcon: ImageVector? = null,
+    onLeadingIconClick: () -> Unit = {},
+    trailingIcon: ImageVector? = null,
+    onTrailingIconClick: () -> Unit = {},
 ) {
     Column(
         modifier = modifier
@@ -39,19 +42,29 @@ fun FinTrackerTopBar(
                 .fillMaxWidth()
                 .padding(top = 18.dp, bottom = 18.dp, start = 4.dp, end = 4.dp)
         ) {
-            route.TopBarLeadingIcon(
+            FinTrackerTopBarButton(
                 onClick = onLeadingIconClick,
                 modifier = Modifier.align(Alignment.CenterStart)
-            )
-            Text(
-                text = route.title,
-                modifier = Modifier.align(Alignment.Center),
-                style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onPrimary)
-            )
-            route.TopBarTrailingIcon(
+            ) {
+                leadingIcon?.let {
+                    Icon(imageVector = leadingIcon, contentDescription = null)
+                }
+            }
+            title?.let {
+                Text(
+                    text = title,
+                    modifier = Modifier.align(Alignment.Center),
+                    style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onPrimary)
+                )
+            }
+            FinTrackerTopBarButton(
                 onClick = onTrailingIconClick,
                 modifier = Modifier.align(Alignment.CenterEnd)
-            )
+            ) {
+                trailingIcon?.let {
+                    Icon(imageVector = trailingIcon, contentDescription = null)
+                }
+            }
         }
     }
 }

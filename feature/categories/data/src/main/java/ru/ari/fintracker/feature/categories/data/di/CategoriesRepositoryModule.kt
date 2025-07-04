@@ -4,7 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.ari.fintracker.feature.categories.data.repository.FakeCategoriesRepositoryImpl
+import ru.ari.fintracker.feature.categories.data.repository.CategoriesRepositoryImpl
 import ru.ari.fintracker.feature.categories.domain.repository.CategoriesRepository
 
 
@@ -16,5 +16,5 @@ import ru.ari.fintracker.feature.categories.domain.repository.CategoriesReposito
 interface CategoriesRepositoryModule {
 
     @Binds
-    fun bindCategoriesRepositoryImpl(repositoryImpl: FakeCategoriesRepositoryImpl): CategoriesRepository
+    fun bindCategoriesRepositoryImpl(repositoryImpl: CategoriesRepositoryImpl): CategoriesRepository
 }

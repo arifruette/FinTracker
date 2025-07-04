@@ -42,6 +42,7 @@ dependencies {
     implementation(projects.core.ui)
     implementation(projects.feature.categories.domain)
     implementation(projects.core.common)
+    implementation(projects.core.domain)
 
     ksp(libs.hilt.android.compiler)
 

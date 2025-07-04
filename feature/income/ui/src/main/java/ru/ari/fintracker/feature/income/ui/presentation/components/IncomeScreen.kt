@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.ari.fintracker.core.common.utils.formatMoney
+import ru.ari.fintracker.core.common.utils.format.formatMoney
 import ru.ari.fintracker.core.ui.components.ErrorText
 import ru.ari.fintracker.core.ui.components.ListItem
 import ru.ari.fintracker.core.ui.components.Loading
@@ -35,7 +35,7 @@ fun IncomeScreen(
                 Column(modifier = Modifier.fillMaxSize()) {
                     ListItem(
                         content = "Всего",
-                        trailingText = formatMoney(uiState.amount, uiState.currency),
+                        trailingText = formatMoney(uiState.amount, uiState.currency.symbol),
                         isHighlighted = true,
                         modifier = Modifier
                             .height(56.dp)

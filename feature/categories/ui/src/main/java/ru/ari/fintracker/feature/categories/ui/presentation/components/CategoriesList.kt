@@ -9,8 +9,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import ru.ari.fintracker.core.domain.models.Category
 import ru.ari.fintracker.core.ui.components.ListItem
-import ru.ari.fintracker.feature.categories.domain.models.Category
 
 /**
  * Компонент для отображения списка категорий в виде прокручиваемой колонки
@@ -32,7 +32,7 @@ fun CategoriesList(
         ) { category ->
             ListItem(
                 content = category.name,
-                leadEmoji = category.icon,
+                leadEmoji = category.emoji,
                 modifier = Modifier.height(70.dp)
             )
             HorizontalDivider(

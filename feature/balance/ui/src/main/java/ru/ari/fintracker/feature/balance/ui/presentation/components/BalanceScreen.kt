@@ -36,7 +36,7 @@ fun BalanceScreen(
             ) {
                 ListItem(
                     content = "Баланс",
-                    trailingText = uiState.balance.totalBalance,
+                    trailingText = uiState.amount,
                     trailingIcon = ImageVector.vectorResource(R.drawable.forward_arrow_icon),
                     emojiBackgroundColor = Color.White,
                     leadEmoji = "\uD83D\uDCB0",
@@ -50,7 +50,7 @@ fun BalanceScreen(
                 )
                 ListItem(
                     content = "Валюта",
-                    trailingText = uiState.balance.currency,
+                    trailingText = uiState.currency.symbol,
                     trailingIcon = ImageVector.vectorResource(R.drawable.forward_arrow_icon),
                     isHighlighted = true,
                     onItemClick = {},
