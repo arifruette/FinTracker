@@ -11,11 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -24,14 +19,15 @@ import androidx.compose.ui.unit.dp
 import ru.ari.feature.categories.ui.R
 import ru.ari.fintracker.core.ui.components.ErrorText
 import ru.ari.fintracker.core.ui.components.Loading
-import ru.ari.fintracker.feature.categories.ui.viewmodel.contract.CategoriesState
+import ru.ari.fintracker.feature.categories.ui.viewmodel.contract.CategoriesScreenAction
+import ru.ari.fintracker.feature.categories.ui.viewmodel.contract.CategoriesUiState
 
 @Composable
 fun CategoriesScreen(
-    uiState: CategoriesState,
+    uiState: CategoriesUiState,
+    onAction: (CategoriesScreenAction) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var textFieldState by rememberSaveable { mutableStateOf("") }
     when {
         uiState.isLoading -> Loading(modifier = modifier.fillMaxSize())
         !uiState.error.isNullOrBlank() -> ErrorText(
@@ -39,13 +35,10 @@ fun CategoriesScreen(
             modifier = Modifier.fillMaxSize()
         )
         else -> {
-            LaunchedEffect(Unit) {
-                textFieldState = uiState.searchTextState
-            }
             Column(modifier = modifier) {
                 TextField(
-                    value = textFieldState,
-                    onValueChange = { textFieldState = it },
+                    value = uiState.searchQuery,
+                    onValueChange = { onAction(CategoriesScreenAction.ChangeSearchQueryState(it)) },
                     modifier = Modifier.fillMaxWidth(),
                     placeholder = {
                         Text(
@@ -75,7 +68,7 @@ fun CategoriesScreen(
                     color = MaterialTheme.colorScheme.outlineVariant
                 )
                 CategoriesList(
-                    categories = uiState.categories
+                    categories = uiState.filteredCategories
                 )
             }
         }

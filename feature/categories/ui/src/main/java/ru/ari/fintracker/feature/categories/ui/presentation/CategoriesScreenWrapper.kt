@@ -22,14 +22,16 @@ fun CategoriesScreenWrapper(
     route: MainFlowScreen
 ) {
     val viewModel: CategoriesViewModel = hiltViewModel()
-    val uiState by viewModel.state.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     Scaffold(
         topBar = {
             FinTrackerTopBar(route = route, onTrailingIconClick = {})
         }
     ) { innerPadding ->
         CategoriesScreen(
-            uiState = uiState, modifier = Modifier
+            uiState = uiState,
+            onAction = viewModel::onAction,
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         )

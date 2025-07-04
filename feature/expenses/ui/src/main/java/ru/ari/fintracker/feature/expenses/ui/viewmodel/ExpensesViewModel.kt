@@ -38,8 +38,8 @@ class ExpensesViewModel @Inject constructor(
 
     private fun getExpenses() {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true, errorMessage = null) }
             withContext(Dispatchers.IO) {
+                _state.update { it.copy(isLoading = true, errorMessage = null) }
                 var result: Result<ExpenseData> = Result.Success<ExpenseData>(ExpenseData())
                 getAccountInfoUseCase().onSuccess {
                     result = getExpensesUseCase(it.id)

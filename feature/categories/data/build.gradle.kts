@@ -30,8 +30,11 @@ android {
 }
 
 dependencies {
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
     implementation(libs.hilt.android)
 
+    implementation(projects.core.domain)
     implementation(projects.core.common)
     implementation(projects.feature.categories.domain)
 
