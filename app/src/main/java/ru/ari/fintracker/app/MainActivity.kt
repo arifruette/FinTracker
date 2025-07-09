@@ -16,7 +16,6 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import dagger.hilt.android.AndroidEntryPoint
 import ru.ari.fintracker.app.ui.theme.FinTrackerTheme
 import ru.ari.fintracker.navigation.AppNavGraph
 import ru.ari.fintracker.navigation.components.AppBottomBar
@@ -26,7 +25,6 @@ import ru.ari.fintracker.navigation.flows.MainFlow
  * Главная активность приложения, служащая корневым контейнером для навигации и UI
  * Содержит основной граф навигации
  */
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -37,13 +37,13 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
 
     implementation(projects.core.ui)
-    implementation(projects.feature.balance.ui)
-    implementation(projects.feature.expenses.ui)
-    implementation(projects.feature.income.ui)
-    implementation(projects.feature.categories.ui)
+    implementation(projects.feature.balance)
+    implementation(projects.feature.expenses)
+    implementation(projects.feature.income)
+    implementation(projects.feature.categories)
     implementation(projects.feature.settings.ui)
-    implementation(projects.feature.history.ui)
-    implementation(projects.feature.editBalance.ui)
+    implementation(projects.feature.history)
+    implementation(projects.feature.editBalance)
 
     androidTestImplementation(platform(libs.androidx.compose.bom))
 }

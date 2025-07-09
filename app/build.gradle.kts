@@ -1,8 +1,9 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
 }
 
@@ -18,6 +19,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+        val apiKey = properties.getProperty("API_KEY") as String
+        buildConfigField(type = "String", name = "API_KEY", value = apiKey)
     }
 
     buildTypes {
@@ -38,6 +44,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -51,16 +58,15 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.hilt.android)
 
     implementation(projects.navigation)
     implementation(projects.core.network)
     implementation(projects.core.data)
     implementation(projects.core.ui)
-    implementation(projects.feature.categories.data)
-    implementation(projects.feature.editBalance.data)
+    implementation(projects.core.di)
 
-    ksp(libs.hilt.android.compiler)
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
 
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
