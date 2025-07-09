@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    namespace = "ru.ari.fintracker.feature.settings.domain"
+    namespace = "ru.ari.fintracker.feature.settings"
     compileSdk = 35
 
     defaultConfig {
@@ -28,4 +29,10 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.ui.tooling)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(platform(libs.androidx.compose.bom))
+
+    implementation(projects.core.ui)
 }

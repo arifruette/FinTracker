@@ -15,9 +15,9 @@ import ru.ari.fintracker.core.common.utils.Result
 import ru.ari.fintracker.core.common.utils.format.formatMoney
 import ru.ari.fintracker.core.common.utils.onError
 import ru.ari.fintracker.core.common.utils.onSuccess
-import ru.ari.fintracker.core.domain.models.AccountBrief
+import ru.ari.fintracker.core.domain.models.account.AccountBrief
+import ru.ari.fintracker.core.domain.models.account.AccountUpdateInfo
 import ru.ari.fintracker.core.domain.usecase.GetAccountInfoUseCase
-import ru.ari.fintracker.feature.edit_balance.domain.models.AccountUpdateInfo
 import ru.ari.fintracker.feature.edit_balance.domain.usecase.UpdateAccountByIdUseCase
 import ru.ari.fintracker.feature.edit_balance.ui.viewmodel.contract.EditScreenAction
 import ru.ari.fintracker.feature.edit_balance.ui.viewmodel.contract.EditScreenUiEffect

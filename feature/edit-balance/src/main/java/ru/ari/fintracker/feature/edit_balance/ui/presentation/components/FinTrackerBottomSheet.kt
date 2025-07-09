@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import ru.ari.fintracker.core.domain.models.Currency
+import ru.ari.fintracker.core.domain.models.account.Currency
 import ru.ari.fintracker.core.ui.components.ListItem
 import ru.ari.fintracker.feature.edit_balance.ui.presentation.utils.toLongName
 

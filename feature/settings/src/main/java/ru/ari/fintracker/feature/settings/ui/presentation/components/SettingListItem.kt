@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
-import ru.ari.feature.settings.ui.R
 import ru.ari.fintracker.core.ui.components.ListItem
+import ru.ari.fintracker.feature.settings.R
 import ru.ari.fintracker.feature.settings.domain.models.SettingType
 
 /**

@@ -1,7 +1,7 @@
 package ru.ari.fintracker.feature.history.ui.viewmodel.contract
 
-import ru.ari.fintracker.core.domain.models.Currency
-import ru.ari.fintracker.core.domain.models.Transaction
+import ru.ari.fintracker.core.domain.models.account.Currency
+import ru.ari.fintracker.core.domain.models.transaction.Transaction
 import java.time.LocalDate
 
 /**

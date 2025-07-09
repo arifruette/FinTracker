@@ -1,7 +1,7 @@
 package ru.ari.fintracker.feature.history.domain.models
 
-import ru.ari.fintracker.core.domain.models.Currency
-import ru.ari.fintracker.core.domain.models.Transaction
+import ru.ari.fintracker.core.domain.models.account.Currency
+import ru.ari.fintracker.core.domain.models.transaction.Transaction
 
 /**
  * Модель данных, представляющая историю транзакций за определенный период

@@ -1,7 +1,7 @@
 package ru.ari.fintracker.feature.categories.domain.repository
 
 import ru.ari.fintracker.core.common.utils.Result
-import ru.ari.fintracker.core.domain.models.Category
+import ru.ari.fintracker.core.domain.models.transaction.Category
 
 /**
  * Интерфейс, описывающий бизнес-правила получения категорий

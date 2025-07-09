@@ -41,7 +41,7 @@ dependencies {
     implementation(projects.feature.expenses)
     implementation(projects.feature.income)
     implementation(projects.feature.categories)
-    implementation(projects.feature.settings.ui)
+    implementation(projects.feature.settings)
     implementation(projects.feature.history)
     implementation(projects.feature.editBalance)
 

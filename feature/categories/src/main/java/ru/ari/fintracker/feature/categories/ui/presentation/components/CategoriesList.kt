@@ -9,7 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.ari.fintracker.core.domain.models.Category
+import ru.ari.fintracker.core.domain.models.transaction.Category
 import ru.ari.fintracker.core.ui.components.ListItem
 
 /**

@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import ru.ari.fintracker.core.common.utils.format.formatMoney
-import ru.ari.fintracker.core.domain.models.Transaction
+import ru.ari.fintracker.core.domain.models.transaction.Transaction
 import ru.ari.fintracker.core.ui.components.EmptyState
 import ru.ari.fintracker.core.ui.components.ListItem
 import ru.ari.fintracker.feature.income.R

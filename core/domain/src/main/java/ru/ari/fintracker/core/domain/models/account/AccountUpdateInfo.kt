@@ -1,4 +1,4 @@
-package ru.ari.fintracker.feature.edit_balance.domain.models
+package ru.ari.fintracker.core.domain.models.account
 
 data class AccountUpdateInfo(
     val name: String,

@@ -14,7 +14,7 @@ import ru.ari.fintracker.core.common.utils.Result
 import ru.ari.fintracker.core.common.utils.onError
 import ru.ari.fintracker.core.common.utils.onException
 import ru.ari.fintracker.core.common.utils.onSuccess
-import ru.ari.fintracker.core.domain.models.TransactionType
+import ru.ari.fintracker.core.domain.models.transaction.TransactionType
 import ru.ari.fintracker.core.domain.usecase.GetAccountInfoUseCase
 import ru.ari.fintracker.feature.history.domain.models.HistoryData
 import ru.ari.fintracker.feature.history.domain.usecase.GetHistoryUseCase

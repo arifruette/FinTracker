@@ -15,7 +15,7 @@ import ru.ari.fintracker.core.common.utils.Result
 import ru.ari.fintracker.core.common.utils.onError
 import ru.ari.fintracker.core.common.utils.onException
 import ru.ari.fintracker.core.common.utils.onSuccess
-import ru.ari.fintracker.core.domain.models.Category
+import ru.ari.fintracker.core.domain.models.transaction.Category
 import ru.ari.fintracker.feature.categories.domain.usecase.GetCategoriesUseCase
 import ru.ari.fintracker.feature.categories.ui.viewmodel.contract.CategoriesScreenAction
 import ru.ari.fintracker.feature.categories.ui.viewmodel.contract.CategoriesUiState

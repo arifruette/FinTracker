@@ -2,7 +2,7 @@ package ru.ari.fintracker.feature.categories.data.repository
 
 import retrofit2.HttpException
 import ru.ari.fintracker.core.common.utils.Result
-import ru.ari.fintracker.core.domain.models.Category
+import ru.ari.fintracker.core.domain.models.transaction.Category
 import ru.ari.fintracker.feature.categories.data.api.CategoriesApi
 import ru.ari.fintracker.feature.categories.data.mapper.toDomain
 import ru.ari.fintracker.feature.categories.domain.repository.CategoriesRepository

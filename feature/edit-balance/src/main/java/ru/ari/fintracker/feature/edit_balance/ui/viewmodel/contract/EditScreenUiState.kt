@@ -1,6 +1,6 @@
 package ru.ari.fintracker.feature.edit_balance.ui.viewmodel.contract
 
-import ru.ari.fintracker.core.domain.models.Currency
+import ru.ari.fintracker.core.domain.models.account.Currency
 
 data class EditScreenUiState(
     val isLoading: Boolean = false,

@@ -13,7 +13,5 @@ class UseCasesModule {
     @AppScope
     fun provideGetAccountInfoUseCase(
         accountRepository: AccountRepository
-    ): GetAccountInfoUseCase {
-        return GetAccountInfoUseCase(accountRepository)
-    }
+    ): GetAccountInfoUseCase = GetAccountInfoUseCase(accountRepository)
 }

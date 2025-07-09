@@ -1,6 +1,6 @@
 package ru.ari.fintracker.feature.balance.ui.viewmodel.contract
 
-import ru.ari.fintracker.core.domain.models.Currency
+import ru.ari.fintracker.core.domain.models.account.Currency
 
 /**
  * Состояния для экрана отображения баланса.

@@ -1,5 +1,6 @@
-package ru.ari.fintracker.core.domain.models
+package ru.ari.fintracker.core.domain.models.transaction
 
+import ru.ari.fintracker.core.domain.models.account.AccountBrief
 import java.time.LocalDateTime
 
 /**

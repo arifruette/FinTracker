@@ -1,4 +1,4 @@
-package ru.ari.fintracker.core.domain.models
+package ru.ari.fintracker.core.domain.models.transaction
 
 /**
  * Категория для классификации транзакций

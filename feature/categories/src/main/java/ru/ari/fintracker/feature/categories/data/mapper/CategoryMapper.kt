@@ -1,6 +1,6 @@
 package ru.ari.fintracker.feature.categories.data.mapper
 
-import ru.ari.fintracker.core.domain.models.Category
+import ru.ari.fintracker.core.domain.models.transaction.Category
 import ru.ari.fintracker.feature.categories.data.models.CategoryResponse
 
 fun CategoryResponse.toDomain() = Category(

@@ -1,6 +1,6 @@
 package ru.ari.fintracker.feature.categories.ui.viewmodel.contract
 
-import ru.ari.fintracker.core.domain.models.Category
+import ru.ari.fintracker.core.domain.models.transaction.Category
 
 /**
  * Все возможные состояния UI при работе со списком категорий:

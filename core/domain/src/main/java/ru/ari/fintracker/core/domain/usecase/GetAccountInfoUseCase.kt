@@ -1,7 +1,7 @@
 package ru.ari.fintracker.core.domain.usecase
 
 import ru.ari.fintracker.core.common.utils.Result
-import ru.ari.fintracker.core.domain.models.AccountBrief
+import ru.ari.fintracker.core.domain.models.account.AccountBrief
 import ru.ari.fintracker.core.domain.repository.AccountRepository
 
 class GetAccountInfoUseCase(

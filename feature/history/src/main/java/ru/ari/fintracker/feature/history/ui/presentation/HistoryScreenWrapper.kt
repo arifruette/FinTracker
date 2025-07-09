@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import ru.ari.fintracker.core.domain.models.TransactionType
+import ru.ari.fintracker.core.domain.models.transaction.TransactionType
 import ru.ari.fintracker.core.ui.components.FinTrackerTopBar
 import ru.ari.fintracker.core.ui.components.utils.rememberDaggerViewModel
 import ru.ari.fintracker.feature.history.R

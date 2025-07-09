@@ -1,6 +1,6 @@
 package ru.ari.fintracker.feature.expenses.ui.viewmodel.contract
-import ru.ari.fintracker.core.domain.models.Currency
-import ru.ari.fintracker.core.domain.models.Transaction
+import ru.ari.fintracker.core.domain.models.account.Currency
+import ru.ari.fintracker.core.domain.models.transaction.Transaction
 
 /**
  * Модель состояния UI для экрана расходов.

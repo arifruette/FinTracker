@@ -2,8 +2,8 @@ package ru.ari.fintracker.feature.expenses.domain.usecase
 
 import ru.ari.fintracker.core.common.utils.Result
 import ru.ari.fintracker.core.common.utils.map
-import ru.ari.fintracker.core.domain.models.Currency
-import ru.ari.fintracker.core.domain.models.Transaction
+import ru.ari.fintracker.core.domain.models.account.Currency
+import ru.ari.fintracker.core.domain.models.transaction.Transaction
 import ru.ari.fintracker.core.domain.repository.TransactionRepository
 import ru.ari.fintracker.feature.expenses.domain.models.ExpenseData
 import java.time.LocalDate
