@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ru.ari.fintracker.core.ui.components.FinTrackerTopBar
@@ -34,7 +35,7 @@ fun EditBalanceScreenWrapper(
     Scaffold(
         topBar = {
             FinTrackerTopBar(
-                title = uiState.accountName.ifBlank { "Мой счет" },
+                title = uiState.accountName.ifBlank { stringResource(R.string.account_name_default_name) },
                 onTrailingIconClick = {
                     (viewModel::onAction)(UpdateAccountInfo(onSuccess = { onCancelButtonClick() }))
                 },

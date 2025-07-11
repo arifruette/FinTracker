@@ -2,11 +2,12 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("org.jetbrains.kotlin.kapt")
     alias(libs.plugins.kotlinx.serialization.plugin)
 }
 
 android {
-    namespace = "ru.ari.navigation"
+    namespace = "ru.ari.fintracker.feature.manage_transaction"
     compileSdk = 35
 
     defaultConfig {
@@ -27,24 +28,29 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(platform(libs.androidx.compose.bom))
 
-    implementation(projects.core.ui)
-    implementation(projects.feature.balance)
-    implementation(projects.feature.expenses)
-    implementation(projects.feature.income)
-    implementation(projects.feature.categories)
-    implementation(projects.feature.settings)
-    implementation(projects.feature.history)
-    implementation(projects.feature.editBalance)
-    implementation(projects.feature.manageTransaction)
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
 
+    implementation(projects.core.ui)
+    implementation(projects.core.di)
+    implementation(projects.core.common)
+    implementation(projects.core.domain)
+
+    implementation(libs.androidx.lifecycle.viewmodel.android)
     androidTestImplementation(platform(libs.androidx.compose.bom))
 }

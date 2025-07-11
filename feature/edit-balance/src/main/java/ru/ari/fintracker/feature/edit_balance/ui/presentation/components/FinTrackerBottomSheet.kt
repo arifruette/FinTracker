@@ -13,9 +13,11 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.ari.fintracker.core.domain.models.account.Currency
 import ru.ari.fintracker.core.ui.components.ListItem
+import ru.ari.fintracker.feature.edit_balance.R
 import ru.ari.fintracker.feature.edit_balance.ui.presentation.utils.toLongName
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,7 +35,7 @@ fun FinTrackerBottomSheet(
     ) {
         Column(modifier = Modifier) {
             Text(
-                "Выберите валюту",
+                text = stringResource(R.string.choose_currency_placeholder),
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.padding(start = 24.dp, bottom = 16.dp)
             )
@@ -47,7 +49,9 @@ fun FinTrackerBottomSheet(
                         onDismiss()
                     },
                     emojiBackgroundColor = Color.Transparent,
-                    modifier = Modifier.fillMaxWidth().height(72.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(72.dp)
                 )
                 HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
             }

@@ -21,4 +21,6 @@ sealed interface HistoryAction {
      * Действие для загрузки транзакций
      */
     data object LoadTransactions : HistoryAction
+
+    data object ChangeDatePickerVisibility: HistoryAction
 }

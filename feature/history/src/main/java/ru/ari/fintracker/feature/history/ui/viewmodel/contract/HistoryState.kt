@@ -22,6 +22,7 @@ data class HistoryState(
     val dateEnd: LocalDate =  LocalDate.now(),
     val transactions: List<Transaction> = emptyList(),
     val amount: Double = 0.0,
+    val isDatePickerShown: Boolean = false,
     val currency: Currency = Currency.RUB,
     val isLoading: Boolean = false,
     val errorMessage: String? = null,

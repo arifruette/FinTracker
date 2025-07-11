@@ -14,11 +14,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.Flow
+import ru.ari.fintracker.core.ui.components.FinTrackerTextField
 import ru.ari.fintracker.core.ui.components.ListItem
 import ru.ari.fintracker.core.ui.components.Loading
 import ru.ari.fintracker.feature.edit_balance.R
@@ -54,8 +56,11 @@ fun EditBalanceScreen(
         else -> {
             Column(modifier = modifier) {
                 FinTrackerTextField(
-                    title = "Название счета",
+                    title = stringResource(R.string.account_name_placeholder),
                     value = uiState.accountName,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(56.dp),
                     onValueChange = {
                         if (it.length < 25) {
                             onAction(ChangeAccountName(it))
@@ -64,19 +69,22 @@ fun EditBalanceScreen(
                 )
                 HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
                 FinTrackerTextField(
-                    title = "Баланс",
+                    title = stringResource(R.string.balance_placeholder),
                     value = uiState.amountInput,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Decimal,
                         imeAction = ImeAction.Done
                     ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(56.dp),
                     onValueChange = {
                         onAction(ChangeAccountAmount(it))
                     }
                 )
                 HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
                 ListItem(
-                    content = "Валюта",
+                    content = stringResource(R.string.currency_label),
                     trailingText = uiState.currency.symbol,
                     trailingIcon = ImageVector.vectorResource(R.drawable.forward_arrow_icon),
                     onItemClick = { onAction(ChangeBottomSheetVisibility) },

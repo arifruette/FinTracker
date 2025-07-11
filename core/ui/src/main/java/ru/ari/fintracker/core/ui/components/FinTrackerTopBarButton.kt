@@ -17,10 +17,12 @@ import androidx.compose.ui.Modifier
 fun FinTrackerTopBarButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
+    enabled: Boolean,
     content: @Composable () -> Unit,
 ) {
     IconButton(
         onClick = onClick,
+        enabled = enabled,
         colors = IconButtonDefaults.iconButtonColors()
             .copy(contentColor = MaterialTheme.colorScheme.onSurfaceVariant),
         modifier = modifier

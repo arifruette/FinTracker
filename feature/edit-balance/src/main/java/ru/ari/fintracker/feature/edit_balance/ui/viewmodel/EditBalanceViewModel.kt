@@ -15,6 +15,7 @@ import ru.ari.fintracker.core.common.utils.Result
 import ru.ari.fintracker.core.common.utils.format.formatMoney
 import ru.ari.fintracker.core.common.utils.onError
 import ru.ari.fintracker.core.common.utils.onSuccess
+import ru.ari.fintracker.core.common.utils.validator.toValidBalance
 import ru.ari.fintracker.core.domain.models.account.AccountBrief
 import ru.ari.fintracker.core.domain.models.account.AccountUpdateInfo
 import ru.ari.fintracker.core.domain.usecase.GetAccountInfoUseCase
@@ -109,29 +110,7 @@ class EditBalanceViewModel @Inject constructor(
     }
 
     private fun updateBalance(newBalance: String) {
-        val cleaned = newBalance.replace(" ", "")
-
-        val isNegative = cleaned.startsWith("-")
-        val unsigned = if (isNegative) cleaned.drop(1) else cleaned
-
-        val filtered = unsigned
-            .filterIndexed { index, c ->
-                c.isDigit() || (c == '.' && !unsigned.take(index).contains('.'))
-            }
-            .let { filteredInput ->
-                val parts = filteredInput.split(".")
-                val intPart = parts[0].take(13)
-                val decPart = parts.getOrNull(1)?.take(2)
-                if (decPart != null) "$intPart.$decPart" else intPart
-            }
-            .let { final ->
-                if (isNegative) "-$final" else final
-            }
-
-        val isPartialNegative = newBalance == "-" || newBalance == "-."
-        val result = if (isPartialNegative) newBalance else filtered
-
-        _uiState.update { it.copy(amountInput = result) }
+        _uiState.update { it.copy(amountInput = newBalance.toValidBalance()) }
     }
 
 

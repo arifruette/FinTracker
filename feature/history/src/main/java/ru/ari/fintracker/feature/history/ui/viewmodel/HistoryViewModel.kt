@@ -45,6 +45,9 @@ class HistoryViewModel @Inject constructor(
     fun onAction(action: HistoryAction) {
         when (action) {
             HistoryAction.LoadTransactions -> loadTransactions()
+            HistoryAction.ChangeDatePickerVisibility -> _state.update {
+                it.copy(isDatePickerShown = !it.isDatePickerShown)
+            }
             is HistoryAction.UpdateDateEnd -> updateDateEnd(action.date)
             is HistoryAction.UpdateDateStart -> updateDateStart(action.date)
         }
@@ -78,32 +81,32 @@ class HistoryViewModel @Inject constructor(
 
     private fun handleResult(result: Result<HistoryData>) {
         result.onSuccess { historyData ->
-                _state.update {
-                    it.copy(
-                        transactions = historyData.transactions,
-                        amount = historyData.amount,
-                        isLoading = false
-                    )
-                }
-            }.onError { code, message ->
-                _state.update {
-                    it.copy(
-                        isLoading = false,
-                        errorMessage = "Ошибка $code: $message"
-                    )
-                }
-            }.onException { error ->
-                var message = "Ошибка: Непредвиденная ошибка :("
-                if (error is UnknownHostException) {
-                    message = "Ошибка подключения к сети"
-                }
-                _state.update {
-                    it.copy(
-                        isLoading = false,
-                        errorMessage = message
-                    )
-                }
+            _state.update {
+                it.copy(
+                    transactions = historyData.transactions,
+                    amount = historyData.amount,
+                    isLoading = false
+                )
             }
+        }.onError { code, message ->
+            _state.update {
+                it.copy(
+                    isLoading = false,
+                    errorMessage = "Ошибка $code: $message"
+                )
+            }
+        }.onException { error ->
+            var message = "Ошибка: Непредвиденная ошибка :("
+            if (error is UnknownHostException) {
+                message = "Ошибка подключения к сети"
+            }
+            _state.update {
+                it.copy(
+                    isLoading = false,
+                    errorMessage = message
+                )
+            }
+        }
     }
 
     private fun updateDateEnd(dateEnd: LocalDate) {

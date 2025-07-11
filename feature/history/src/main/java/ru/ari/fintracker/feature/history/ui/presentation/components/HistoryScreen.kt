@@ -15,11 +15,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.ari.fintracker.core.common.utils.format.formatMoney
+import ru.ari.fintracker.core.ui.components.DateSelector
 import ru.ari.fintracker.core.ui.components.EmptyState
 import ru.ari.fintracker.core.ui.components.ErrorText
 import ru.ari.fintracker.core.ui.components.ListItem
 import ru.ari.fintracker.core.ui.components.Loading
+import ru.ari.fintracker.core.ui.components.utils.formatForDisplay
 import ru.ari.fintracker.feature.history.ui.viewmodel.contract.HistoryAction
+import ru.ari.fintracker.feature.history.ui.viewmodel.contract.HistoryAction.ChangeDatePickerVisibility
 import ru.ari.fintracker.feature.history.ui.viewmodel.contract.HistoryState
 
 @Composable
@@ -38,32 +41,50 @@ fun HistoryScreen(
                 )
             }
         }
+
         else -> {
             Column(
                 modifier = modifier
             ) {
-                DateSelector(
-                    label = "Начало",
-                    date = uiState.dateStart,
-                    modifier = Modifier.height(56.dp),
-                    onDateSelected = { newDate ->
-                        onAction(HistoryAction.UpdateDateStart(newDate))
-                    }
+                ListItem(
+                    modifier = Modifier.height(56.dp).fillMaxWidth(),
+                    isHighlighted = true,
+                    content = "Начало",
+                    onItemClick = { onAction(ChangeDatePickerVisibility) },
+                    trailingText = uiState.dateStart.formatForDisplay(),
                 )
+                if (uiState.isDatePickerShown) {
+                    DateSelector(
+                        date = uiState.dateEnd,
+                        onDismiss = { onAction(ChangeDatePickerVisibility) },
+                        onDateSelected = { newDate ->
+                            onAction(HistoryAction.UpdateDateEnd(newDate))
+                        }
+                    )
+                }
+
 
                 HorizontalDivider(
                     thickness = 1.dp,
                     color = MaterialTheme.colorScheme.outlineVariant
                 )
 
-                DateSelector(
-                    label = "Конец",
-                    date = uiState.dateEnd,
-                    modifier = Modifier.height(56.dp),
-                    onDateSelected = { newDate ->
-                        onAction(HistoryAction.UpdateDateEnd(newDate))
-                    }
+                ListItem(
+                    modifier = Modifier.height(56.dp).fillMaxWidth(),
+                    isHighlighted = true,
+                    content = "Конец",
+                    onItemClick = { onAction(ChangeDatePickerVisibility) },
+                    trailingText = uiState.dateEnd.formatForDisplay(),
                 )
+                if (uiState.isDatePickerShown) {
+                    DateSelector(
+                        date = uiState.dateEnd,
+                        onDismiss = { onAction(ChangeDatePickerVisibility) },
+                        onDateSelected = { newDate ->
+                            onAction(HistoryAction.UpdateDateEnd(newDate))
+                        }
+                    )
+                }
 
                 HorizontalDivider(
                     thickness = 1.dp,
@@ -87,7 +108,7 @@ fun HistoryScreen(
                     EmptyState(modifier = Modifier.fillMaxSize())
                 } else {
                     LazyColumn {
-                        items(uiState.transactions, key = {it.id}) { transaction ->
+                        items(uiState.transactions, key = { it.id }) { transaction ->
                             TransactionItem(
                                 transaction,
                                 onClick = {},
@@ -95,7 +116,10 @@ fun HistoryScreen(
                                     .fillMaxWidth()
                                     .height(70.dp)
                             )
-                            HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
+                            HorizontalDivider(
+                                thickness = 1.dp,
+                                color = MaterialTheme.colorScheme.outlineVariant
+                            )
                         }
                     }
                 }

@@ -1,9 +1,7 @@
-package ru.ari.fintracker.feature.edit_balance.ui.presentation.components
+package ru.ari.fintracker.core.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
@@ -12,32 +10,42 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
+@Suppress("LongParameterList")
 @Composable
 fun FinTrackerTextField(
     value: String,
     onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    title: String? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    title: String
+    currencySymbol: String? = null,
+    isHighlighted: Boolean = true,
 ) {
+    val backgroundModifier =
+        Modifier.background(color = if (isHighlighted) MaterialTheme.colorScheme.secondary else Color.Transparent)
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp)
-            .background(color = MaterialTheme.colorScheme.secondary)
+        modifier = modifier
+            .then(backgroundModifier)
             .padding(start = 16.dp, top = 8.dp, end = 30.dp, bottom = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(title)
+        title?.let {
+            Text(title)
+        }
         BasicTextField(
             value = value,
             onValueChange = { onValueChange(it) },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.weight(1f),
             keyboardOptions = keyboardOptions,
-            textStyle = MaterialTheme.typography.bodyMedium.copy(textAlign = TextAlign.End),
+            textStyle = MaterialTheme.typography.bodyLarge.copy(textAlign = TextAlign.End),
             singleLine = true,
         )
+        currencySymbol?.let {
+            Text(" $currencySymbol")
+        }
     }
 }

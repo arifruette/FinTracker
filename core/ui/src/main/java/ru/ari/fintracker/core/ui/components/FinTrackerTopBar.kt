@@ -44,6 +44,7 @@ fun FinTrackerTopBar(
         ) {
             FinTrackerTopBarButton(
                 onClick = onLeadingIconClick,
+                enabled = leadingIcon != null,
                 modifier = Modifier.align(Alignment.CenterStart)
             ) {
                 leadingIcon?.let {
@@ -59,6 +60,7 @@ fun FinTrackerTopBar(
             }
             FinTrackerTopBarButton(
                 onClick = onTrailingIconClick,
+                enabled = trailingIcon != null,
                 modifier = Modifier.align(Alignment.CenterEnd)
             ) {
                 trailingIcon?.let {

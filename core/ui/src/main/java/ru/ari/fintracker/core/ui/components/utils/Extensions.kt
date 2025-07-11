@@ -1,4 +1,4 @@
-package ru.ari.fintracker.feature.history.ui.presentation.utils
+package ru.ari.fintracker.core.ui.components.utils
 
 import java.time.Instant
 import java.time.LocalDate
