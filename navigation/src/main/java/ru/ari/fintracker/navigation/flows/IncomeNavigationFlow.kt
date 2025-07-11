@@ -15,10 +15,9 @@ import ru.ari.fintracker.core.ui.navigation.Screen
 import ru.ari.fintracker.feature.history.ui.presentation.HistoryScreenWrapper
 import ru.ari.fintracker.feature.income.ui.presentation.IncomeScreenWrapper
 import ru.ari.fintracker.feature.manage_transaction.ui.presentation.ManageTransactionScreenWrapper
-import ru.ari.fintracker.feature.manage_transaction.ui.presentation.navigation.ManageIncomeData
+import ru.ari.fintracker.feature.manage_transaction.ui.presentation.navigation.ManageIncomeScreen
 import ru.ari.fintracker.navigation.flows.Income.incomeScreen
 import ru.ari.fintracker.navigation.flows.IncomeHistory.incomeHistoryScreen
-import ru.ari.fintracker.navigation.flows.ManageIncome.incomeManageScreen
 import ru.ari.navigation.R
 
 /**
@@ -39,7 +38,10 @@ fun NavGraphBuilder.incomeNavigationFlow(navController: NavHostController) {
                 navController.navigate(IncomeHistory)
             },
             onFloatingButtonClick = {
-                navController.navigate(ManageIncome)
+                navController.navigate(ManageIncomeScreen())
+            },
+            onIncomeClick = {
+                navController.navigate(ManageIncomeScreen(it))
             }
         )
         incomeHistoryScreen(
@@ -56,7 +58,7 @@ fun NavGraphBuilder.incomeNavigationFlow(navController: NavHostController) {
         incomeManageScreen(
             onCancelButtonClick = {
                 navController.navigate(Income) {
-                    popUpTo(ManageIncome) {
+                    popUpTo(ManageIncomeScreen()) {
                         inclusive = true
                     }
                     launchSingleTop = true
@@ -80,11 +82,13 @@ data object Income : MainFlowScreen {
 
     fun NavGraphBuilder.incomeScreen(
         onTopBarIconClick: () -> Unit,
+        onIncomeClick: (Long) -> Unit,
         onFloatingButtonClick: () -> Unit
     ) {
         composable<Income> {
             IncomeScreenWrapper(
                 onTopBarIconClick = onTopBarIconClick,
+                onIncomeClick = onIncomeClick,
                 onFloatingButtonClick = onFloatingButtonClick
             )
         }
@@ -117,18 +121,15 @@ data object IncomeHistory : Screen {
 }
 
 
-@Serializable
-data object ManageIncome : Screen {
-    fun NavGraphBuilder.incomeManageScreen(
-        onCancelButtonClick: () -> Unit
-    ) {
-        composable<ManageIncome> { backStackEntry ->
-            val transactionId = backStackEntry.toRoute<ManageIncomeData>()
-            ManageTransactionScreenWrapper(
-                transactionId = transactionId.incomeId,
-                isIncome = true,
-                onCancelButtonClick = onCancelButtonClick
-            )
-        }
+fun NavGraphBuilder.incomeManageScreen(
+    onCancelButtonClick: () -> Unit
+) {
+    composable<ManageIncomeScreen> { backStackEntry ->
+        val transactionData = backStackEntry.toRoute<ManageIncomeScreen>()
+        ManageTransactionScreenWrapper(
+            transactionId = transactionData.transactionId,
+            isIncome = true,
+            onCancelButtonClick = onCancelButtonClick
+        )
     }
 }

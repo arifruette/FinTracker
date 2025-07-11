@@ -26,6 +26,7 @@ import ru.ari.fintracker.feature.income.R
 @Composable
 fun IncomeList(
     income: List<Transaction>,
+    onIncomeClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     if (income.isEmpty()) {
@@ -44,7 +45,7 @@ fun IncomeList(
                     trailingText = formatMoney(income.amount, income.account.currency.symbol),
                     trailingIcon = ImageVector.vectorResource(R.drawable.arrow_forward_icon),
                     comment = if (income.comment.isNullOrBlank()) null else income.comment,
-                    onItemClick = {},
+                    onItemClick = { onIncomeClick(income.id) },
                     modifier = Modifier.height(70.dp)
                 )
                 HorizontalDivider(

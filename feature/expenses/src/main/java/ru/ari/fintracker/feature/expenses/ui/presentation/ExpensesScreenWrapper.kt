@@ -26,6 +26,7 @@ import ru.ari.fintracker.feature.expenses.ui.viewmodel.ExpensesViewModel
 @Composable
 fun ExpensesScreenWrapper(
     onTopBarIconClick: () -> Unit,
+    onExpenseClick: (Long) -> Unit,
     onFloatingButtonClick: () -> Unit
 ) {
     val viewModel: ExpensesViewModel = rememberDaggerViewModel(
@@ -54,7 +55,8 @@ fun ExpensesScreenWrapper(
         ExpensesScreen(
             uiState = uiState, modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
+                .padding(innerPadding),
+            onExpenseClick = onExpenseClick,
         )
     }
 }

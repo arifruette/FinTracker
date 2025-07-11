@@ -25,6 +25,7 @@ import ru.ari.fintracker.feature.expenses.R
 @Composable
 fun ExpensesList(
     expenses: List<Transaction>,
+    onExpenseClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     if (expenses.isEmpty()) {
@@ -43,7 +44,7 @@ fun ExpensesList(
                     trailingText = formatMoney(expense.amount, expense.account.currency.symbol),
                     trailingIcon = ImageVector.vectorResource(R.drawable.arrow_forward_icon),
                     comment = if (expense.comment.isNullOrBlank()) null else expense.comment,
-                    onItemClick = {},
+                    onItemClick = { onExpenseClick(expense.id) },
                     modifier = Modifier.height(70.dp)
                 )
                 HorizontalDivider(

@@ -16,6 +16,7 @@ import ru.ari.fintracker.feature.income.ui.viewmodel.contract.IncomeState
 @Composable
 fun IncomeScreen(
     uiState: IncomeState,
+    onIncomeClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(modifier = modifier.fillMaxSize()) {
@@ -41,7 +42,8 @@ fun IncomeScreen(
                             .height(56.dp)
                     )
                     IncomeList(
-                        income = uiState.incomes
+                        income = uiState.incomes,
+                        onIncomeClick = onIncomeClick
                     )
                 }
             }

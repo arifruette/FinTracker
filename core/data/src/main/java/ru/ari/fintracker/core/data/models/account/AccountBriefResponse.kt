@@ -1,4 +1,4 @@
-package ru.ari.fintracker.core.data.models.transaction
+package ru.ari.fintracker.core.data.models.account
 
 /**
  * Информация о банковском счёте

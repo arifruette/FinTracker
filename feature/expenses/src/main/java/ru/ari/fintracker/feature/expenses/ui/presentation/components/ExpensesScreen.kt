@@ -16,6 +16,7 @@ import ru.ari.fintracker.feature.expenses.ui.viewmodel.contract.ExpensesState
 @Composable
 fun ExpensesScreen(
     uiState: ExpensesState,
+    onExpenseClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(modifier = modifier.fillMaxSize()) {
@@ -41,7 +42,8 @@ fun ExpensesScreen(
                             .height(56.dp)
                     )
                     ExpensesList(
-                        expenses = uiState.expenses
+                        expenses = uiState.expenses,
+                        onExpenseClick = onExpenseClick
                     )
                 }
             }

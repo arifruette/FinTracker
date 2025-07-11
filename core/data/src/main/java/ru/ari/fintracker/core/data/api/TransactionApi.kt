@@ -1,10 +1,16 @@
 package ru.ari.fintracker.core.data.api
 
 import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
+import ru.ari.fintracker.core.data.models.transaction.CreateTransactionRequest
 import ru.ari.fintracker.core.data.models.transaction.TransactionResponse
+import ru.ari.fintracker.core.data.models.transaction.UpdateTransactionRequest
 
 /**
  * API для работы с банковскими транзакциями
@@ -23,4 +29,20 @@ interface TransactionApi {
         @Query("startDate") startDate: String,
         @Query("endDate") endDate: String
     ): Response<List<TransactionResponse>>
+
+    @POST("transactions")
+    suspend fun createTransaction(
+        @Body request: CreateTransactionRequest
+    ): Response<TransactionResponse>
+
+    @PUT("transactions/{id}")
+    fun updateTransaction(
+        @Path("id") id: Long,
+        @Body updateTransactionRequest: UpdateTransactionRequest
+    ): Response<TransactionResponse>
+
+    @DELETE
+    fun deleteTransaction(
+        @Path("id") id: Long
+    ): Response<Unit>
 }

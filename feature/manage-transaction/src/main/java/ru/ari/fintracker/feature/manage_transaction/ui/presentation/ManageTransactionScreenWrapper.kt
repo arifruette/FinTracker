@@ -38,7 +38,7 @@ fun ManageTransactionScreenWrapper(
 
     val viewModel: ManageTransactionViewModel = viewModel(
         factory = remember {
-            ManageTransactionViewModelFactory(assistedFactory, isIncome)
+            ManageTransactionViewModelFactory(assistedFactory, isIncome, transactionId)
         }
     )
 

@@ -5,5 +5,5 @@ import ru.ari.fintracker.feature.manage_transaction.ui.viewmodel.ManageTransacti
 
 @AssistedFactory
 interface ViewModelAssistedFactory {
-    fun create(isIncomeScreen: Boolean): ManageTransactionViewModel
+    fun create(isIncomeScreen: Boolean, transactionId: Long?): ManageTransactionViewModel
 }

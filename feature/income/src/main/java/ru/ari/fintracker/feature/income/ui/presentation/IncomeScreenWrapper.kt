@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ru.ari.fintracker.core.ui.components.FinTrackerFloatingButton
@@ -21,13 +22,13 @@ import ru.ari.fintracker.feature.income.ui.viewmodel.IncomeViewModel
 /**
  * Composable обертка для экрана доходов, реализующая базовую структуру экрана
  *
- * @param route текущий экран в потоке MainFlowScreen (для кастомизации элементов)
  * @param onTopBarIconClick обработчик клика по иконке в топбаре
  * @param onFloatingButtonClick обработчик клика по плавающей кнопке
  */
 @Composable
 fun IncomeScreenWrapper(
     onTopBarIconClick: () -> Unit,
+    onIncomeClick: (Long) -> Unit,
     onFloatingButtonClick: () -> Unit
 ) {
     val viewModel: IncomeViewModel = rememberDaggerViewModel(
@@ -42,7 +43,7 @@ fun IncomeScreenWrapper(
     Scaffold(
         topBar = {
             FinTrackerTopBar(
-                title = "Доходы сегодня",
+                title = stringResource(R.string.today_income_title),
                 trailingIcon = ImageVector.vectorResource(R.drawable.history_icon),
                 onTrailingIconClick = onTopBarIconClick
             )
@@ -54,7 +55,8 @@ fun IncomeScreenWrapper(
         IncomeScreen(
             uiState = uiState, modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
+                .padding(innerPadding),
+            onIncomeClick = onIncomeClick,
         )
     }
 }

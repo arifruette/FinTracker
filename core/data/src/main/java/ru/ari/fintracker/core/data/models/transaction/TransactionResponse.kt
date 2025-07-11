@@ -1,5 +1,7 @@
 package ru.ari.fintracker.core.data.models.transaction
 
+import ru.ari.fintracker.core.data.models.account.AccountBriefResponse
+
 /**
  * Полная информация о транзакции с сервера.
  *

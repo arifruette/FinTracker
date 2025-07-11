@@ -3,6 +3,7 @@ package ru.ari.fintracker.core.domain.repository
 import ru.ari.fintracker.core.common.utils.Result
 import ru.ari.fintracker.core.domain.models.transaction.Transaction
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 /**
  * Репозиторий для управления операциями с транзакциями
@@ -23,4 +24,26 @@ interface TransactionRepository {
         endDate: LocalDate,
         accountId: Long
     ): Result<List<Transaction>>
+
+    suspend fun createTransaction(
+        accountId: Long,
+        categoryId: Long,
+        amount: String,
+        transactionDate: LocalDateTime,
+        comment: String,
+    ): Result<Transaction?>
+
+    @Suppress("LongParameterList")
+    suspend fun updateTransaction(
+        transactionId: Long,
+        accountId: Long?,
+        categoryId: Long?,
+        amount: String?,
+        transactionDate: LocalDateTime?,
+        comment: String?,
+    ): Result<Transaction?>
+
+    suspend fun deleteTransaction(
+        transactionId: Long
+    ): Result<Unit>
 }

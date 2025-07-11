@@ -8,11 +8,14 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import androidx.navigation.toRoute
 import kotlinx.serialization.Serializable
 import ru.ari.fintracker.core.ui.navigation.MainFlowScreen
 import ru.ari.fintracker.core.ui.navigation.Screen
 import ru.ari.fintracker.feature.expenses.ui.presentation.ExpensesScreenWrapper
 import ru.ari.fintracker.feature.history.ui.presentation.HistoryScreenWrapper
+import ru.ari.fintracker.feature.manage_transaction.ui.presentation.ManageTransactionScreenWrapper
+import ru.ari.fintracker.feature.manage_transaction.ui.presentation.navigation.ManageExpenseScreen
 import ru.ari.fintracker.navigation.flows.Expenses.expensesScreen
 import ru.ari.fintracker.navigation.flows.ExpensesHistory.expensesHistoryScreen
 import ru.ari.navigation.R
@@ -35,7 +38,12 @@ fun NavGraphBuilder.expensesNavigationFlow(navController: NavHostController) {
             onTopBarIconClick = {
                 navController.navigate(ExpensesHistory)
             },
-            onFloatingButtonClick = {}
+            onFloatingButtonClick = {
+                navController.navigate(ManageExpenseScreen())
+            },
+            onExpenseClick = {
+                navController.navigate(ManageExpenseScreen(it))
+            }
         )
         expensesHistoryScreen(
             onLeadingIconClick = {
@@ -47,6 +55,16 @@ fun NavGraphBuilder.expensesNavigationFlow(navController: NavHostController) {
                 }
             },
             onTrailingIconClick = {})
+        expenseManageScreen(
+            onCancelButtonClick = {
+                navController.navigate(Expenses) {
+                    popUpTo(ManageExpenseScreen()) {
+                        inclusive = true
+                    }
+                    launchSingleTop = true
+                }
+            }
+        )
     }
 }
 
@@ -64,11 +82,13 @@ data object Expenses : MainFlowScreen {
 
     fun NavGraphBuilder.expensesScreen(
         onTopBarIconClick: () -> Unit,
+        onExpenseClick: (Long) -> Unit,
         onFloatingButtonClick: () -> Unit
     ) {
         composable<Expenses> {
             ExpensesScreenWrapper(
                 onTopBarIconClick = onTopBarIconClick,
+                onExpenseClick = onExpenseClick,
                 onFloatingButtonClick = onFloatingButtonClick
             )
         }
@@ -96,5 +116,18 @@ data object ExpensesHistory : Screen {
                 onTrailingIconClick = onTrailingIconClick
             )
         }
+    }
+}
+
+fun NavGraphBuilder.expenseManageScreen(
+    onCancelButtonClick: () -> Unit,
+) {
+    composable<ManageExpenseScreen> { backStackEntry ->
+        val transactionData = backStackEntry.toRoute<ManageExpenseScreen>()
+        ManageTransactionScreenWrapper(
+            transactionId = transactionData.transactionId,
+            isIncome = false,
+            onCancelButtonClick = onCancelButtonClick
+        )
     }
 }

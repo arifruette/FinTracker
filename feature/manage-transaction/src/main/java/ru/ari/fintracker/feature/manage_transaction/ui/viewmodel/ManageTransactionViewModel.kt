@@ -13,12 +13,18 @@ import ru.ari.fintracker.feature.manage_transaction.ui.viewmodel.contract.Manage
 import java.time.LocalDateTime
 
 class ManageTransactionViewModel @AssistedInject constructor(
-    @Assisted private val isIncome: Boolean
+    @Assisted private val isIncome: Boolean,
+    @Assisted private val transactionId: Long?
 ): ViewModel() {
+
+    init {
+        println(transactionId)
+        println(isIncome)
+    }
 
     @AssistedFactory
     interface ViewModelAssistedFactory {
-        fun create(isIncomeScreen: Boolean): ManageTransactionViewModel
+        fun create(isIncomeScreen: Boolean, transactionId: Long?): ManageTransactionViewModel
     }
 
     private val _uiState = MutableStateFlow(ManageTransactionUiState())
