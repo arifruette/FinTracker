@@ -31,7 +31,7 @@ class CategoriesViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             getCategories()
             _uiState.map { it.searchQuery }
                 .map { it.trim().lowercase() }
