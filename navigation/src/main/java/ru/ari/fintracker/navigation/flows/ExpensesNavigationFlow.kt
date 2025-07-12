@@ -54,7 +54,11 @@ fun NavGraphBuilder.expensesNavigationFlow(navController: NavHostController) {
                     launchSingleTop = true
                 }
             },
-            onTrailingIconClick = {})
+            onTrailingIconClick = {},
+            onItemClick = {
+                navController.navigate(ManageExpenseScreen(it))
+            }
+        )
         expenseManageScreen(
             onCancelButtonClick = {
                 navController.navigate(Expenses) {
@@ -108,11 +112,13 @@ data object ExpensesHistory : Screen {
      */
     fun NavGraphBuilder.expensesHistoryScreen(
         onLeadingIconClick: () -> Unit,
+        onItemClick: (Long) -> Unit,
         onTrailingIconClick: () -> Unit
     ) {
         composable<ExpensesHistory> {
             HistoryScreenWrapper(
                 onLeadingIconClick = onLeadingIconClick,
+                onItemClick = onItemClick,
                 onTrailingIconClick = onTrailingIconClick
             )
         }

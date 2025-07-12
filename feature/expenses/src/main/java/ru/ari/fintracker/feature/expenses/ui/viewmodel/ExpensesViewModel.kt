@@ -15,6 +15,7 @@ import ru.ari.fintracker.core.common.utils.onSuccess
 import ru.ari.fintracker.core.domain.usecase.GetAccountInfoUseCase
 import ru.ari.fintracker.feature.expenses.domain.models.ExpenseData
 import ru.ari.fintracker.feature.expenses.domain.usecase.GetExpensesUseCase
+import ru.ari.fintracker.feature.expenses.ui.viewmodel.contract.ExpensesAction
 import ru.ari.fintracker.feature.expenses.ui.viewmodel.contract.ExpensesState
 import java.net.UnknownHostException
 import javax.inject.Inject
@@ -32,6 +33,12 @@ class ExpensesViewModel @Inject constructor(
 
     init {
         getExpenses()
+    }
+
+    fun onAction(action: ExpensesAction) {
+        when (action) {
+            ExpensesAction.Refresh -> getExpenses()
+        }
     }
 
     private fun getExpenses() {

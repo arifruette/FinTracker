@@ -8,4 +8,5 @@ import ru.ari.fintracker.core.domain.models.transaction.Category
  */
 interface CategoriesRepository {
     suspend fun getCategories(): Result<List<Category>>
+    suspend fun getCategoriesByType(isIncome: Boolean): Result<List<Category>>
 }

@@ -1,5 +1,6 @@
 package ru.ari.fintracker.core.network.di
 
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -23,10 +24,11 @@ class NetworkModule {
     fun provideRetrofit(
         okHttpClient: OkHttpClient
     ): Retrofit {
+        val gson = GsonBuilder().serializeNulls().create()
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 

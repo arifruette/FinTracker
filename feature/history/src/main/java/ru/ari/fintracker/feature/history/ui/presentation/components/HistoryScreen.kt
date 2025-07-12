@@ -29,6 +29,7 @@ import ru.ari.fintracker.feature.history.ui.viewmodel.contract.HistoryState
 fun HistoryScreen(
     uiState: HistoryState,
     onAction: (HistoryAction) -> Unit,
+    onItemClick: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
     when {
@@ -111,7 +112,7 @@ fun HistoryScreen(
                         items(uiState.transactions, key = { it.id }) { transaction ->
                             TransactionItem(
                                 transaction,
-                                onClick = {},
+                                onClick = {onItemClick(transaction.id)},
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(70.dp)

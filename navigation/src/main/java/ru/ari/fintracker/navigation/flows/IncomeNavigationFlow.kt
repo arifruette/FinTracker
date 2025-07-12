@@ -53,7 +53,8 @@ fun NavGraphBuilder.incomeNavigationFlow(navController: NavHostController) {
                     launchSingleTop = true
                 }
             },
-            onTrailingIconClick = {}
+            onTrailingIconClick = {},
+            onItemClick = {navController.navigate(ManageIncomeScreen(it))}
         )
         incomeManageScreen(
             onCancelButtonClick = {
@@ -108,11 +109,13 @@ data object IncomeHistory : Screen {
      */
     fun NavGraphBuilder.incomeHistoryScreen(
         onLeadingIconClick: () -> Unit,
+        onItemClick: (Long) -> Unit,
         onTrailingIconClick: () -> Unit
     ) {
         composable<IncomeHistory> {
             HistoryScreenWrapper(
                 isIncomeScreen = true,
+                onItemClick = onItemClick,
                 onLeadingIconClick = onLeadingIconClick,
                 onTrailingIconClick = onTrailingIconClick
             )

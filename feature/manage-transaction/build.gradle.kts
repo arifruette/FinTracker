@@ -50,6 +50,7 @@ dependencies {
     implementation(projects.core.di)
     implementation(projects.core.common)
     implementation(projects.core.domain)
+    implementation(projects.feature.categories)
 
     implementation(libs.androidx.lifecycle.viewmodel.android)
     androidTestImplementation(platform(libs.androidx.compose.bom))

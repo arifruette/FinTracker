@@ -31,7 +31,7 @@ interface TransactionRepository {
         amount: String,
         transactionDate: LocalDateTime,
         comment: String,
-    ): Result<Transaction?>
+    ): Result<Unit>
 
     @Suppress("LongParameterList")
     suspend fun updateTransaction(
@@ -41,9 +41,13 @@ interface TransactionRepository {
         amount: String?,
         transactionDate: LocalDateTime?,
         comment: String?,
-    ): Result<Transaction?>
+    ): Result<Unit>
 
     suspend fun deleteTransaction(
         transactionId: Long
     ): Result<Unit>
+
+    suspend fun getTransactionById(
+        transactionId: Long
+    ): Result<Transaction?>
 }

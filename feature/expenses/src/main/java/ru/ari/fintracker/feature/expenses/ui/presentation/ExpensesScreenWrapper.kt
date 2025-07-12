@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -17,6 +18,7 @@ import ru.ari.fintracker.feature.expenses.R
 import ru.ari.fintracker.feature.expenses.di.DaggerExpensesComponent
 import ru.ari.fintracker.feature.expenses.ui.presentation.components.ExpensesScreen
 import ru.ari.fintracker.feature.expenses.ui.viewmodel.ExpensesViewModel
+import ru.ari.fintracker.feature.expenses.ui.viewmodel.contract.ExpensesAction
 
 /**
  * Обертка для экрана расходов, интегрирующая UI с ViewModel и Scaffold
@@ -37,6 +39,10 @@ fun ExpensesScreenWrapper(
             component.viewModelFactory()
         }
     )
+
+    LaunchedEffect(Unit) {
+        viewModel.onAction(ExpensesAction.Refresh)
+    }
 
     val uiState by viewModel.state.collectAsStateWithLifecycle()
     Scaffold(

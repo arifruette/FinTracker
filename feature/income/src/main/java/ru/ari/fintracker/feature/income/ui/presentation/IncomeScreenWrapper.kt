@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -18,6 +19,7 @@ import ru.ari.fintracker.feature.income.R
 import ru.ari.fintracker.feature.income.di.DaggerIncomeComponent
 import ru.ari.fintracker.feature.income.ui.presentation.components.IncomeScreen
 import ru.ari.fintracker.feature.income.ui.viewmodel.IncomeViewModel
+import ru.ari.fintracker.feature.income.ui.viewmodel.contract.IncomeAction
 
 /**
  * Composable обертка для экрана доходов, реализующая базовую структуру экрана
@@ -39,6 +41,11 @@ fun IncomeScreenWrapper(
             component.viewModelFactory()
         }
     )
+
+    LaunchedEffect(Unit) {
+        viewModel.onAction(IncomeAction.Refresh)
+    }
+
     val uiState by viewModel.state.collectAsStateWithLifecycle()
     Scaffold(
         topBar = {

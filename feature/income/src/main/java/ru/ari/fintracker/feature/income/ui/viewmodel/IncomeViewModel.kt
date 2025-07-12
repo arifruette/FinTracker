@@ -15,6 +15,7 @@ import ru.ari.fintracker.core.common.utils.onSuccess
 import ru.ari.fintracker.core.domain.usecase.GetAccountInfoUseCase
 import ru.ari.fintracker.feature.income.domain.models.IncomeData
 import ru.ari.fintracker.feature.income.domain.usecase.GetIncomeUseCase
+import ru.ari.fintracker.feature.income.ui.viewmodel.contract.IncomeAction
 import ru.ari.fintracker.feature.income.ui.viewmodel.contract.IncomeState
 import java.net.UnknownHostException
 import javax.inject.Inject
@@ -35,10 +36,16 @@ class IncomeViewModel @Inject constructor(
         getIncome()
     }
 
+    fun onAction(action: IncomeAction) {
+        when (action) {
+            IncomeAction.Refresh -> getIncome()
+        }
+    }
+
     private fun getIncome() {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true, errorMessage = null) }
             withContext(Dispatchers.IO) {
+                _state.update { it.copy(isLoading = true, errorMessage = null) }
                 var result: Result<IncomeData> = Result.Success<IncomeData>(IncomeData())
                 getAccountInfoUseCase().onSuccess { res ->
                     _state.update { it.copy(currency = res.currency) }

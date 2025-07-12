@@ -1,5 +1,6 @@
 package ru.ari.fintracker.core.data.models.transaction
 
+import ru.ari.fintracker.core.common.utils.format.toUtcIsoString
 import java.time.LocalDateTime
 
 data class CreateTransactionRequest(
@@ -20,7 +21,7 @@ data class CreateTransactionRequest(
             accountId = accountId,
             categoryId = categoryId,
             amount = amount,
-            transactionDate = date.toString(),
+            transactionDate = date.toUtcIsoString(),
             comment = comment,
         )
     }

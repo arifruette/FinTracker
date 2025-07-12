@@ -14,11 +14,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.ari.fintracker.core.di.component.CoreComponentProvider
 import ru.ari.fintracker.core.ui.components.FinTrackerTopBar
+import ru.ari.fintracker.feature.categories.di.DaggerCategoriesComponent
 import ru.ari.fintracker.feature.manage_transaction.R
 import ru.ari.fintracker.feature.manage_transaction.di.DaggerManageTransactionComponent
 import ru.ari.fintracker.feature.manage_transaction.di.viewmodel.ManageTransactionViewModelFactory
 import ru.ari.fintracker.feature.manage_transaction.ui.presentation.components.ManageTransactionScreen
 import ru.ari.fintracker.feature.manage_transaction.ui.viewmodel.ManageTransactionViewModel
+import ru.ari.fintracker.feature.manage_transaction.ui.viewmodel.contract.ManageTransactionAction
 
 @Composable
 fun ManageTransactionScreenWrapper(
@@ -28,12 +30,19 @@ fun ManageTransactionScreenWrapper(
 ) {
     // тут не получится создать viewmodel используя rememberDaggerViewModel,
     // т.к. мы предоставляем аргумент isIncome в рантайме
-    val app = LocalContext.current.applicationContext as CoreComponentProvider
-    val coreDeps = app.coreComponent
+    val coreDeps = (LocalContext.current.applicationContext as CoreComponentProvider).coreComponent
+
+    val categoriesDeps = DaggerCategoriesComponent
+        .factory()
+        .create(coreDeps)
 
     val component = remember {
-        DaggerManageTransactionComponent.factory().create(coreDeps)
+        DaggerManageTransactionComponent.factory().create(
+            coreDeps,
+            categoriesDeps
+        )
     }
+
     val assistedFactory = component.manageTransactionViewModelAssistedFactory()
 
     val viewModel: ManageTransactionViewModel = viewModel(
@@ -55,13 +64,18 @@ fun ManageTransactionScreenWrapper(
                 leadingIcon = ImageVector.vectorResource(R.drawable.close_icon),
                 onLeadingIconClick = onCancelButtonClick,
                 trailingIcon = ImageVector.vectorResource(R.drawable.accept_icon),
-                onTrailingIconClick = {}
+                onTrailingIconClick = {
+                    viewModel.onAction(ManageTransactionAction.CompleteEdit(onCancelButtonClick))
+                }
             )
         }
     ) { innerPadding ->
         ManageTransactionScreen(
             uiState = uiState,
             onAction = viewModel::onAction,
+            isEditMode = transactionId != null,
+            isIncome = isIncome,
+            onDeleted = onCancelButtonClick,
             modifier = Modifier.padding(innerPadding)
         )
     }

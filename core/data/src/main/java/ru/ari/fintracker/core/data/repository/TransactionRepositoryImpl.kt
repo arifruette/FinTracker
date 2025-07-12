@@ -1,5 +1,6 @@
 package ru.ari.fintracker.core.data.repository
 
+import android.util.Log
 import retrofit2.HttpException
 import ru.ari.fintracker.core.common.utils.Result
 import ru.ari.fintracker.core.data.api.TransactionApi
@@ -47,9 +48,9 @@ class TransactionRepositoryImpl @Inject constructor(
         amount: String,
         transactionDate: LocalDateTime,
         comment: String
-    ): Result<Transaction?> {
+    ): Result<Unit> {
         return try {
-            val response = api.createTransaction(
+            api.createTransaction(
                 CreateTransactionRequest.create(
                     accountId,
                     categoryId,
@@ -58,10 +59,12 @@ class TransactionRepositoryImpl @Inject constructor(
                     comment
                 )
             )
-            Result.Success(response.body()?.toDomain())
+            Result.Success(Unit)
         } catch (e: HttpException) {
+            Log.d("DEBUG", "createTransaction: $e")
             Result.Error(e.code(), e.message())
         } catch (e: Throwable) {
+            Log.d("DEBUG", "createTransaction: $e")
             Result.Exception(e)
         }
     }
@@ -73,9 +76,9 @@ class TransactionRepositoryImpl @Inject constructor(
         amount: String?,
         transactionDate: LocalDateTime?,
         comment: String?
-    ): Result<Transaction?> {
+    ): Result<Unit> {
         return try {
-            val response = api.updateTransaction(
+            api.updateTransaction(
                 id = transactionId,
                 updateTransactionRequest = UpdateTransactionRequest.create(
                     accountId,
@@ -85,7 +88,7 @@ class TransactionRepositoryImpl @Inject constructor(
                     comment
                 )
             )
-            Result.Success(response.body()?.toDomain())
+            Result.Success(Unit)
         } catch (e: HttpException) {
             Result.Error(e.code(), e.message())
         } catch (e: Throwable) {
@@ -97,6 +100,17 @@ class TransactionRepositoryImpl @Inject constructor(
         return try {
             api.deleteTransaction(id = transactionId)
             Result.Success(Unit)
+        } catch (e: HttpException) {
+            Result.Error(e.code(), e.message())
+        } catch (e: Throwable) {
+            Result.Exception(e)
+        }
+    }
+
+    override suspend fun getTransactionById(transactionId: Long): Result<Transaction?> {
+        return try {
+            val resp = api.getTransactionById(id = transactionId)
+            Result.Success(resp.body()?.toDomain())
         } catch (e: HttpException) {
             Result.Error(e.code(), e.message())
         } catch (e: Throwable) {

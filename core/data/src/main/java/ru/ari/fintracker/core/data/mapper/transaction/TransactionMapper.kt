@@ -1,11 +1,11 @@
 package ru.ari.fintracker.core.data.mapper.transaction
 
+import android.util.Log
 import ru.ari.fintracker.core.data.models.transaction.TransactionResponse
 import ru.ari.fintracker.core.domain.models.transaction.Transaction
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 
 fun TransactionResponse.toDomain(): Transaction {
@@ -22,11 +22,14 @@ fun TransactionResponse.toDomain(): Transaction {
 
 private fun parseDateTime(dateTimeString: String): LocalDateTime {
     return try {
-        val formatter = DateTimeFormatter.ISO_DATE_TIME
-        ZonedDateTime.parse(dateTimeString, formatter)
+        Log.d("TIME", "parseDateTime: $dateTimeString")
+        val t = ZonedDateTime.parse(dateTimeString)
             .withZoneSameInstant(ZoneId.systemDefault())
             .toLocalDateTime()
+        Log.d("TIME", "parseDateTime: $t")
+        t
     } catch (e: DateTimeParseException) {
         LocalDateTime.now()
     }
 }
+

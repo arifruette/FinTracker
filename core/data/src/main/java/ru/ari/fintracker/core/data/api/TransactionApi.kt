@@ -36,13 +36,18 @@ interface TransactionApi {
     ): Response<TransactionResponse>
 
     @PUT("transactions/{id}")
-    fun updateTransaction(
+    suspend fun updateTransaction(
         @Path("id") id: Long,
         @Body updateTransactionRequest: UpdateTransactionRequest
     ): Response<TransactionResponse>
 
-    @DELETE
-    fun deleteTransaction(
+    @GET("transactions/{id}")
+    suspend fun getTransactionById(
+        @Path("id") id: Long
+    ): Response<TransactionResponse>
+
+    @DELETE("transactions/{id}")
+    suspend fun deleteTransaction(
         @Path("id") id: Long
     ): Response<Unit>
 }

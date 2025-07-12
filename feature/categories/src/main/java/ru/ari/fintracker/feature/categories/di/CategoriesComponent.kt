@@ -15,7 +15,7 @@ import ru.ari.fintracker.feature.categories.data.di.CategoriesRepositoryModule
         CategoriesViewModelModule::class
     ]
 )
-interface CategoriesComponent {
+interface CategoriesComponent: CategoriesComponentDeps {
     fun viewModelFactory(): ViewModelProvider.Factory
 
     @Component.Factory

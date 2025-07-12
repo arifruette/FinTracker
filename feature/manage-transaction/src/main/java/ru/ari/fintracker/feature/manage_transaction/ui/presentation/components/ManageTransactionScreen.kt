@@ -2,13 +2,24 @@ package ru.ari.fintracker.feature.manage_transaction.ui.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -27,14 +38,18 @@ import ru.ari.fintracker.feature.manage_transaction.ui.viewmodel.contract.Manage
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
+@Suppress("LongParameterList")
 @Composable
 fun ManageTransactionScreen(
     uiState: ManageTransactionUiState,
     onAction: (ManageTransactionAction) -> Unit,
+    isEditMode: Boolean,
+    isIncome: Boolean,
+    onDeleted: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier.verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(1.dp)
     ) {
         ListItem(
@@ -49,9 +64,17 @@ fun ManageTransactionScreen(
             content = stringResource(R.string.category_picker_label),
             trailingText = uiState.category.name,
             trailingIcon = ImageVector.vectorResource(R.drawable.forward_arrow_icon),
+            onItemClick = { onAction(ManageTransactionAction.ChangeDropdownState) },
             modifier = Modifier
                 .baseFieldModifier()
         )
+        if (uiState.isDropdownMenuExpanded) {
+            FinTrackerDropdown(
+                onDismissRequest = { onAction(ManageTransactionAction.ChangeDropdownState) },
+                onCategoryClick = { onAction(ManageTransactionAction.UpdateCategory(it)) },
+                categories = uiState.categories
+            )
+        }
         HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
         FinTrackerTextField(
             title = stringResource(R.string.price_field_label),
@@ -114,6 +137,30 @@ fun ManageTransactionScreen(
             }
         )
         HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
+        if (isEditMode) {
+            Spacer(modifier = Modifier.height(20.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .height(40.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Button(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    shape = RoundedCornerShape(100.dp),
+                    colors = ButtonDefaults.buttonColors().copy(containerColor = Color(0xFFE46962)),
+                    onClick = {
+                        onAction(ManageTransactionAction.DeleteTransaction(onDeleted))
+                    }) {
+                    Text(
+                        "Удалить ${if (isIncome) "доход" else "расход"}",
+                        style = MaterialTheme.typography.labelLarge.copy(color = Color.White)
+                    )
+                }
+            }
+        }
     }
 }
 

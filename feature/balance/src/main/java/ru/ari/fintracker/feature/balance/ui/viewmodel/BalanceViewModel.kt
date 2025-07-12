@@ -32,8 +32,8 @@ class BalanceViewModel @Inject constructor(
 
     private fun loadUsersBalance() {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
             withContext(Dispatchers.IO) {
+                _state.update { it.copy(isLoading = true) }
                 val result = getAccountInfoUseCase()
                 result.onSuccess { res ->
                     _state.update {

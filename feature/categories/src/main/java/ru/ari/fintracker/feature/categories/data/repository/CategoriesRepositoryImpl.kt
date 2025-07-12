@@ -24,4 +24,15 @@ class CategoriesRepositoryImpl @Inject constructor(
             Result.Exception(e)
         }
     }
+
+    override suspend fun getCategoriesByType(isIncome: Boolean): Result<List<Category>> {
+        return try {
+            val resp = categoriesApi.getCategoriesByType(isIncome)
+            Result.Success(resp.body()?.map { it.toDomain() } ?: emptyList())
+        } catch(e: HttpException) {
+            Result.Error(e.code(), e.message())
+        } catch (e: Throwable) {
+            Result.Exception(e)
+        }
+    }
 }

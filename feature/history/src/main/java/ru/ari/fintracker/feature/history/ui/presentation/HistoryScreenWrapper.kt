@@ -29,6 +29,7 @@ import ru.ari.fintracker.feature.history.ui.viewmodel.HistoryViewModel
 fun HistoryScreenWrapper(
     onLeadingIconClick: () -> Unit,
     onTrailingIconClick: () -> Unit,
+    onItemClick: (Long) -> Unit,
     isIncomeScreen: Boolean = false
 ) {
     val viewModel: HistoryViewModel = rememberDaggerViewModel(
@@ -58,6 +59,7 @@ fun HistoryScreenWrapper(
         HistoryScreen(
             uiState = uiState,
             onAction = viewModel::onAction,
+            onItemClick = onItemClick,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(top = innerPadding.calculateTopPadding(), bottom = innerPadding.calculateBottomPadding())
